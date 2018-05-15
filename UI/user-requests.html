@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/user-requests.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <title>User Requests</title>
+</head>
+  <body>
+
+    <div class="navbar">
+      <div id="brand">
+        <span><a href="index.html">M-Tracker</a></span>
+      </div>
+
+      <div class="nav-icon">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+
+      <input type="checkbox" id="nav-check">
+      <div class="nav-links">
+        <a href="new-request.html"><i class="fa fa-plus"></i> Create new request</a>
+        <a href="index.html">Logout</a>
+        <a href="user-profile.html"><span class="role">emeka</span></a>
+      </div>      
+    </div><br>
+
+    <div class="header">
+      <div class="container">
+        <h1>My Requests</h1>
+      </div>
+    </div>
+
+    <div class="table-body">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"> Request ID</th>
+            <th scope="col"> Product </th>
+            <th scope="col">Request Type</th>
+            <th scope="col">Status</th>
+            <th scope="col">Details</th>
+            <th scope="col">Cancel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Request ID">1</td>
+            <td data-label="Product">Laptop</td>
+            <td data-label="Request Type">Maintenance</td>
+            <td data-label="Status">Pending</td>
+            <td data-label="Details"> 
+              <button class="btn btn-details" onclick="getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
+            </td>
+            <td data-label="Action">
+              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Request ID">2</td>
+            <td data-label="Product">Laptop Charger</td>
+            <td data-label="Request Type">Repair</td>
+            <td data-label="Status">Approved</td>
+            <td data-label="Details"> 
+              <button class="btn btn-details" onclick="getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
+            </td>
+            <td data-label="Action">
+              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Request ID">3</td>
+            <td data-label="Product">Office Chair</td>
+            <td data-label="Request Type">Repair</td>
+            <td data-label="Status">Rejected</td>
+            <td data-label="Details"> 
+              <button class="btn btn-details" onclick="getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
+            </td>
+            <td data-label="Action">
+              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Request ID">4</td>
+            <td data-label="Product">Headphone</td>
+            <td data-label="Request Type">Repair</td>
+            <td data-label="Status">Approved</td>
+            <td data-label="Details"> 
+              <button class="btn btn-details" onclick="getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
+            </td>
+            <td data-label="Action">
+              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Request ID">5</td>
+            <td data-label="Product">Office Table</td>
+            <td data-label="Request Type">Repair</td>
+            <td data-label="Status">Approved</td>
+            <td data-label="Details"> 
+              <button class="btn btn-details" onclick="getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
+            </td>
+            <td data-label="Action">
+              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      
+
+    <footer>
+      <p>M-Tracker, Copyright &copy; 2018</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

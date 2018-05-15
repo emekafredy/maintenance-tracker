@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- CSS -->
   <link rel="stylesheet" href="css/login.css">
-  <title>Sign Up</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Login</title>
 </head>
   <body>
 
@@ -26,12 +27,10 @@
       <input type="checkbox" id="nav-check">
       <div class="nav-links">
         <a href="sign-up.html">Sign Up</a>
-        <a href="login.html">Login</a>
-        <a href="admin-login.html">Admin</a>
+        <a href="login.html" class="mob-active"><span class="active">Login</span></a>
+        <a href="admin-login.html"><span class="role">Admin</span></a>
       </div>      
-    </div>
-    <header id="login-header">
-    </header>
+    </div><br>
 
     <div id="login">
       <form> 
@@ -49,11 +48,11 @@
         <p class="sign-up"> 
           <input type="submit" value="Login" onclick="loginUser();"/> 
         </p>
-        <p style="text-align: center;">  
-          Don't have an account ?
-          <a href="sign-up.html"> Sign up </a>
-        </p>
       </form>
+      <div style="text-align: center;">
+        <p>Don't have an account ?</p>
+        <a href="sign-up.html"> Sign up </a>
+      </div>
     </div>
 
     <footer>

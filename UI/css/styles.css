@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Kavivanar|Lobster|Merriweather|Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Kavivanar|Lobster|Merriweather');
 
 body {
   font-family: 'Merriweather';
@@ -15,8 +15,8 @@ body {
 
 .navbar {
   background: #1d2951;
-  height: 80px;
-  line-height: 60px;
+  height: 70px;
+  line-height: 50px;
   width: 100%;
   position: fixed;
 }
@@ -31,7 +31,7 @@ body {
   font-size: 22px;
   color: #fff;
   padding: 10px 20px;
-  font-family: 'Lobster';
+  font-family: 'Kavivanar';
 }
 
 #brand span {
@@ -39,14 +39,14 @@ body {
 }
 
 .navbar > .nav-links {
-  padding-left: 10px;
+  padding-left: 0px;
   float: right;
   font-size: 18px;
 }
 
 .navbar > .nav-links > a {
   display: inline-block;
-  padding: 13px 20px;
+  padding: 10px 20px;
   text-decoration: none;
   font-size: 0.9em;
   color: #fff;
@@ -131,6 +131,7 @@ footer {
   background: #1d2951;
   color: #fff;
   text-align: center;
+  font-family: 'Kavivanar';
 }
 
 /* Media Queries */
@@ -170,7 +171,6 @@ footer {
   .navbar > .nav-links > a {
     display: block;
     width: 100%;
-    text-align: center;
   }
   .navbar > #nav-check:not(:checked) + .nav-links {
     height: 0px;
@@ -180,10 +180,7 @@ footer {
     height: auto;
     overflow-y: auto;
   }
-}
 
-
-@media(max-width: 500px) {
   .box {
     float: none;
     text-align: center;

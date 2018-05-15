@@ -2,7 +2,7 @@ body{
   background: #fff;
 }
 
-#signup-header {
+#login-header {
   height: 300px;
   background: url('../files/header2.png');
   background-position: center;
@@ -12,7 +12,7 @@ body{
   border-bottom: 5px solid #006600;
 }
 
-#signUp {
+#login {
   width: 40%;
   margin: 90px auto 150px auto;
   background: #ccc;
@@ -21,12 +21,13 @@ body{
   border: 2px solid #1d2951;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+input[type="password"], input[type="email"]{
   font-size: 1em;
   width: 100%;
-  height: 30px;
-  border: none;
-  border-bottom: 2px solid #1d2951;
+  padding: 0 0 0 10px;
+  height: 40px;
+  border-radius: 15px;
+  border: 2px solid #1d2951;
   background: transparent;
   outline: none;
 }
@@ -65,14 +66,14 @@ p> a:hover {
 
 
 @media(max-width: 768px) {
-  #signUp {
+  #login {
     width: 60%;
     margin: 90px auto 150px auto;
   }
 }
 
 @media(max-width: 500px) {
-  #signUp {
+  #login {
     width: 80%;
     margin: 90px auto 150px auto;
   }

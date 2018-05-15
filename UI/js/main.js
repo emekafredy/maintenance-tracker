@@ -6,3 +6,7 @@ const signUpPage = () => {
 // const signUpUser = () => {
 //   window.location.href = 'user-request.html';
 // };
+
+// const loginUser = () => {
+//   window.location.href = 'user-request.html';
+// };

@@ -128,6 +128,42 @@ input[type="submit"] {
   width:40%;
 }
 
-.modal {
-  
+
+
+/* Modal Message */
+.modal-div {
+  background: #ccc;
+  border-radius: 8px;
+  margin: 100px auto;
+  padding: 20px;
+  text-align: center;
+  width: 40%;
+}
+
+.fa-check-circle {
+  color:green;
+  font-size:2em !important;
+}
+
+#modal-container {
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  height: 100%; 
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  padding-top: 100px;
+  top: 0;
+  width: 100%; 
+  z-index: 100;  
+}
+
+#close {
+  background: #882222;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  padding: 10px 20px; 
 }

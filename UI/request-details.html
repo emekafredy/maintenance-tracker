@@ -38,7 +38,7 @@
         <h1>Request Details</h1>
       </div>
     </div>
-
+    
     <div class="container">
       <div class="back">
         <button class="btn btn-edit" onclick="getPages.backToRequests();">
@@ -68,8 +68,12 @@
               </span></p>
               <p> </p><label>Request status</label> : <span>Pending</span></p>
               <div class="btn-div">
-                <button class="btn btn-edit"><i class="fa fa-pencil-square-o"></i> Edit Request</button>
-                <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel Request</button>
+                <button class="btn btn-edit">
+                  <i class="fa fa-pencil-square-o"></i> Edit Request
+                </button>
+                <button class="btn btn-delete" onclick="deleteRequest()">
+                  <i class="fa fa-trash"></i> Cancel Request
+                </button>
               </div><br><br>
               <p><em>NB: If there is no update to your request after an hour, please contact us on A00998</em></p>
             </div>
@@ -83,5 +87,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/users.js"></script>
   </body>
 </html>

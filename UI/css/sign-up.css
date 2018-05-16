@@ -9,11 +9,10 @@ body {
 #signUp {
   background:#001c3d;
   border:2px solid #1d2951;
-  border-radius:5px;
   color:rgb(199,189,189);
   font-family:Merriweather;
-  margin:80px auto;
-  opacity:0.86;
+  margin:100px auto 0 auto;
+  opacity:0.60;
   padding:30px;
   width:40%;
 }

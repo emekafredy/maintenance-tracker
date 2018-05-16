@@ -1,0 +1,32 @@
+.header {
+  margin-bottom: 100px !important;
+}
+
+.filter-div {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.filter-div > input {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  height: 40px;
+  outline: none;
+  padding-left: 5px;
+  width: 20%;
+}
+
+.filter-div > span {
+  font-size: 1.2em;
+}
+
+.table-body {
+  min-height: 53% !important;
+}
+
+@media (max-width: 768px) {
+  .table-body {
+    min-height: 65% !important;
+  }
+}

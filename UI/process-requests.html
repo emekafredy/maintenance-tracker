@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/process-requests.css">
+  <link rel="stylesheet" href="css/request-details.css">
+  <link rel="stylesheet" href="css/styles.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <title>Process Request</title>
+</head>
+  <body>
+
+    <div class="navbar">
+      <div id="brand">
+        <span><a href="index.html">M-Tracker</a></span>
+      </div>
+
+      <div class="nav-icon">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+
+      <input type="checkbox" id="nav-check">
+      <div class="nav-links">
+        <a href="new-request.html"><i class="fa fa-plus"></i> Create new request</a>
+        <a href="index.html">Logout</a>
+        <a href="user-profile.html"><span class="role">emeka</span></a>
+      </div>      
+    </div><br>
+
+    <div class="header">
+      <div class="container">
+        <h1>Request Details</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="back">
+        <button class="btn btn-edit" onclick="getPages.backToAdmin();">
+            <i class="fa fa-arrow-left"></i> Back to requests
+        </button>
+      </div>
+      <div class="card">
+          <div class="wrapper">
+
+            <div class="column">
+              <div><img src="files/product.png" /></div>
+            </div>
+
+            <div class="column">
+              <p> <label>Name</label> : <span>Simi Abiodun</span></p>
+              <p> <label>User ID</label> : <span>usr2</span></p>
+              <p> <label>Request ID</label> : <span>2</span></p>
+              <p> <label>Product ID</label> : <span>1</span></p>
+              <p> <label>Product</label> : <span>Laptop</span></p>
+              <p> </p><label>Request type</label> : <span>Repair</span></p>
+              <p> <label>Product receipt date</label> : <span>15/06/2017</span></p>
+              <p> <label>Last Check</label> : <span>15/02/2018</span></p>
+              <p> <label>Isssue</label>: <br>
+              <span>
+                Lorem Ipsum is simply dummy text of the 
+                printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy 
+                text ever since the 1500s, when an unknown printer 
+                took a galley of type and scrambled it to make a type specimen book
+              </span></p>
+              <p><label>Request status</label> : <span id="request-status">Pending</span></p>
+              <div class="btn-div">
+                <button class="btn btn-edit" id="approveBtn" onclick="process.approveRequest();">
+                  <i class="fa fa-pencil-square-o"></i> Approve Request
+                </button>
+                <button class="btn btn-delete" id="rejectBtn" onclick="process.rejectRequest();">
+                  <i class="fa fa-trash"></i> Reject Request
+                </button>
+                <button class="btn btn-resolve" id="resolveBtn" onclick="process.resolveRequest();">
+                  <i class="fa fa-check"></i> Check as resolved
+                </button>
+                <p><label id="resolveHeader">Resolve Date: </label> <span id="resolveDate"></span></p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+      
+
+    <footer>
+      <p>M-Tracker, Copyright &copy; 2018</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>

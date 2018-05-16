@@ -13,7 +13,14 @@ const getPages = {
   },
   backToRequests: () => {
     window.location.href = 'user-requests.html';
+  },
+  backToAdmin: () => {
+    window.location.href = 'admin-panel.html';
   }
+}
+
+const processRequests = () => {
+  window.location.href = 'process-requests.html';
 }
 
 filterRequest = () => {

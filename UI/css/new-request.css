@@ -1,0 +1,129 @@
+.back {
+  margin:auto;
+  width:80%;
+}
+
+.btn {
+  border:1px solid transparent;
+  border-radius:.25rem;
+  cursor:pointer;
+  display:inline-block;
+  font-size:1rem;
+  font-weight:400;
+  line-height:1.5;
+  outline:none;
+  padding:.375rem .75rem;
+  text-align:center;
+  transition:color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  vertical-align:middle;
+  white-space:nowrap;
+}
+
+.btn-back {
+  background-color:#007bff;
+  border-color:#007bff;
+  color:#fff;
+}
+
+.btn-back:hover {
+  background-color:#0069d9;
+  border-color:#0062cc;
+  color:#fff;
+}
+
+.header {
+  background:#FF8C00;
+  color:#000;
+  font-family:Merriweather;
+  height:100px;
+  margin-bottom:30px;
+  text-align:center;
+}
+
+.header h1 {
+  margin-top:30px;
+}
+
+.container {
+  margin:auto;
+  overflow:hidden;
+  width:70%;
+}
+
+.card {
+  -ms-flex-direction:column;
+  background-clip:border-box;
+  background-color:#f4f7f8;
+  border:1px solid rgba(0,0,0,0.125);
+  border-radius:.25rem;
+  display:flex;
+  flex-direction:column;
+  line-height:1.5em;
+  margin:50px auto;
+  padding:3em;
+  position:relative;
+  width:60%;
+  word-wrap:break-word;
+}
+
+.title {
+  background-color:#1d2951;
+  border-bottom:1px solid rgba(0,0,0,0.125);
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
+  color:#fff;
+  margin-bottom:0;
+  padding:.75rem 1.25rem;
+}
+
+form {
+  margin:20px auto;
+  width:90%;
+}
+
+label {
+  display:block;
+}
+
+.form {
+  margin-bottom:1rem;
+  width:100%;
+}
+
+.form > select,.form > input,.form > textarea {
+  background-clip:padding-box;
+  background-color:#fff;
+  border:1px solid #ced4da;
+  border-radius:.25rem;
+  color:#495057;
+  display:block;
+  font-size:1rem;
+  line-height:1.5;
+  outline:none;
+  padding:.375rem .75rem;
+  transition:border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  width:100%;
+}
+
+input[type="file"] {
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+
+input[type="date"] {
+  width:96%!important;
+}
+
+input[type="submit"] {
+  border:1px solid transparent;
+  border-radius:.25rem;
+  cursor:pointer;
+  display:inline-block;
+  font-size:1rem;
+  font-weight:400;
+  line-height:1.5;
+  outline:none;
+  padding:.375rem .75rem;
+  width:40%;
+}

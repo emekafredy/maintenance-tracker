@@ -4,13 +4,26 @@ body {
   font-family:Merriweather;
   line-height:1.5;
   margin:0;
-  padding:0
+  padding:0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.body-wrapper {
+  min-height:100%;
+  position:relative;
 }
 
 .container {
   margin:auto;
   overflow:hidden;
   width:90%
+}
+
+.centre-div {
+  text-align: center;
 }
 
 a > span.role {
@@ -126,11 +139,16 @@ a > span.role {
 
 footer {
   background:#1d2951;
+  background-repeat: no-repeat;
+  background-position: center top;
+  bottom: -20px;
   color:#fff;
   font-family:Kavivanar;
-  margin-top:20px;
-  padding:5px;
-  text-align:center
+  height:50px; 
+  margin-top:50px;
+  position: relative;
+  text-align:center;
+  width: 100%;
 }
 
 @media(max-width: 550px) {

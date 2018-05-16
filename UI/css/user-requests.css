@@ -21,7 +21,7 @@ body {
 
 .table-body {
   margin:0 auto 100px;
-  width:95%;
+  width:90%;
 }
 
 table {
@@ -73,28 +73,48 @@ table th {
 }
 
 .btn-details {
-  background-color:#6c757d;
+  background-color:#007bff;
+  border-bottom: #2980b9 3px solid;
   border-color:#6c757d;
+  border-left: #2980b9 1px solid;
+  border-right: #2980b9 1px solid;
   color:#fff;
   outline:none;
+  transition: 0.5s;
 }
 
 .btn-details:hover {
-  background-color:#5a6268;
-  border-color:#545b62;
-  color:#fff;
+  background: #334ec5;
+  transition: 0.5s;
+}
+
+.btn-details:active {
+  background: #2385C7;
+  border-radius: 6px;
+  margin-top: 3px;
+  padding: 10px;
 }
 
 .btn-delete {
   background-color:#dc3545;
-  border-color:#dc3545;
+  border-bottom: #a11533 3px solid;
+  border-color:#6c757d;
+  border-left: #a11533 1px solid;
+  border-right: #a11533 1px solid;
   color:#fff;
+  transition: 0.5s;
 }
 
 .btn-delete:hover {
-  background-color:#c82333;
-  border-color:#bd2130;
-  color:#fff;
+  background: #b42432;
+  transition: 0.5s;
+}
+
+.btn-delete:active {
+  background: #a11533;
+  border-radius: 6px;
+  margin-top: 3px;
+  padding: 10px;
 }
 
 

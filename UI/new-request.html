@@ -41,7 +41,9 @@
 
     <div class="container">
       <div class="back">
-        <button class="btn btn-back" onclick="backToRequests();"><i class="fa fa-arrow-left"></i> Back to requests</button>
+        <button class="btn btn-back" onclick="getPages.backToRequests();">
+          <i class="fa fa-arrow-left"></i> Back to requests
+        </button>
       </div>
 
       <div class="card">
@@ -54,8 +56,9 @@
             <label for="product">Product</label>
             <select>
               <option value="laptop">Laptop</option>
+              <option value="monitor">Monitor</option>
               <option value="chair">Office Chair</option>
-              <option value="table">Office Table</option>
+              <option value="table">Office Desk</option>
               <option value="charger">Laptop Charger</option>
               <option value="headphone">Headphone</option>
               <option value="socket">Socket</option>
@@ -75,6 +78,11 @@
             <input type="date" name="receipt">
           </div>
 
+          <div class="form">
+            <label for="lcheck">Last Maintenance/Repair Check</label>
+            <input type="date" name="receipt">
+          </div>
+
 
           <div class="form">
             <label for="type">Issue</label>
@@ -86,7 +94,7 @@
             <input type="file" name="pic" accept="image/*">
           </div>
 
-          <div style="text-align: center;">
+          <div class="centre-div">
             <input type="submit" value="submit" class="btn-back">
           </div>
         </form>

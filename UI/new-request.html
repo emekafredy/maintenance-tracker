@@ -70,23 +70,24 @@
             <select>
               <option value="maintenance">Maintenance</option>
               <option value="repair">Repair</option>
+              <option value="replace">Replace</option>
             </select>
           </div>
 
           <div class="form">
             <label for="receipt">Product Receipt Date</label>
-            <input type="date" name="receipt">
+            <input type="date" name="receipt" required>
           </div>
 
           <div class="form">
             <label for="lcheck">Last Maintenance/Repair Check</label>
-            <input type="date" name="receipt">
+            <input type="date" name="receipt" required>
           </div>
 
 
           <div class="form">
             <label for="type">Issue</label>
-            <textarea name="issue"></textarea>
+            <textarea name="issue" required></textarea>
           </div>
 
           <div class="form">
@@ -95,7 +96,7 @@
           </div>
 
           <div class="centre-div">
-            <input type="submit" value="submit" class="btn-back">
+            <input type="submit" value="submit" class="btn-back" id="submitRequest">
           </div>
         </form>
       </div>
@@ -107,5 +108,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/users.js"></script>
   </body>
 </html>

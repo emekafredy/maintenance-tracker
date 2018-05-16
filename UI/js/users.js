@@ -1,41 +1,34 @@
 let submitRequest = document.getElementById('submitRequest');
 
 submitRequest.addEventListener('click', () => {
-  alert('hello');
+  modal.createMessage();
 })
 
-class Modal {
-  constructor() {
-    this.modalContainer = document.createElement('div');
-    this.modalContainer.className = 'modal';
-    document.body.appendChild(this.modalContainer);
 
-    const modalContent = document.createElement('div');
-    modalContent.className = 'mod-content';
-    this.modalContainer.appendChild(modalContent);
+const modal = {
 
-    const closeBtn = document.createElement('button');
-    closeBtn.innerHTML = '&times;';
-    modalContent.appendChild(closeBtn);
-    closeBtn.addEventListener('click', this.close);
+  createMessage: () => {
+    let modalDiv = document.getElementById('modal-container');
+    modalDiv.innerHTML = `
+        <div class="modal-div">
+          <div> <i class="fa fa-check-circle"></i> </div>
+          <p id="messageId">Request Successfully Created</p>
+          <button id="close">close</button>
+        </div>
+    `
+    modalDiv.style.display = "block";
 
-    this.message = document.createElement('div');
-    modalContent.appendChild(this.message);
+    window.onclick = function(event) {
+      if (event.target == modalDiv) {
+        modalDiv.style.display = "none";
+      }
+    } 
+
+
+    let closeBtn = document.getElementById("close");
+    closeBtn.onclick = function() {
+      modalDiv.style.display = "none";
+    }
   }
 
-  set html() {
-    this.message.innerHTML = value;
-  }
-
-  open () {
-    this.modalContainer.classList.add('open');
-  }
-
-  close () {
-    this.modalContainer.classList.remove('open');
-  }
-}
-
-let m = new Modal;
-m.html = 'Hello World';
-m.open();
+};

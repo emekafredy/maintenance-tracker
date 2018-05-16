@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/new-request.css">
+  <link rel="stylesheet" href="css/styles.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <title>Create New Request</title>
+</head>
+  <body>
+
+    <div class="navbar">
+      <div id="brand">
+        <span><a href="index.html">M-Tracker</a></span>
+      </div>
+
+      <div class="nav-icon">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+
+      <input type="checkbox" id="nav-check">
+      <div class="nav-links">
+        <a href="new-request.html"><i class="fa fa-plus"></i> Create new request</a>
+        <a href="index.html">Logout</a>
+        <a href="user-profile.html"><span class="role">emeka</span></a>
+      </div>      
+    </div><br>
+
+    <div class="header">
+      <div class="container">
+        <h1>New Request</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="back">
+        <button class="btn btn-back" onclick="backToRequests();"><i class="fa fa-arrow-left"></i> Back to requests</button>
+      </div>
+
+      <div class="card">
+        <div class="title">
+          Add Request
+        </div>
+        <form action="">
+
+          <div class="form">
+            <label for="product">Product</label>
+            <select>
+              <option value="laptop">Laptop</option>
+              <option value="chair">Office Chair</option>
+              <option value="table">Office Table</option>
+              <option value="charger">Laptop Charger</option>
+              <option value="headphone">Headphone</option>
+              <option value="socket">Socket</option>
+            </select>
+          </div>
+
+          <div class="form">
+            <label for="type">Request Type</label>
+            <select>
+              <option value="maintenance">Maintenance</option>
+              <option value="repair">Repair</option>
+            </select>
+          </div>
+
+          <div class="form">
+            <label for="receipt">Product Receipt Date</label>
+            <input type="date" name="receipt">
+          </div>
+
+
+          <div class="form">
+            <label for="type">Issue</label>
+            <textarea name="issue"></textarea>
+          </div>
+
+          <div class="form">
+            <label for="image">Upload Image</label>
+            <input type="file" name="pic" accept="image/*">
+          </div>
+
+          <div style="text-align: center;">
+            <input type="submit" value="submit" class="btn-back">
+          </div>
+        </form>
+      </div>
+    </div>
+      
+
+    <footer>
+      <p>M-Tracker, Copyright &copy; 2018</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -8,16 +8,16 @@ img {
 }
 
 .header {
-  background:#ccc;
+  background:#FF8C00;
   color:#000;
   font-family:Merriweather;
-  height:150px;
+  height:100px;
   margin-bottom:100px;
   text-align:center;
 }
 
 .header h1 {
-  margin-top:50px;
+  margin-top:30px;
 }
 
 .container {
@@ -31,17 +31,6 @@ img {
   width:80%;
 }
 
-.btn-back {
-  background-color:#6c757d;
-  border-color:#6c757d;
-  color:#fff;
-}
-
-.btn-back:hover {
-  background-color:#5a6268;
-  border-color:#545b62;
-  color:#fff;
-}
 
 .card {
   background:#ccc;

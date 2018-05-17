@@ -92,32 +92,35 @@ class Request {
       if (myRequest.id === id) {
         requestFound = myRequest;
         requestIndex = index;
+
+        const updatedRequest = {
+          id: requestFound.id,
+          userId: requestFound.userId,
+          name: requestFound.name,
+          product: request.body.product || requestFound.product,
+          requestType: request.body.requestType || requestFound.requestType,
+          receiptDate: request.body.receiptDate || requestFound.receiptDate,
+          lastCheck: request.body.lastCheck || requestFound.lastCheck,
+          issueDescription: request.body.issueDescription || requestFound.issueDescription,
+          requestStatus: request.body.requestStatus,
+          imgUrl: request.body.imgUrl || requestFound.imgUrl,
+        };
+
+        if (RequestMiddleware.checkUpdate(request, response)) {
+          return null;
+        }
+
+        requests.splice(requestIndex, 1, updatedRequest);
+
+        return response.status(201).send({
+          message: 'Request updated successfully',
+          updatedRequest,
+        });
       }
       return null;
     });
-
-    if (RequestMiddleware.checkUpdate(request, response)) {
-      return null;
-    }
-
-    const updatedRequest = {
-      id: requestFound.id,
-      userId: requestFound.userId,
-      name: requestFound.name,
-      product: request.body.product || requestFound.product,
-      requestType: request.body.requestType || requestFound.requestType,
-      receiptDate: request.body.receiptDate || requestFound.receiptDate,
-      lastCheck: request.body.lastCheck || requestFound.lastCheck,
-      issueDescription: request.body.issueDescription || requestFound.issueDescription,
-      requestStatus: request.body.requestStatus,
-      imgUrl: request.body.imgUrl || requestFound.imgUrl,
-    };
-
-    requests.splice(requestIndex, 1, updatedRequest);
-
-    return response.status(201).send({
-      message: 'Request updated successfully',
-      updatedRequest,
+    return response.status(404).json({
+      message: 'Request does not exist',
     });
   }
 }

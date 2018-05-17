@@ -14,6 +14,6 @@ app.use(express.static('UI'));
 
 
 app.listen(port);
-winston.log('info', `App listening on port ${port}`);
+winston.log('info', `App is listening on port ${port}`);
 
 export default app;

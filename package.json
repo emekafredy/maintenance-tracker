@@ -1,0 +1,44 @@
+{
+  "name": "maintenance-tracker",
+  "version": "1.0.0",
+  "description": "A company app that helps employees forward maintenance/repair requests to the maintenance department",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js --exec babel-node  --presets es2015",
+    "lint": "eslint **/*.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emekafredy/maintenance-tracker.git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "Emeka Samuel Chinedu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emekafredy/maintenance-tracker/issues"
+  },
+  "homepage": "https://github.com/emekafredy/maintenance-tracker#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "express": "^4.16.3",
+    "logger": "0.0.1",
+    "mocha": "^3.0.0",
+    "nodemon": "^1.17.4",
+    "request": "^2.86.0",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}

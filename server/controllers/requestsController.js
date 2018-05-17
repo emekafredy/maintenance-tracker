@@ -15,13 +15,30 @@ class Request {
    */
   static getRequests(request, response) {
     if (requests.length === 0) {
-      response.status(404).json({
+      response.status(204).json({
         message: 'No request has been made',
       });
     }
     response.status(200).json({
       message: 'Requests retrieved successfully',
       requests,
+    });
+  }
+
+  static getARequest(request, response) {
+    const id = parseInt(request.params.requestId, 10);
+    requests.map((myRequest, index) => {
+      if (myRequest.id === id) {
+        return response.status(200).json({
+          message: 'Request successfully retrieved',
+          myRequest,
+        });
+      }
+      return null;
+    });
+
+    return response.status(404).json({
+      message: 'Request does not exist',
     });
   }
 }

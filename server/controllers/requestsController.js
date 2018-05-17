@@ -9,6 +9,7 @@ class Request {
   /**
    * @method {getRequests} - GET method to get maintenace/repair requests from the database
    * @method {getARequest}  GET method to get a maintenance/repair
+   * @method {createRequest}  POST method to create new maintenance/repair requests
    * request from the database with its id
    * @param {object} request
    * @param {object} response
@@ -39,6 +40,30 @@ class Request {
 
     return response.status(404).json({
       message: 'Request does not exist',
+    });
+  }
+
+  static createRequest(request, response) {
+    const newRequest = {
+      id: requests.length + 1,
+      userId: request.body.userId,
+      name: request.body.name,
+      product: request.body.product,
+      requestType: request.body.requestType,
+      receiptDate: request.body.receiptDate,
+      lastCheck: request.body.lastCheck,
+      issueDescription: request.body.issueDescription,
+      requestStatus: 'Pending',
+      imgUrl: request.body.imgUrl,
+    };
+
+    if (RequestMiddleware.checkRequest(request, response)) {
+      return null;
+    }
+    requests.push(newRequest);
+    return response.status(201).send({
+      message: 'Request successfully added',
+      newRequest,
     });
   }
 }

@@ -11,13 +11,13 @@ class Request {
    * @param {object} request
    * @param {object} response
    */
-  static getRequests(request, response) {
+  static getRequests(request, response, next) {
     if (requests.length === 0) {
-      response.status(204).json({
-        message: 'No request has been made',
+      return response.status(204).json({
+        message: 'No request found',
       });
     }
-    response.status(200).json({
+    return response.status(200).json({
       message: 'Requests retrieved successfully',
       requests,
     });
@@ -30,7 +30,7 @@ class Request {
    * @param  {object} request
    * @param  {object} response
    */
-  static getARequest(request, response) {
+  static getARequest(request, response, next) {
     const id = parseInt(request.params.requestId, 10);
     requests.map((myRequest, index) => {
       if (myRequest.id === id) {
@@ -53,7 +53,7 @@ class Request {
    * @param  {object} request
    * @param  {object} response
    */
-  static createRequest(request, response) {
+  static createRequest(request, response, next) {
     const newRequest = {
       id: requests.length + 1,
       userId: request.body.userId,
@@ -83,7 +83,7 @@ class Request {
    * @param  {object} request
    * @param  {object} response
    */
-  static updateRequest(request, response) {
+  static updateRequest(request, response, next) {
     const id = parseInt(request.params.requestId, 10);
     let requestFound;
     let requestIndex;

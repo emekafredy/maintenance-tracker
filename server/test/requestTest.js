@@ -62,6 +62,26 @@ describe('TEST REQUESTS ENDPOINTS', () => {
         })
         .end((error, response) => {
           expect(response).to.have.status(201);
+          expect(response.body.message).to.equal('Request successfully added');
+          done();
+        });
+    });
+    it('Should not go through when invalid inputs are made', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/requests')
+        .send({
+          userId: 2,
+          name: '',
+          product: 'Laptop',
+          requestType: 'Repair',
+          receiptDate: '01/03/2016',
+          lastCheck: '03/12/2017',
+          issueDescription: 'The charger no longer powers or charges the system',
+          requestStatus: 'Pending',
+          imgUrl: 'https://static.bhphotovideo.com/explora/sites/default/files/plug5.jpg',
+        })
+        .end((error, response) => {
+          expect(response).to.have.status(400);
           done();
         });
     });

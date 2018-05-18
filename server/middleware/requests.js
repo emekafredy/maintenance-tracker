@@ -8,26 +8,26 @@ class RequestMiddleware {
         message: 'Your user ID is required',
       });
     }
-    if (request.body.userId && request.body.userId.trim() === '') {
-      return response.status(400).json({
-        message: 'There should be no blank space on your user ID',
-      });
-    }
-    if (request.body.userId && request.body.userId.match(num)) {
-      return response.status(400).json({
-        message: 'user ID should be a number',
-      });
-    }
+    // if (request.body.userId && request.body.userId.trim() === '') {
+    //   return response.status(400).json({
+    //     message: 'There should be no blank space on your user ID',
+    //   });
+    // }
+    // if (request.body.userId && request.body.userId.match(num)) {
+    //   return response.status(400).json({
+    //     message: 'user ID should be a number',
+    //   });
+    // }
     if (!request.body.name) {
       return response.status(400).json({
         message: 'Your name is required',
       });
     }
-    if (request.body.name && request.body.name.trim() === '') {
-      return response.status(400).json({
-        message: 'There should be no blank space on your name input',
-      });
-    }
+    // if (request.body.name && request.body.name.trim() === '') {
+    //   return response.status(400).json({
+    //     message: 'There should be no blank space on your name input',
+    //   });
+    // }
     if (!request.body.product) {
       return response.status(400).json({
         message: 'The product is required',
@@ -63,16 +63,16 @@ class RequestMiddleware {
         message: 'Please enter the date you recieved this product',
       });
     }
-    if (request.body.receiptDate && !request.body.receiptDate.match(re)) {
-      return response.status(400).json({
-        message: 'Your date should be in numbers and in this format: dd/mm/yyyy',
-      });
-    }
-    if (request.body.lastCheck && !request.body.lastCheck.match(re)) {
-      return response.status(400).json({
-        message: 'Your date should be in numbers and in this format: dd/mm/yyyy',
-      });
-    }
+    // if (request.body.receiptDate && !request.body.receiptDate.match(re)) {
+    //   return response.status(400).json({
+    //     message: 'Your date should be in numbers and in this format: dd/mm/yyyy',
+    //   });
+    // }
+    // if (request.body.lastCheck && !request.body.lastCheck.match(re)) {
+    //   return response.status(400).json({
+    //     message: 'Your date should be in numbers and in this format: dd/mm/yyyy',
+    //   });
+    // }
     if (!request.body.issueDescription || request.body.issueDescription === '') {
       return response.status(400).json({
         message: 'Please describe the issue with your product',

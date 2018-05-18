@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Kavivanar|Lobster|Merriweather');
 
 body {
+  background: #f2f2f2;
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
 .header {
-  background:#FF8C00;
   color:#000;
   font-family:Merriweather;
   height:100px;
@@ -34,7 +34,10 @@ table {
 }
 
 table tr:nth-child(even) {
-  background-color:#f2f2f2;
+  background-color:#fff;
+}
+table tr:nth-child(odd) {
+  background-color:#ccc;
 }
 
 table th,table td {
@@ -157,4 +160,43 @@ table th {
   table td:last-child {
     border-bottom: 0;
   }
+}
+
+
+/* Modal Message */
+.modal-div {
+  background: #ccc;
+  border-radius: 8px;
+  margin: 100px auto;
+  padding: 20px;
+  text-align: center;
+  width: 40%;
+}
+
+.fa-check-circle {
+  color:green;
+  font-size:2em !important;
+}
+
+#modal-container {
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  height: 100%; 
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  padding-top: 100px;
+  top: 0;
+  width: 100%; 
+  z-index: 100;  
+}
+
+#close {
+  background: #882222;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  padding: 10px 20px; 
 }

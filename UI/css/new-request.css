@@ -1,6 +1,6 @@
 .back {
   margin:auto;
-  width:80%;
+  width:60%;
 }
 
 .btn {
@@ -32,7 +32,6 @@
 }
 
 .header {
-  background:#FF8C00;
   color:#000;
   font-family:Merriweather;
   height:100px;

@@ -1,20 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Kavivanar');
+
 body {
-  background:url(../files/profile.png);
+  background:url(../files/blue.png);
   background-position:center;
   background-size:cover;
 }
 
 #profile-card {
-  background:#2d9fc5;
+  background:#471dbb;
   border:none;
   box-shadow: 5px 10px #000;
   color:rgb(199,189,189);
   font-family:Merriweather;
-  margin:80px auto;
+  margin:90px auto 0 auto;
   min-height: 70%;
   opacity:0.86;
   padding:40px;
   width:25%;
+}
+
+#role-title {
+  color: #fff;
+  font-size: 1.2em;
+  font-family: 'Kavivanar';
+  font-weight: bold;
 }
 
 .image-div {

@@ -1,5 +1,6 @@
 
 
+
 let removeRequest = document.getElementById('removeRequest');
 removeRequest.addEventListener('click', () => {
   deleteRequest();
@@ -33,5 +34,3 @@ const deleteRequest = () => {
   return null;
   
 }
-
-

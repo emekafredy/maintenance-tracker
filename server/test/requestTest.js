@@ -86,5 +86,20 @@ describe('TEST REQUESTS ENDPOINTS', () => {
         });
     });
   });
+
+  describe('Test endpoint for updating requests', () => {
+    it('Should be successful when inputs are updated with valid data', (done) => {
+      chai.request(app)
+        .put('/api/v1/users/requests/2')
+        .send({
+          product: 'Laptop Charger',
+          requestType: 'Repair',
+        })
+        .end((error, response) => {
+          expect(response).to.have.status(201);
+          done();
+        });
+    });
+  });
 });
 

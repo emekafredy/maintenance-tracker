@@ -14,7 +14,7 @@ class Request {
   static getRequests(request, response, next) {
     if (requests.length === 0) {
       return response.status(204).json({
-        message: 'No request has been made',
+        message: 'No request found',
       });
     }
     return response.status(200).json({

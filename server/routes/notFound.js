@@ -1,5 +1,5 @@
-// const notFound = (request, response) => {
-//   response.status(404).send({ message: 'Page does not exist' });
-// };
+const notFound = (request, response) => {
+  response.status(404).send({ message: 'Page does not exist' });
+};
 
-// export default notFound;
+export default notFound;

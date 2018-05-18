@@ -44,5 +44,27 @@ describe('TEST REQUESTS ENDPOINTS', () => {
         });
     });
   });
+
+  describe('Test endpoints to add new requests', () => {
+    it('Should be a success when valid inputs are made', (done) => {
+      chai.request(app)
+        .post('/api/v1/users/requests')
+        .send({
+          userId: 2,
+          name: 'Simdi',
+          product: 'Laptop',
+          requestType: 'Repair',
+          receiptDate: '01/03/2016',
+          lastCheck: '03/12/2017',
+          issueDescription: 'The charger no longer powers or charges the system',
+          requestStatus: 'Pending',
+          imgUrl: 'https://static.bhphotovideo.com/explora/sites/default/files/plug5.jpg',
+        })
+        .end((error, response) => {
+          expect(response).to.have.status(201);
+          done();
+        });
+    });
+  });
 });
 

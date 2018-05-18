@@ -105,16 +105,16 @@ class RequestMiddleware {
         message: 'Request type should be either Repair, Maintenance or Replace',
       });
     }
-    if (request.body.receiptDate && !request.body.receiptDate.match(re)) {
-      return response.status(400).json({
-        message: 'Your date should be in numbers and in this format: dd/mm/yyyy',
-      });
-    }
-    if (request.body.lastCheck && !request.body.lastCheck.match(re)) {
-      return response.status(400).json({
-        message: 'Your date should be in numbers and in this format: dd/mm/yyyy',
-      });
-    }
+    // if (request.body.receiptDate && !request.body.receiptDate.match(re)) {
+    //   return response.status(400).json({
+    //     message: 'Your date should be in numbers and in this format: dd/mm/yyyy',
+    //   });
+    // }
+    // if (request.body.lastCheck && !request.body.lastCheck.match(re)) {
+    //   return response.status(400).json({
+    //     message: 'Your date should be in numbers and in this format: dd/mm/yyyy',
+    //   });
+    // }
     return null;
   }
 }

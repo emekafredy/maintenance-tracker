@@ -33,11 +33,12 @@
       </div>      
     </div><br>
 
+    <div id="modal-container"></div>
     <div class="header">
       <div class="container">
         <h1>My Requests</h1>
       </div>
-    </div>
+    </div><hr>
 
     <div class="table-body">
       <table>
@@ -121,7 +122,9 @@
               <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
             </td>
             <td data-label="Action">
-              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+              <button class="btn btn-delete" id="removeRequest">
+                <i class="fa fa-trash"></i> Cancel request 
+              </button>
             </td>
           </tr>
         </tbody>
@@ -134,5 +137,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/users.js"></script>
   </body>
 </html>

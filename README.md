@@ -3,6 +3,7 @@
 A company app that helps employees of a company reach out to the maintenance department with requests for tools repair, maintenance or replacement.
 
 [![Build Status](https://travis-ci.org/emekafredy/maintenance-tracker.svg)](https://travis-ci.org/emekafredy/maintenance-tracker)
+[![Coverage Status](https://coveralls.io/repos/github/emekafredy/maintenance-tracker/badge.svg?branch=develop)](https://coveralls.io/github/emekafredy/maintenance-tracker?branch=develop)
 
 FEATURES:
 

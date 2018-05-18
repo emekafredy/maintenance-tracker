@@ -1,30 +1,30 @@
-let requestStatus = document.getElementById('request-status');
-let resolveHeader = document.getElementById('resolveHeader');
-let resolveDate = document.getElementById('resolveDate');
+const requestStatus = document.getElementById('request-status');
+const resolveHeader = document.getElementById('resolveHeader');
+const resolveDate = document.getElementById('resolveDate');
 
-let approveBtn = document.getElementById('approveBtn');
-let rejectBtn = document.getElementById('rejectBtn');
-let resolveBtn = document.getElementById('resolveBtn');
+const approveBtn = document.getElementById('approveBtn');
+const rejectBtn = document.getElementById('rejectBtn');
+const resolveBtn = document.getElementById('resolveBtn');
 
 const formatDate = (date) => {
-  var monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
+  const monthNames = [
+    'January', 'February', 'March',
+    'April', 'May', 'June', 'July',
+    'August', 'September', 'October',
+    'November', 'December',
   ];
 
-  var day = date.getDate();
-  var monthIndex = date.getMonth();
-  var year = date.getFullYear();
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
 
-  return day + ' ' + monthNames[monthIndex] + ' ' + year;
-}
+  return `${day} ${monthNames[monthIndex]} ${year}`;
+};
 
 
 const process = {
   approveRequest: () => {
-    if (requestStatus.textContent == 'Pending') {
+    if (requestStatus.textContent === 'Pending') {
       requestStatus.textContent = 'Approved';
       approveBtn.style.display = 'none';
       rejectBtn.style.display = 'none';
@@ -41,7 +41,7 @@ const process = {
     }
   },
   resolveRequest: () => {
-    if (requestStatus.textContent == 'Approved') {
+    if (requestStatus.textContent === 'Approved') {
       requestStatus.textContent = 'Resolved';
       approveBtn.style.display = 'none';
       rejectBtn.style.display = 'none';

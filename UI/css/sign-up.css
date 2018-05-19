@@ -1,18 +1,19 @@
 @import url(https://fonts.googleapis.com/css?family=Kavivanar|Lobster|Merriweather);
 
 body {
-  background:url(../files/body.png);
+  background:url(../files/blue.png);
   background-position:center;
   background-size:cover;
 }
 
 #signUp {
-  background:#001c3d;
-  border:2px solid #1d2951;
+  background:transparent;
+  border:3px solid #1d2951;
+  border-radius: 10px;
+  box-shadow: 10px 15px #000;
   color:rgb(199,189,189);
   font-family:Merriweather;
   margin:100px auto 0 auto;
-  opacity:0.60;
   padding:30px;
   width:40%;
 }
@@ -22,7 +23,7 @@ body {
   color:#1d2951;
   font-weight:bold;
   margin:auto;
-  padding:7px 30px;
+  padding:5px 10px;
   text-align:center;
   text-decoration:none;
   transition:0;
@@ -41,7 +42,7 @@ input[type="text"],input[type="password"],input[type="email"],input[type="number
   border-bottom:2px solid #ddd;
   color:#fff;
   font-size:1em;
-  height:30px;
+  height:20px;
   outline:none;
   width:100%;
 }
@@ -52,9 +53,9 @@ input[type="submit"] {
   color:#1d2951;
   font-size:1em;
   font-weight:bold;
-  margin:60px 30% 20px;
+  margin:40px 30% 20px;
   outline:none;
-  padding:15px 0;
+  padding:10px 0;
   text-align:center;
   transition:0;
   width:40%;

@@ -1,35 +1,32 @@
+let modalDiv = document.getElementById('modal-container');
+const deleteRequest = () => {
+  modalDiv.innerHTML = `
+      <div class="modal-div">
+        <p id="messageId">Do you really want to delete this request?</p>
+        <button id="proceed" onclick="proceedWithDelete();">Proceed</button>
+        <button id="close">Cancel</button>
+      </div>
+  `
+  modalDiv.style.display = "block";
 
+  let closeBtn = document.getElementById("close");
+  closeBtn.onclick = function() {
+    modalDiv.style.display = "none";
+  }
+}
 
-const modal = {
+const proceedWithDelete = () => {
+  modalDiv.innerHTML = `
+      <div class="modal-div">
+        <div> <i class="fa fa-check-circle"></i> </div>
+        <p id="messageId">Request successfully deleted</p>
+        <button id="closeAfterdelete">close</button>
+      </div>
+  `
+  modalDiv.style.display = "block";
 
-  createMessage: () => {
-    const modalDiv = document.getElementById('modal-container');
-    modalDiv.innerHTML = `
-        <div class="modal-div">
-          <div> <i class="fa fa-check-circle"></i> </div>
-          <p id="messageId">Request Successfully Created</p>
-          <button id="close">close</button>
-        </div>
-    `;
-    modalDiv.style.display = 'block';
-
-    window.onclick = function (event) {
-      if (event.target === modalDiv) {
-        modalDiv.style.display = 'none';
-      }
-    };
-
-
-    const closeBtn = document.getElementById('close');
-    closeBtn.onclick = function () {
-      modalDiv.style.display = 'none';
-    };
-  },
-
-};
-
-const submitRequest = document.getElementById('submitRequest');
-
-submitRequest.addEventListener('click', () => {
-  modal.createMessage();
-});
+  let closeBtn = document.getElementById("closeAfterdelete");
+  closeBtn.onclick = function() {
+    modalDiv.style.display = "none";
+  }
+}

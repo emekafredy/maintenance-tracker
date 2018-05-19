@@ -7,7 +7,8 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/process-requests.css">
   <link rel="stylesheet" href="css/request-details.css">
-  <link rel="stylesheet" href="css/styles.css"> 
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/user-requests.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <title>Process Request</title>
 </head>
@@ -29,19 +30,22 @@
       <input type="checkbox" id="nav-check">
       <div class="nav-links">
         <a href="index.html">Logout</a>
-        <a href="admin-panel.html"><span class="role">Admin</span></a>
+        <a href="admin-profile.html">
+          <span class="role"><i class="fa fa-user"></i> admin</span>
+        </a>
       </div>      
     </div><br>
 
+    <div id="modal-container"></div>
     <div class="header">
       <div class="container">
-        <h1>Request Details</h1>
+        <h1>Process Request</h1>
       </div>
     </div>
 
     <div class="container">
       <div class="back">
-        <button class="btn btn-edit" onclick="getPages.backToAdmin();">
+        <button class="btn btn-details" onclick="getPages.backToAdmin();">
             <i class="fa fa-arrow-left"></i> Back to requests
         </button>
       </div>
@@ -71,7 +75,7 @@
               </span></p>
               <p><label>Request status</label> : <span id="request-status">Pending</span></p>
               <div class="btn-div">
-                <button class="btn btn-edit" id="approveBtn" onclick="process.approveRequest();">
+                <button class="btn btn-details" id="approveBtn" onclick="process.approveRequest();">
                   <i class="fa fa-pencil-square-o"></i> Approve Request
                 </button>
                 <button class="btn btn-delete" id="rejectBtn" onclick="process.rejectRequest();">

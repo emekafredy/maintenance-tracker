@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "nyc --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./server/test",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "nodemon app.js --exec babel-node  --presets es2015",
     "lint": "eslint **/*.js --fix"
   },
@@ -43,6 +43,7 @@
     "jsonwebtoken": "^8.2.1",
     "logger": "0.0.1",
     "mocha": "^3.0.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.17.4",
     "nyc": "^11.8.0",
     "request": "^2.86.0",

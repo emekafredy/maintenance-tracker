@@ -29,16 +29,19 @@
       <div class="nav-links">
         <a href="new-request.html"><i class="fa fa-plus"></i> Create new request</a>
         <a href="index.html">Logout</a>
-        <a href="user-profile.html"><span class="role">emeka</span></a>
+        <a href="user-profile.html">
+          <span class="role"><i class="fa fa-user-circle-o"></i> emeka</span>
+        </a>
       </div>      
     </div><br>
 
     <div id="modal-container"></div>
+
     <div class="header">
       <div class="container">
         <h1>My Requests</h1>
       </div>
-    </div><hr>
+    </div>
 
     <div class="table-body">
       <table>
@@ -62,7 +65,9 @@
               <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
             </td>
             <td data-label="Action">
-              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+              <button class="btn btn-delete" onclick="deleteRequest();">
+                <i class="fa fa-trash"></i> Cancel request 
+              </button>
             </td>
           </tr>
           <tr>
@@ -74,7 +79,9 @@
               <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
             </td>
             <td data-label="Action">
-              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+              <button class="btn btn-delete" onclick="deleteRequest();">
+                <i class="fa fa-trash"></i> Cancel request 
+              </button>
             </td>
           </tr>
           <tr>
@@ -86,7 +93,9 @@
               <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
             </td>
             <td data-label="Action">
-              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+              <button class="btn btn-delete" onclick="deleteRequest();">
+                <i class="fa fa-trash"></i> Cancel request 
+              </button>
             </td>
           </tr>
           <tr>
@@ -98,7 +107,9 @@
               <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
             </td>
             <td data-label="Action">
-              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+              <button class="btn btn-delete" onclick="deleteRequest();">
+                <i class="fa fa-trash"></i> Cancel request 
+              </button>
             </td>
           </tr>
           <tr>
@@ -110,7 +121,9 @@
               <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
             </td>
             <td data-label="Action">
-              <button class="btn btn-delete"><i class="fa fa-trash"></i> Cancel request </button>
+              <button class="btn btn-delete" onclick="deleteRequest();">
+                <i class="fa fa-trash"></i> Cancel request 
+              </button>
             </td>
           </tr>
           <tr>
@@ -119,10 +132,12 @@
             <td data-label="Request Type">Repair</td>
             <td data-label="Status">Approved</td>
             <td data-label="Details"> 
-              <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
+              <button class="btn btn-details" onclick="getPages.getDetails();">
+                <i class="fa fa-arrow-circle-o-right"></i> Details 
+              </button> 
             </td>
             <td data-label="Action">
-              <button class="btn btn-delete" id="removeRequest">
+              <button class="btn btn-delete" onclick="deleteRequest();">
                 <i class="fa fa-trash"></i> Cancel request 
               </button>
             </td>

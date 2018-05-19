@@ -1,4 +1,5 @@
 body {
+  background: #f2f2f2;
   font-family:'open sans';
   overflow-x:hidden;
 }
@@ -11,7 +12,8 @@ img {
   color:#000;
   font-family:Merriweather;
   height:100px;
-  margin-bottom:100px;
+  margin-bottom:10px;
+  margin-top: 90px;
   text-align:center;
 }
 
@@ -26,7 +28,7 @@ img {
 }
 
 .back {
-  margin:auto;
+  margin-left: 90px;
   width:80%;
 }
 
@@ -59,22 +61,6 @@ label {
   text-transform:UPPERCASE;
 }
 
-.btn {
-  border:1px solid transparent;
-  border-radius:.25rem;
-  cursor:pointer;
-  display:inline-block;
-  font-size:1rem;
-  font-weight:400;
-  line-height:1.5;
-  outline:none;
-  padding:.375rem .75rem;
-  text-align:center;
-  transition:color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  vertical-align:middle;
-  white-space:nowrap;
-}
-
 .btn-delete {
   background-color:#dc3545;
   border-color:#dc3545;
@@ -87,17 +73,6 @@ label {
   color:#fff;
 }
 
-.btn-edit {
-  background-color:#007bff;
-  border-color:#007bff;
-  color:#fff;
-}
-
-.btn-edit:hover {
-  background-color:#0069d9;
-  border-color:#0062cc;
-  color:#fff;
-}
 
 @media (max-width: 768px) {
   .column {

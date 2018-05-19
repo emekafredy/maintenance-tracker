@@ -11,14 +11,14 @@ Maintenance tracker is an app that enables employees of an organization request 
 # Features:
 
 
-#Users
+# Users
 
 - Sign up page for new users and Login page for registered users
 - Pages for users to create, edit or cancel requests
 - User can also see all requests made
 
 
-#Admin
+# Admin
 
 - Logged in admin can see every employees' requests
 - Admin can process employees' requests by either approving or rejecting them
@@ -42,11 +42,11 @@ Maintenance tracker is an app that enables employees of an organization request 
 - Will be available soon
 
 
-#UI Template
+# UI Template
 
 - https://emekafredy.github.io/maintenance-tracker/UI
 
 
-#Project Management Tool
+# Project Management Tool
 
 - https://www.pivotaltracker.com/n/projects/2171557

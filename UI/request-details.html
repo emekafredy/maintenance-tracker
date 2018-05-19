@@ -7,6 +7,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/request-details.css">
   <link rel="stylesheet" href="css/styles.css"> 
+  <link rel="stylesheet" href="css/user-requests.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <title>User Request Details</title>
 </head>
@@ -29,19 +30,22 @@
       <div class="nav-links">
         <a href="new-request.html"><i class="fa fa-plus"></i> Create new request</a>
         <a href="index.html">Logout</a>
-        <a href="user-profile.html"><span class="role">emeka</span></a>
+        <a href="user-profile.html">
+          <span class="role"><i class="fa fa-user-circle-o"></i> emeka</span>
+        </a>
       </div>      
     </div><br>
 
+    <div id="modal-container"></div>
     <div class="header">
       <div class="container">
         <h1>Request Details</h1>
       </div>
-    </div><hr>
+    </div>
     
     <div class="container">
       <div class="back">
-        <button class="btn btn-edit" onclick="getPages.backToRequests();">
+        <button class="btn btn-details" onclick="getPages.backToRequests();">
             <i class="fa fa-arrow-left"></i> Back to requests
         </button>
       </div>
@@ -68,7 +72,7 @@
               </span></p>
               <p> </p><label>Request status</label> : <span>Pending</span></p>
               <div class="btn-div">
-                <button class="btn btn-edit">
+                <button class="btn btn-details">
                   <i class="fa fa-pencil-square-o"></i> Edit Request
                 </button>
                 <button class="btn btn-delete" onclick="deleteRequest();">

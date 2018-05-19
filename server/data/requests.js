@@ -11,6 +11,7 @@ const requests = [
     requestStatus: 'Pending',
     imgUrl: 'https://static.bhphotovideo.com/explora/sites/default/files/plug5.jpg',
   },
+
   {
     id: 2,
     userId: 1,
@@ -23,6 +24,7 @@ const requests = [
     requestStatus: 'Pending',
     imgUrl: 'https://royalcomputer.co.uk/portals/0/Images/mbabrokenscreen.png',
   },
+
   {
     id: 3,
     userId: 5,
@@ -35,6 +37,7 @@ const requests = [
     requestStatus: 'Approved',
     imgUrl: 'https://images-eu.ssl-images-amazon.com/images/I/41y9NTZVYAL._SY300_QL70_.jpg',
   },
+
   {
     id: 4,
     userId: 2,
@@ -47,6 +50,7 @@ const requests = [
     requestStatus: 'Processed',
     imgUrl: 'https://target.scene7.com/is/image/Target/14517908?wid=250&hei=250&qlt=80&fmt=pjpeg',
   },
+
   {
     id: 5,
     userId: 1,
@@ -59,6 +63,7 @@ const requests = [
     requestStatus: 'Rejected',
     imgUrl: 'https://target.scene7.com/is/image/Target/14517908?wid=250&hei=250&qlt=80&fmt=pjpeg',
   },
+
   {
     id: 6,
     userId: 7,

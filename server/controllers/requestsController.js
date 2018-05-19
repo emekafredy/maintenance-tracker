@@ -42,7 +42,7 @@ class Request {
       return null;
     });
 
-    if (isNaN(id)) {
+    if (Number.isNaN(id)) {
       return response.status(400).json({
         message: 'Your request is invalid. Please enter a number',
       });

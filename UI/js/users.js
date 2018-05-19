@@ -1,4 +1,4 @@
-let modalDiv = document.getElementById('modal-container');
+const modalDiv = document.getElementById('modal-container');
 const deleteRequest = () => {
   modalDiv.innerHTML = `
       <div class="modal-div">
@@ -6,14 +6,14 @@ const deleteRequest = () => {
         <button id="proceed" onclick="proceedWithDelete();">Proceed</button>
         <button id="close">Cancel</button>
       </div>
-  `
-  modalDiv.style.display = "block";
+  `;
+  modalDiv.style.display = 'block';
 
-  let closeBtn = document.getElementById("close");
-  closeBtn.onclick = function() {
-    modalDiv.style.display = "none";
-  }
-}
+  const closeBtn = document.getElementById('close');
+  closeBtn.onclick = function () {
+    modalDiv.style.display = 'none';
+  };
+};
 
 const proceedWithDelete = () => {
   modalDiv.innerHTML = `
@@ -22,11 +22,11 @@ const proceedWithDelete = () => {
         <p id="messageId">Request successfully deleted</p>
         <button id="closeAfterdelete">close</button>
       </div>
-  `
-  modalDiv.style.display = "block";
+  `;
+  modalDiv.style.display = 'block';
 
-  let closeBtn = document.getElementById("closeAfterdelete");
-  closeBtn.onclick = function() {
-    modalDiv.style.display = "none";
-  }
-}
+  const closeBtn = document.getElementById('closeAfterdelete');
+  closeBtn.onclick = function () {
+    modalDiv.style.display = 'none';
+  };
+};

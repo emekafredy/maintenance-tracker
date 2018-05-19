@@ -32,12 +32,12 @@ const process = {
     }
   },
   rejectRequest: () => {
-    if (requestStatus.textContent == 'Pending') {
-        rejectARequest();
-        requestStatus.textContent = 'Rejected';
-        approveBtn.style.display = 'none';
-        rejectBtn.style.display = 'none';
-        resolveBtn.style.display = 'none';  
+    if (requestStatus.textContent === 'Pending') {
+      rejectARequest();
+      requestStatus.textContent = 'Rejected';
+      approveBtn.style.display = 'none';
+      rejectBtn.style.display = 'none';
+      resolveBtn.style.display = 'none';
     }
   },
   resolveRequest: () => {
@@ -49,12 +49,11 @@ const process = {
       resolveHeader.style.display = 'block';
       resolveDate.textContent = formatDate(new Date());
     }
-  }
-}
+  },
+};
 
 
-
-let modalDiv = document.getElementById('modal-container');
+const modalDiv = document.getElementById('modal-container');
 const rejectARequest = () => {
   modalDiv.innerHTML = `
       <div class="modal-div">
@@ -62,14 +61,14 @@ const rejectARequest = () => {
         <button id="proceed" onclick="proceedWithRejection();">Proceed</button>
         <button id="close">Cancel</button>
       </div>
-  `
-  modalDiv.style.display = "block";
+  `;
+  modalDiv.style.display = 'block';
 
-  let closeBtn = document.getElementById("close");
-  closeBtn.onclick = function() {
-    modalDiv.style.display = "none";
-  }
-}
+  const closeBtn = document.getElementById('close');
+  closeBtn.onclick = function () {
+    modalDiv.style.display = 'none';
+  };
+};
 
 const proceedWithRejection = () => {
   modalDiv.innerHTML = `
@@ -78,11 +77,11 @@ const proceedWithRejection = () => {
         <p id="messageId">Request marked as rejected</p>
         <button id="closeAfterdelete">close</button>
       </div>
-  `
-  modalDiv.style.display = "block";
+  `;
+  modalDiv.style.display = 'block';
 
-  let closeBtn = document.getElementById("closeAfterdelete");
-  closeBtn.onclick = function() {
-    modalDiv.style.display = "none";
-  }
-}
+  const closeBtn = document.getElementById('closeAfterdelete');
+  closeBtn.onclick = function () {
+    modalDiv.style.display = 'none';
+  };
+};

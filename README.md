@@ -36,6 +36,13 @@ Maintenance tracker is an app that enables employees of an organization request 
 
 - Heroku - https://emeka-m-tracker.herokuapp.com/api/v1
 
+ | Method | Description | Endpoints |
+ | ------ | ----------- | --------- |
+ | GET | Get all requests | /users/requests |
+ | GET | Get a request by ID(ID must be a number) | /users/requests/requestId |
+ | POST | Create a new request | /users/requests |
+ | PUT | Update existing request | /users/requests/requestId |
+
 
 # API documentattion
 
@@ -50,3 +57,6 @@ Maintenance tracker is an app that enables employees of an organization request 
 # Project Management Tool
 
 - https://www.pivotaltracker.com/n/projects/2171557
+
+# Author
+- Emeka Samuel Chinedu

@@ -33,13 +33,23 @@ describe('TEST REQUESTS ENDPOINTS', () => {
         });
     });
 
-    it('Should return a 404 message for invalid parameters', (done) => {
+    it('Should return a 400 message for invalid parameters', (done) => {
       chai.request(app)
-        .get('/api/v1/users/requests/10')
+        .get('/api/v1/users/requests/abd')
         .end((error, response) => {
           expect(response).to.be.an('object');
-          response.should.have.status(404);
-          response.body.message.should.eql('Request does not exist');
+          response.should.have.status(400);
+          response.body.message.should.eql('Your request is invalid. Please enter a number');
+          done();
+        });
+    });
+    it('Should return a 400 message for IDs that do not exist', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/requests/12')
+        .end((error, response) => {
+          expect(response).to.be.an('object');
+          response.should.have.status(400);
+          response.body.message.should.eql('You have no request with this ID');
           done();
         });
     });

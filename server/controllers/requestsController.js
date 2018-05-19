@@ -42,8 +42,13 @@ class Request {
       return null;
     });
 
-    return response.status(404).json({
-      message: 'Request does not exist',
+    if (isNaN(id)) {
+      return response.status(400).json({
+        message: 'Your request is invalid. Please enter a number',
+      });
+    }
+    return response.status(400).json({
+      message: 'You have no request with this ID',
     });
   }
 

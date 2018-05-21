@@ -7,7 +7,7 @@
     "test": "nyc --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./server/test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "nodemon app.js --exec babel-node  --presets es2015",
-    "mig": "psql -U postgres -f ./server/models/mtrackerDev.sql",
+    "mig": "psql -U postgres -f ./server/models/mtracker.sql",
     "lint": "eslint **/*.js --fix"
   },
   "repository": {

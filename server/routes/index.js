@@ -1,4 +1,5 @@
 import requestRoutes from '../routes/requestRoutes';
+import userRoutes from '../routes/userRoutes';
 
 const routes = (app) => {
   app.get('/api/v1', (request, response) => response.status(200).json({
@@ -6,6 +7,7 @@ const routes = (app) => {
   }));
 
   requestRoutes(app);
+  userRoutes(app);
 };
 
 export default routes;

@@ -51,6 +51,7 @@
     "pg-promise": "^8.4.4",
     "request": "^2.86.0",
     "should": "^13.2.1",
+    "validator": "^10.2.0",
     "winston": "^2.4.2"
   },
   "devDependencies": {

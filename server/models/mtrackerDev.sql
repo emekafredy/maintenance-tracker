@@ -11,8 +11,7 @@ CREATE TABLE users (
  email VARCHAR (50) NOT NULL,
  phone VARCHAR (20) NOT NULL,
  pass VARCHAR (20) NOT NULL,
- isAdmin boolean NOT NULL default false,
- createdAt date NOT NULL DEFAULT CURRENT_DATE
+ isAdmin boolean NOT NULL default false
 );
 
 CREATE TABLE requests (
@@ -28,6 +27,7 @@ CREATE TABLE requests (
  FOREIGN KEY (userId) REFERENCES users (userId)
 );
 
+-- seeding
 INSERT INTO users (firstName,lastName,email,phone,pass,isAdmin) 
   VALUES ('Emeka','Chinedu','emekaadmin@gmail.com','ab48589033','01234', true);
 INSERT INTO users (firstName,lastName,email,phone,pass) 

@@ -1,29 +1,16 @@
-import promise from 'bluebird';
+import pg from 'pg';
 
-const options = {
-  promiseLib: promise,
-};
-
-const pgp = require('pg-promise')(options);
-
-const connectionString = {
+const connection = {
   user: 'postgres',
   host: 'localhost',
   database: 'mtracker',
   password: 'sam',
   port: 5432,
+  max: 10,
+  idleTimeoutMillis: 30000,
 };
 
-// const connectionString2 = {
-//   user: 'postgres',
-//   host: 'localhost',
-//   database: 'trackertest',
-//   password: 'sam',
-//   port: 5432,
-// };
 
-const dbDev = pgp(connectionString);
-// const dbTest = pgp(connectionString2);
+const pool = new pg.Pool(connection);
 
-module.exports = dbDev;
-// module.exports = dbTest;
+export default pool;

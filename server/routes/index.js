@@ -1,4 +1,4 @@
-import requestRoutes from '../routes/requestRoutes';
+// import requestRoutes from '../routes/requestRoutes';
 import userRoutes from '../routes/userRoutes';
 
 const routes = (app) => {
@@ -6,7 +6,7 @@ const routes = (app) => {
     message: 'Welcome to M-Tracker App API, Version 1',
   }));
 
-  requestRoutes(app);
+  // requestRoutes(app);
   userRoutes(app);
 };
 

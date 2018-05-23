@@ -1,5 +1,5 @@
 import requests from '../data/requests';
-import RequestMiddleware from '../middleware/requests';
+import RequestMiddleware from '../validation/requests';
 
 /**
  * Represents the Requests Controller

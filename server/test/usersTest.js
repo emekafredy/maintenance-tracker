@@ -1,13 +1,13 @@
 import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
-import app from '../../app';
 import { describe } from 'mocha';
+
+import app from '../../app';
 
 chai.use(chaiHttp);
 chai.should();
 
 describe('ENDPOINTS TEST', () => {
-
   describe('GET /api/v1', () => {
     it('should return a welcome message on the home page', (done) => {
       chai.request(app)

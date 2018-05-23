@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 import client from '../models/database';
-import UserValidator from '../middleware/user';
+import UserValidator from '../validation/user';
 
 
 class UserController {

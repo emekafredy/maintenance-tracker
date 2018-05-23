@@ -8,7 +8,7 @@ before_install:
   - npm install -g npm@latest
 
 before_script:
-  - npm run mig
+  - psql -c 'create database mtracker;' -U postgres
 
 script:
   - npm test

@@ -1,19 +1,17 @@
-DROP DATABASE IF EXISTS mtracker;
-CREATE DATABASE mtracker;
-
 \c mtracker;
 
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
  userId serial PRIMARY KEY,
  firstName VARCHAR (50) NOT NULL,
  lastName VARCHAR (50) NOT NULL,
  signupDate date NOT NULL DEFAULT CURRENT_DATE,
  email VARCHAR (50) NOT NULL,
- phone VARCHAR (20) NOT NULL,
  pass VARCHAR (20) NOT NULL,
  isAdmin boolean NOT NULL default false
 );
 
+DROP TABLE IF EXISTS requests;
 CREATE TABLE requests (
  requestId serial PRIMARY KEY,
  userId INT NOT NULL,
@@ -28,12 +26,12 @@ CREATE TABLE requests (
 );
 
 -- seeding
-INSERT INTO users (firstName,lastName,email,phone,pass,isAdmin) 
-  VALUES ('Emeka','Chinedu','emekaadmin@gmail.com','ab48589033','01234', true);
-INSERT INTO users (firstName,lastName,email,phone,pass) 
-  VALUES ('Tomiwa','Olaniyi','tomiwa0456@gmail.com','ab498989033','56789');
-INSERT INTO users (firstName,lastName,email,phone,pass) 
-  VALUES ('Mercy','Rose','mercy@gmail.com','ab498989033','56789');
+INSERT INTO users (firstName,lastName,email,pass,isAdmin) 
+  VALUES ('Emeka','Chinedu','emekaadmin@gmail.com','01234', true);
+INSERT INTO users (firstName,lastName,email,pass) 
+  VALUES ('Tomiwa','Olaniyi','tomiwa0456@gmail.com','56789');
+INSERT INTO users (firstName,lastName,email,pass) 
+  VALUES ('Mercy','Rose','mercy@gmail.com','56789');
 
 
 INSERT INTO requests (userId,product,requestType,issue,imageUrl) 

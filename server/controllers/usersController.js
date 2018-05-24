@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import winston from 'winston';
 import validator from 'validator';
 import client from '../models/database';
 import UserValidator from '../validation/user';
@@ -20,11 +21,11 @@ class UserController {
       firstName: validator.trim(request.body.firstName),
       lastName: validator.trim(request.body.lastName),
       email: validator.trim(request.body.email),
-      pass: validator.trim(request.body.pass),
+      password: validator.trim(request.body.password),
     };
     const query = {
-      text: 'INSERT INTO users(firstName, lastName, email, pass) VALUES($1, $2, $3, $4)',
-      values: [newUser.firstName, newUser.lastName, newUser.email, newUser.pass],
+      text: 'INSERT INTO users(firstName, lastName, email, password) VALUES($1, $2, $3, $4)',
+      values: [newUser.firstName, newUser.lastName, newUser.email, newUser.password],
     };
 
 
@@ -55,12 +56,12 @@ class UserController {
 
   static userLogin(request, response, next) {
     const regMail = request.body.email;
-    const regPass = request.body.pass;
+    const regPass = request.body.password;
 
-    client.query({ text: 'SELECT * FROM users where email = $1 and pass = $2', values: [regMail, regPass] })
+    client.query({ text: 'SELECT * FROM users where email = $1 and password = $2', values: [regMail, regPass] })
       .then((foundmail) => {
         if (foundmail.rowCount === 1 && regPass) {
-          jwt.sign({ foundmail }, 'secretKey', (err, token) => response.send({
+          jwt.sign({ user: foundmail.rows[0] }, 'secretKey', (err, token) => response.send({
             token,
           }))
             .catch(error => next(error));

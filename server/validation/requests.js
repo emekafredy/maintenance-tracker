@@ -22,11 +22,11 @@ class RequestMiddleware {
       });
     }
     if (request.body.requestType &&
-          request.body.requestType !== 'repair' &&
-            request.body.requestType !== 'maintenance' &&
-              request.body.requestType !== 'replace') {
+          request.body.requestType !== 'repair'.toLowerCase() &&
+            request.body.requestType !== 'maintenance'.toLowerCase() &&
+              request.body.requestType !== 'replace'.toLowerCase()) {
       return response.status(400).json({
-        message: 'Request type should be either Repair, Maintenance or Replace',
+        message: 'Request type should be either repair, maintenance or replace',
       });
     }
     if (!request.body.issue) {

@@ -41,6 +41,33 @@ class UserRequestsController {
     }
     return null;
   }
+
+  static createRequest(request, response, next) {
+    const { userid: userId } = request.user;
+    const newRequest = {
+      product: request.body.product,
+      requestType: request.body.requestType,
+      issue: request.body.issue,
+    };
+    const query = {
+      text: 'INSERT INTO requests(userId, product, requestType, issue) VALUES($1, $2, $3, $4)',
+      values: [userId,
+        newRequest.product,
+        newRequest.requestType,
+        newRequest.issue],
+    };
+
+    if (RequestValidator.checkRequest(request, response)) {
+      return null;
+    }
+
+    client.query(query).then(myRequest => response.status(201).json({
+      message: 'Request Successfully created',
+      newRequest,
+    })).catch(error => next(error));
+
+    return null;
+  }
 }
 
 export default UserRequestsController;

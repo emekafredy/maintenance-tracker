@@ -53,7 +53,6 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .get('/api/v1/users/requests')
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
-              console.log(response);
               response.should.have.status(204);
               done();
             });

@@ -37,6 +37,11 @@ describe('ENDPOINTS TEST', () => {
         .get('/api/v1/users')
         .end((error, response) => {
           expect(response).to.have.status(200);
+          expect(response.body.status).to.equal('Users successfully retrieved');
+          expect(response.body.data[1].firstname).to.equal('Tomiwa');
+          expect(response.body.data[1].lastname).to.equal('Olaniyi');
+          expect(response.body.data[1].email).to.equal('tomiwa0456@gmail.com');
+          expect(response.body.data[1].isadmin).to.equal(false);
           expect(response.body).to.be.an('object');
           done();
         });
@@ -51,7 +56,7 @@ describe('ENDPOINTS TEST', () => {
           firstName: 'Sandra',
           lastName: 'Taiwo',
           email: 'saandra@gmail.com',
-          pass: 'password',
+          password: 'password',
         })
         .end((error, response) => {
           expect(response).to.have.status(200);
@@ -67,7 +72,7 @@ describe('ENDPOINTS TEST', () => {
           firstName: 'Sandra',
           lastName: 'Taiwo',
           email: 'saandra@gmail.com',
-          pass: 'password',
+          password: 'mypassword',
         })
         .end((error, response) => {
           expect(response).to.have.status(409);
@@ -83,7 +88,7 @@ describe('ENDPOINTS TEST', () => {
           firstName: '',
           lastName: 'Taiwo',
           email: 'saandra@gmail.com',
-          pass: 'password',
+          password: 'password',
         })
         .end((error, response) => {
           expect(response).to.have.status(400);
@@ -99,7 +104,7 @@ describe('ENDPOINTS TEST', () => {
           firstName: 'Sandra',
           lastName: 'Taiwo',
           email: 'saandra@com',
-          pass: 'password',
+          password: 'mypassword',
         })
         .end((error, response) => {
           expect(response).to.have.status(400);
@@ -116,7 +121,7 @@ describe('ENDPOINTS TEST', () => {
         .post('/api/v1/auth/login')
         .send({
           email: 'saandra@com',
-          pass: 'password',
+          password: 'password',
         })
         .end((error, response) => {
           expect(response.body).to.be.an('object');
@@ -128,7 +133,7 @@ describe('ENDPOINTS TEST', () => {
         .post('/api/v1/auth/login')
         .send({
           email: 'saandra@com',
-          pass: 'paord',
+          password: 'paord',
         })
         .end((error, response) => {
           expect(response).to.have.status(409);

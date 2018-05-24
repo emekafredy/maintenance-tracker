@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import client from '../models/database';
 
 class UserMiddleware {
   static checkUser(request, response, next) {
@@ -15,12 +16,11 @@ class UserMiddleware {
     return response.status(401).send({ message: 'Please Login or Signup to gain access' });
   }
 
-
   static checkAdmin(request, response, next) {
-    if (request.user.isAdmin) {
+    if (request.user.isadmin) {
       return next();
     }
-    return response.status(401).send({ message: 'User not an Admin' });
+    return response.status(500).send({ message: 'User not an Admin' });
   }
 }
 

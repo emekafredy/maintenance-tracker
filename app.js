@@ -1,11 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
+import dotenv from 'dotenv';
 
 import router from './server/routes';
 import notFound from './server/routes/notFound';
 
-
+winston.log('ENV', process.env);
 // Set up the express app
 const app = express();
 const port = process.env.PORT || 4500;

@@ -23,7 +23,7 @@ class UserValidation {
         message: 'Your email is invalid',
       });
     }
-    if (!request.body.pass) {
+    if (!request.body.password) {
       return response.status(400).json({
         message: 'You did not enter a password',
       });

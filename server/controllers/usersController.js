@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import winston from 'winston';
 import validator from 'validator';
 import client from '../models/database';
 import UserValidator from '../validation/user';

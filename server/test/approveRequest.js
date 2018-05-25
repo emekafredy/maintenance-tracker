@@ -39,7 +39,6 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .send(updatedRequest)
             .end((err, response) => {
-              console.log('RESPONSE', response);
               response.should.have.status(200);
               response.body.message.should.eql('Request has been approved');
               done();

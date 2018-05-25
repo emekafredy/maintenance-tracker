@@ -40,7 +40,21 @@ class RequestMiddleware {
   static checkUpdate(request, response) {
     const re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
     const num = /\D/g;
-
+    if (!request.body.requestType) {
+      return response.status(400).json({
+        message: 'Please update the request type',
+      });
+    }
+    if (!request.body.product) {
+      return response.status(400).json({
+        message: 'Please Update the product',
+      });
+    }
+    if (!request.body.issue) {
+      return response.status(400).json({
+        message: 'Please update the issue with your product',
+      });
+    }
     if (request.body.product &&
       request.body.product !== 'laptop' &&
         request.body.product !== 'monitor' &&

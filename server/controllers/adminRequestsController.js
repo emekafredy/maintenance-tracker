@@ -34,7 +34,7 @@ class AdminRequestsController {
         return client.query(query).then((update) => {
           response.status(200).json({
             message: 'Request has been approved',
-            approvedRequest,
+            data: data.rows,
           });
         }).catch(error => next(error));
       }).catch(error => next(error));
@@ -71,7 +71,7 @@ class AdminRequestsController {
         return client.query(query).then((update) => {
           response.status(200).json({
             message: 'Request has been disapproved',
-            approvedRequest,
+            data: data.rows,
           });
         }).catch(error => next(error));
       }).catch(error => next(error));
@@ -116,7 +116,7 @@ class AdminRequestsController {
         return client.query(query).then((update) => {
           response.status(200).json({
             message: 'Request has been resolved',
-            approvedRequest,
+            data: data.rows,
           });
         }).catch(error => next(error));
       }).catch(error => next(error));

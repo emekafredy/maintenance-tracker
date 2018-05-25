@@ -17,10 +17,10 @@ class UserController {
 
   static userSignup(request, response, next) {
     const newUser = {
-      firstName: validator.trim(String(request.body.firstName)),
-      lastName: validator.trim(String(request.body.lastName)),
-      email: validator.trim(String(request.body.email)),
-      password: validator.trim(String(request.body.password)),
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
+      email: request.body.email,
+      password: request.body.password,
     };
     const query = {
       text: 'INSERT INTO users(firstName, lastName, email, password) VALUES($1, $2, $3, $4)',
@@ -61,6 +61,7 @@ class UserController {
       .then((foundmail) => {
         if (foundmail.rowCount === 1 && regPass) {
           jwt.sign({ user: foundmail.rows[0] }, 'secretKey', (err, token) => response.send({
+            foundmail: foundmail.rows,
             token,
           }))
             .catch(error => next(error));

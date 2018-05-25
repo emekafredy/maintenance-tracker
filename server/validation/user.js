@@ -8,12 +8,12 @@ class UserValidation {
     const userEmail = request.body.email;
     const userPassword = request.body.password;
 
-    if (!userFirstname) {
+    if (!validator.trim(String(userFirstname)) || !(userFirstname)) {
       return response.status(400).json({
         message: 'Your first name is required',
       });
     }
-    if (!userLastName) {
+    if (!validator.trim(String(userLastName)) || !(userLastName)) {
       return response.status(400).json({
         message: 'Your last name is required',
       });
@@ -28,7 +28,7 @@ class UserValidation {
         message: 'Your email is invalid',
       });
     }
-    if (!userPassword) {
+    if (!validator.trim(String(userPassword)) || !(userPassword)) {
       return response.status(400).json({
         message: 'You did not enter a password',
       });

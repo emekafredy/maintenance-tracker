@@ -2,7 +2,7 @@ class RequestMiddleware {
   static checkRequest(request, response) {
     const product = String(request.body.product.toLowerCase());
     const requestType = String(request.body.requestType.toLowerCase());
-    const issue = String(request.body.issue.toLowerCase());
+    const { issue } = request.body;
 
     if (!product) {
       return response.status(400).json({
@@ -33,7 +33,7 @@ class RequestMiddleware {
         message: 'Request type should be either repair, maintenance or replace',
       });
     }
-    if (!issue) {
+    if (!issue || issue === ' ') {
       return response.status(400).json({
         message: 'Please describe the issue with your product',
       });

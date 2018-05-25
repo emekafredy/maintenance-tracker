@@ -17,10 +17,10 @@ class UserController {
 
   static userSignup(request, response, next) {
     const newUser = {
-      firstName: validator.trim(request.body.firstName),
-      lastName: validator.trim(request.body.lastName),
-      email: validator.trim(request.body.email),
-      password: validator.trim(request.body.password),
+      firstName: validator.trim(String(request.body.firstName)),
+      lastName: validator.trim(String(request.body.lastName)),
+      email: validator.trim(String(request.body.email)),
+      password: validator.trim(String(request.body.password)),
     };
     const query = {
       text: 'INSERT INTO users(firstName, lastName, email, password) VALUES($1, $2, $3, $4)',

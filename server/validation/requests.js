@@ -1,35 +1,39 @@
 class RequestMiddleware {
   static checkRequest(request, response) {
-    if (!request.body.product) {
+    const product = String(request.body.product.toLowerCase());
+    const requestType = String(request.body.requestType.toLowerCase());
+    const issue = String(request.body.issue.toLowerCase());
+
+    if (!product) {
       return response.status(400).json({
         message: 'The product is required',
       });
     }
-    if (request.body.product &&
-      request.body.product !== 'laptop' &&
-        request.body.product !== 'monitor' &&
-          request.body.product !== 'chair' &&
-            request.body.product !== 'desk' &&
-              request.body.product !== 'charger' &&
-                request.body.product !== 'headphone') {
+    if (product &&
+      product !== 'laptop' &&
+        product !== 'monitor' &&
+          product !== 'chair' &&
+            product !== 'desk' &&
+              product !== 'charger' &&
+                product !== 'headphone') {
       return response.status(400).json({
         message: 'Invalid entry. Select one out of this list of products: laptop, monitor, chair, desk, charger and headphone',
       });
     }
-    if (!request.body.requestType) {
+    if (!requestType) {
       return response.status(400).json({
         message: 'Request type is required',
       });
     }
-    if (request.body.requestType &&
-          request.body.requestType !== 'repair'.toLowerCase() &&
-            request.body.requestType !== 'maintenance'.toLowerCase() &&
-              request.body.requestType !== 'replace'.toLowerCase()) {
+    if (requestType &&
+          requestType !== 'repair'.toLowerCase() &&
+            requestType !== 'maintenance'.toLowerCase() &&
+              requestType !== 'replace'.toLowerCase()) {
       return response.status(400).json({
         message: 'Request type should be either repair, maintenance or replace',
       });
     }
-    if (!request.body.issue) {
+    if (!issue) {
       return response.status(400).json({
         message: 'Please describe the issue with your product',
       });

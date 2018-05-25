@@ -64,7 +64,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .send(incorrectupdatedRequest)
             .end((err, response) => {
               response.should.have.status(400);
-              response.body.message.should.eql('Request type should be either repair, maintenance or replace');
+              response.body.message.should.eql('Please update the issue with your product');
               done();
             });
         });
@@ -78,6 +78,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
           chai.request(app)
             .put('/api/v1/users/requests/1')
             .set('authorization', `Bearer ${reply.body.token}`)
+            .send(updatedRequest)
             .end((err, response) => {
               response.should.have.status(400);
               response.body.message.should.eql('You have no request with this ID');

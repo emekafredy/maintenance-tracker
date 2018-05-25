@@ -73,18 +73,11 @@ class UserRequestsController {
     const reqId = parseInt(request.params.requestId, 10);
     const { userid: userId } = request.user;
     const updatedRequest = {
-      product: request.body.product || response.req.body.product,
-      requestType: request.body.requestType || response.req.body.requestType,
-      issue: request.body.issue || response.req.body.issue,
+      product: request.body.product,
+      requestType: request.body.requestType,
+      issue: request.body.issue,
     };
-    const query = {
-      text: 'UPDATE requests SET product=$1, requestType=$2, issue=$3 WHERE requestId=$4',
-      values: [
-        updatedRequest.product,
-        updatedRequest.requestType,
-        updatedRequest.issue,
-        reqId],
-    };
+
     if (RequestValidator.checkUpdate(request, response)) {
       return null;
     }
@@ -99,7 +92,14 @@ class UserRequestsController {
             message: 'You can no longer update this request',
           });
         }
-        return client.query(query).then(myRequest => response.status(200).json({
+        return client.query({
+          text: 'UPDATE requests SET product=$1, requestType=$2, issue=$3 WHERE requestId=$4',
+          values: [
+            updatedRequest.product || data.rows[0].product,
+            updatedRequest.requestType || data.rows[0].requesttype,
+            updatedRequest.issue || data.rows[0].issue,
+            reqId],
+        }).then(myRequest => response.status(200).json({
           message: 'Request successfully updated',
           updatedRequest,
         })).catch(err => next(err.message));

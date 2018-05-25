@@ -1,5 +1,6 @@
 import userRoutes from './userRoutes';
 import userRequestsRoutes from './userRequestsRoutes';
+import adminRequestsRoutes from './adminRequestsRoutes';
 
 const routes = (app) => {
   app.get('/', (request, response) => response.status(200).json({
@@ -12,6 +13,7 @@ const routes = (app) => {
 
   userRoutes(app);
   userRequestsRoutes(app);
+  adminRequestsRoutes(app);
 };
 
 export default routes;

@@ -20,7 +20,7 @@ class UserMiddleware {
     if (request.user.isadmin) {
       return next();
     }
-    return response.status(500).send({ message: 'User not an Admin' });
+    return response.status(401).send({ message: 'User not an Admin' });
   }
 }
 

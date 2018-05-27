@@ -1,0 +1,268 @@
+FORMAT: 1A
+HOST: https://emeka-m-tracker.herokuapp.com/api/v1
+
+# Maintenance Tracker API Documentation
+
+An API that allows employees make tools maintenance/repair requests to the repairs department of their company
+
+
+## Employees Signup [/auth/signup]
+### Register employees/users [POST]
+
++ Request (application/json)
+
+        {
+            "firstName": "Bello",
+            "lastName": "Rasheed",
+            "email": "bello_r@gmail.com",
+            "password": "789tr"
+        }
+
+
++ Response 201 (application/json)
+
+        {
+            "message": "Welcome Bello",
+            "newUser": {
+                "firstName": "Bello",
+                "lastName": "Rasheed",
+                "email": "bello_r@gmail.com",
+                "password": "789tr"
+            },
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImNvbW1hbmQiOiJJTlNFUlQiLCJyb3dDb3VudCI6MSwib2lkIjowLCJyb3dzIjpbXSwiZmllbGRzIjpbXSwiX3BhcnNlcnMiOltdLCJSb3dDdG9yIjpudWxsLCJyb3dBc0FycmF5IjpmYWxzZX0sImlhdCI6MTUyNzQ0Nzc4Nn0.ZhnK1vxATjMSSz5SyCXlFuSW-UDGHQIvi_MfB8p8hd8"
+        }
+            
+## Employees Login [/auth/login]
+### Sign in employees/users [POST]
+
++ Request (application/json)
+
+        {
+            "email": "bello_r@gmail.com",
+            "password": "789tr"
+        }
+
+
++ Response 200 (application/json)
+
+        {
+            "foundmail": [
+                {
+                    "userid": 5,
+                    "firstname": "Bello",
+                    "lastname": "Rasheed",
+                    "signupdate": "2018-05-26T23:00:00.000Z",
+                    "email": "bellor@gmail.com",
+                    "password": "789tr",
+                    "isadmin": false
+                }
+            ],
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJpZCI6NSwiZmlyc3RuYW1lIjoiQmVsbG8iLCJsYXN0bmFtZSI6IlJhc2hlZWQiLCJzaWdudXBkYXRlIjoiMjAxOC0wNS0yNlQyMzowMDowMC4wMDBaIiwiZW1haWwiOiJiZWxsb3JAZ21haWwuY29tIiwicGFzc3dvcmQiOiI3ODl0ciIsImlzYWRtaW4iOmZhbHNlfSwiaWF0IjoxNTI3NDUwMDMxfQ.1nXptVSOzX1jW1dNHk4YaQ4_PXHoYLfoLgDAOnVV3fk"
+        }
+        
+## Employees' Requests [/users/requests]
+
+### Create new request for a logged in user [POST]
+
++ Request (application/json)
+
+        {
+            "product": "laptop",
+            "requestType": "repair",
+            "issue": "My system shuts down on its own"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "message": "Request Successfully created",
+            "newRequest": {
+                "product": "laptop",
+                "requestType": "repair",
+                "issue": "My system shuts down on its own"
+            }
+        }
+        
+### Get all requests of a logged in user [GET]
+
++ Response 200 (application/json)
+
+        {
+            "message": "Requests successfully retrieved",
+            "data": [
+                {
+                    "requestid": 6,
+                    "userid": 5,
+                    "requestdate": "2018-05-26T23:00:00.000Z",
+                    "product": "laptop",
+                    "requesttype": "repair",
+                    "issue": "My system shuts down on its own",
+                    "requeststatus": "pending",
+                    "imageurl": "https://www.mountaineers.org/images/placeholder-images/placeholder-400-x-400/image_preview"
+                }
+            ]
+        }
+
+## Employees' request by ID [/users/requests/6]
+
+### Get a request by logged in user [GET]
+
++ Response 200 (application/json)
+
+        {
+            "message": "Retrieved ONE request",
+            "data": [
+                {
+                    "requestid": 6,
+                    "userid": 5,
+                    "requestdate": "2018-05-26T23:00:00.000Z",
+                    "product": "laptop",
+                    "requesttype": "repair",
+                    "issue": "My system shuts down on its own",
+                    "requeststatus": "pending",
+                    "imageurl": "https://www.mountaineers.org/images/placeholder-images/placeholder-400-x-400/image_preview"
+                }
+            ]
+        }
+
+        
+### Update a request by a logged in user [PUT]
+
++ Request (application/json)
+
+        {
+            "issue": "My system's battery no longer lasts"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Request successfully updated",
+            "updatedRequest": {
+                "product": "laptop",
+                "requestType": "repair",
+                "issue": "My system's battery no longer lasts"
+            }
+        }
+ 
+
+
+## Admin requests [/requests]
+
+### Get all requests in application [GET]
+
++ Response 200 (application/json)
+
+        {
+            "message": "Requests retrieved successfully",
+            "data": [
+                {
+                    "requestid": 1,
+                    "userid": 3,
+                    "requestdate": "2018-05-26T23:00:00.000Z",
+                    "product": "laptop",
+                    "requesttype": "repair",
+                    "issue": "It shuts down on its own",
+                    "requeststatus": "pending",
+                    "imageurl": "https://www.asus.com/media/global/products/Slb3ZUQCNmiKi66c/P_setting_F5F5F5_1_90_end_765.png"
+                },
+                {
+                    "requestid": 3,
+                    "userid": 3,
+                    "requestdate": "2018-05-26T23:00:00.000Z",
+                    "product": "monitor",
+                    "requesttype": "repair",
+                    "issue": "Broken screen",
+                    "requeststatus": "pending",
+                    "imageurl": "https://www.asus.com/media/global/products/Slb3ZUQCNmiKi66c/P_setting_F5F5F5_1_90_end_765.png"
+                },
+                {
+                    "requestid": 4,
+                    "userid": 2,
+                    "requestdate": "2018-05-26T23:00:00.000Z",
+                    "product": "charger",
+                    "requesttype": "repair",
+                    "issue": "Does not charge my laptop anymore",
+                    "requeststatus": "approved",
+                    "imageurl": "https://www.mountaineers.org/images/placeholder-images/placeholder-400-x-400/image_preview"
+                },
+                {
+                    "requestid": 6,
+                    "userid": 5,
+                    "requestdate": "2018-05-26T23:00:00.000Z",
+                    "product": "laptop",
+                    "requesttype": "repair",
+                    "issue": "My system's battery no longer lasts",
+                    "requeststatus": "pending",
+                    "imageurl": "https://www.mountaineers.org/images/placeholder-images/placeholder-400-x-400/image_preview"
+                }
+            ]
+        }
+        
+## Admin requests by ID [/requests/3/approve]
+
+### Approve a pending request [PUT]
+
++ Request (application/json)
+
+        {
+            "requestStatus": "approved"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "message": "Request has been approved",
+            "approvedRequest": {
+                "product": "monitor",
+                "requestType": "repair",
+                "issue": "Broken screen",
+                "requestStatus": "approved"
+            }
+        }
+        
+
+## Admin requests by ID [/requests/3/resolve]
+
+### Resolve an approved request [PUT]
+
++ Request (application/json)
+
+        {
+            "requestStatus": "resolved"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "message": "Request has been resolved",
+            "resolvedRequest": {
+                "product": "monitor",
+                "requestType": "repair",
+                "issue": "Broken screen",
+                "requestStatus": "resolved"
+            }
+        }
+        
+
+## Admin requests by ID [/requests/1/disapprove]
+
+### Disapprove a pending request [PUT]
+
++ Request (application/json)
+
+        {
+            "requestStatus": "disapproved"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "message": "Request has been disapproved",
+            "disapprovedRequest": {
+                "product": "laptop",
+                "requestType": "repair",
+                "issue": "It shuts down on its own",
+                "requestStatus": "disapproved"
+            }
+        }

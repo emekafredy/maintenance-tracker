@@ -43,7 +43,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             });
         });
     });
-    it('should return 204 status code for successful request without content', (done) => {
+    it('should return a message for a successful request without content', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user3)
@@ -53,7 +53,8 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .get('/api/v1/users/requests')
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
-              response.should.have.status(204);
+              response.should.have.status(200);
+              response.body.message.should.eql('You have no requests record yet');
               done();
             });
         });

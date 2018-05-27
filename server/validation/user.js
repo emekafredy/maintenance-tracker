@@ -35,6 +35,28 @@ class UserValidation {
     }
     return null;
   }
+
+  static checkUserLogin(request, response) {
+    const userEmail = request.body.email;
+    const userPassword = request.body.password;
+
+    if (!userEmail && userPassword) {
+      return response.status(400).json({
+        message: 'Please enter your email address',
+      });
+    }
+    if (userEmail && !userPassword) {
+      return response.status(400).json({
+        message: 'Please enter your password',
+      });
+    }
+    if (!userEmail && !userPassword) {
+      return response.status(400).json({
+        message: 'Please enter your email address and password',
+      });
+    }
+    return null;
+  }
 }
 
 export default UserValidation;

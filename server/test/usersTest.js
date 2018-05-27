@@ -59,7 +59,7 @@ describe('ENDPOINTS TEST', () => {
           password: 'password',
         })
         .end((error, response) => {
-          expect(response).to.have.status(200);
+          expect(response).to.have.status(201);
           expect(response.body).to.be.an('object');
           response.body.message.should.eql('Welcome Sandra');
           done();

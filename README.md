@@ -36,17 +36,23 @@ Maintenance tracker is an app that enables employees of an organization request 
 
 - Heroku - https://emeka-m-tracker.herokuapp.com/api/v1
 
- | Method | Description | Endpoints |
- | ------ | ----------- | --------- |
- | GET | Get all requests | /users/requests |
- | GET | Get a request by ID(ID must be a number) | /users/requests/requestId |
- | POST | Create a new request | /users/requests |
- | PUT | Update existing request | /users/requests/requestId |
+ | Method | Description | Endpoints | Role |
+ | ------ | ----------- | --------- | ---- |
+ | POST | Users Sign Up | auth/signup | User |
+ | POST | Users Login | auth/login | User |
+ | GET | Get all requests for a logged-in User | /users/requests | User |
+ | POST | Create new request | /users/requests | User |
+ | GET | Get a request by ID (ID must be a number) | /users/requests/requestId | User |
+ | PUT | Update existing request | /users/requests/requestId | User |
+ | GET | Get all Requests | /requests | Admin |
+ | PUT | Approve a request | /requests/requestId/approve | Admin |
+ | PUT | Disapprove a request | /requests/requestId/disapprove | Admin |
+ | PUT |  Resolve a request | /requests/requestId/resolve | Admin |
 
 
-# API documentattion
+# API documentation
 
-- Will be available soon
+- Apiary - https://mtracker.docs.apiary.io/#
 
 
 # UI Template

@@ -1,3 +1,5 @@
+import validator from 'validator';
+
 import client from '../models/database';
 import RequestValidator from '../validation/requests';
 
@@ -11,8 +13,8 @@ class UserRequestsController {
           data: data.rows,
         });
       }
-      return response.status(204).json({
-        message: 'You have no requests record',
+      return response.status(200).json({
+        message: 'You have no requests record yet',
       });
     }).catch(err => next(err.message));
   }
@@ -23,7 +25,7 @@ class UserRequestsController {
     client.query('select * from requests where userId = $1 and requestId = $2', [userId, reqId])
       .then((data) => {
         if (data.rows.length === 0) {
-          response.status(400).json({
+          return response.status(400).json({
             message: 'You have no request with this ID',
           });
         }
@@ -36,18 +38,21 @@ class UserRequestsController {
       .catch(err => next(err.message));
     if (Number.isNaN(reqId)) {
       return response.status(400).json({
-        message: 'Your request is invalid. Please enter a number',
+        message: 'Your request ID is invalid. Please enter a number',
       });
     }
     return null;
   }
 
   static createRequest(request, response, next) {
+    if (RequestValidator.checkRequest(request, response)) {
+      return null;
+    }
     const { userid: userId } = request.user;
     const newRequest = {
-      product: request.body.product,
-      requestType: request.body.requestType,
-      issue: request.body.issue,
+      product: validator.trim(String(request.body.product.toLowerCase())),
+      requestType: validator.trim(String(request.body.requestType.toLowerCase())),
+      issue: validator.trim(String(request.body.issue)),
     };
     const query = {
       text: 'INSERT INTO requests(userId, product, requestType, issue) VALUES($1, $2, $3, $4)',
@@ -56,11 +61,6 @@ class UserRequestsController {
         newRequest.requestType,
         newRequest.issue],
     };
-
-    if (RequestValidator.checkRequest(request, response)) {
-      return null;
-    }
-
     client.query(query).then(myRequest => response.status(201).json({
       message: 'Request Successfully created',
       newRequest,
@@ -72,15 +72,11 @@ class UserRequestsController {
   static updateRequest(request, response, next) {
     const reqId = parseInt(request.params.requestId, 10);
     const { userid: userId } = request.user;
-    const updatedRequest = {
-      product: request.body.product,
-      requestType: request.body.requestType,
-      issue: request.body.issue,
-    };
 
     if (RequestValidator.checkUpdate(request, response)) {
       return null;
     }
+
     client.query('select * from requests where userId = $1 and requestId = $2', [userId, reqId])
       .then((data) => {
         if (data.rows.length === 0) {
@@ -92,12 +88,17 @@ class UserRequestsController {
             message: 'You can no longer update this request',
           });
         }
+        const updatedRequest = {
+          product: request.body.product || data.rows[0].product,
+          requestType: request.body.requestType || data.rows[0].requesttype,
+          issue: request.body.issue || data.rows[0].issue,
+        };
         return client.query({
           text: 'UPDATE requests SET product=$1, requestType=$2, issue=$3 WHERE requestId=$4',
           values: [
-            updatedRequest.product || data.rows[0].product,
-            updatedRequest.requestType || data.rows[0].requesttype,
-            updatedRequest.issue || data.rows[0].issue,
+            updatedRequest.product,
+            updatedRequest.requestType,
+            updatedRequest.issue,
             reqId],
         }).then(myRequest => response.status(200).json({
           message: 'Request successfully updated',
@@ -107,7 +108,7 @@ class UserRequestsController {
 
     if (Number.isNaN(reqId)) {
       return response.status(400).json({
-        message: 'Your request is invalid. Please enter a number',
+        message: 'Your request ID is invalid. Please enter a number',
       });
     }
     return null;

@@ -80,11 +80,11 @@ class UserRequestsController {
     client.query('select * from requests where userId = $1 and requestId = $2', [userId, reqId])
       .then((data) => {
         if (data.rows.length === 0) {
-          response.status(400).json({
+          return response.status(400).json({
             message: 'You have no request with this ID',
           });
         } else if (data.rows[0].requeststatus !== 'pending') {
-          response.status(401).json({
+          return response.status(401).json({
             message: 'You can no longer update this request',
           });
         }

@@ -1,21 +1,21 @@
+import validator from 'validator';
+
 class RequestMiddleware {
   static checkRequest(request, response) {
-    const product = String(request.body.product.toLowerCase());
-    const requestType = String(request.body.requestType.toLowerCase());
-    const { issue } = request.body;
+    const { issue, product, requestType } = request.body;
 
-    if (!product) {
+    if (!validator.trim(String(product)) || !product) {
       return response.status(400).json({
         message: 'The product is required',
       });
     }
-    if (product &&
-      product !== 'laptop' &&
-        product !== 'monitor' &&
-          product !== 'chair' &&
-            product !== 'desk' &&
-              product !== 'charger' &&
-                product !== 'headphone') {
+    if (validator.trim(String(product)) &&
+      validator.trim(String(product.toLowerCase())) !== 'laptop' &&
+      validator.trim(String(product.toLowerCase())) !== 'monitor' &&
+      validator.trim(String(product.toLowerCase())) !== 'chair' &&
+      validator.trim(String(product.toLowerCase())) !== 'desk' &&
+      validator.trim(String(product.toLowerCase())) !== 'charger' &&
+      validator.trim(String(product.toLowerCase())) !== 'headphone') {
       return response.status(400).json({
         message: 'Invalid entry. Select one out of this list of products: laptop, monitor, chair, desk, charger and headphone',
       });
@@ -26,14 +26,14 @@ class RequestMiddleware {
       });
     }
     if (requestType &&
-          requestType !== 'repair'.toLowerCase() &&
-            requestType !== 'maintenance'.toLowerCase() &&
-              requestType !== 'replace'.toLowerCase()) {
+      validator.trim(String(requestType.toLowerCase())) !== 'repair' &&
+      validator.trim(String(requestType.toLowerCase())) !== 'maintenance' &&
+      validator.trim(String(requestType.toLowerCase())) !== 'replace') {
       return response.status(400).json({
         message: 'Request type should be either repair, maintenance or replace',
       });
     }
-    if (!issue || issue === ' ') {
+    if (!validator.trim(String(issue)) || !(issue)) {
       return response.status(400).json({
         message: 'Please describe the issue with your product',
       });
@@ -41,40 +41,25 @@ class RequestMiddleware {
     return null;
   }
 
-  static checkUpdate(request, response) {
-    const re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
-    const num = /\D/g;
-    if (!request.body.requestType) {
-      return response.status(400).json({
-        message: 'Please update the request type',
-      });
-    }
-    if (!request.body.product) {
-      return response.status(400).json({
-        message: 'Please Update the product',
-      });
-    }
-    if (!request.body.issue) {
-      return response.status(400).json({
-        message: 'Please update the issue with your product',
-      });
-    }
-    if (request.body.product &&
-      request.body.product !== 'laptop' &&
-        request.body.product !== 'monitor' &&
-          request.body.product !== 'chair' &&
-            request.body.product !== 'desk' &&
-              request.body.product !== 'charger' &&
-                request.body.product !== 'headphone' &&
-                  request.body.product !== 'socket') {
+  static checkUpdate(request, response, next) {
+    const { product, requestType } = request.body;
+
+    if (product &&
+      product !== 'laptop' &&
+      product !== 'monitor' &&
+      product !== 'chair' &&
+      product !== 'desk' &&
+      product !== 'charger' &&
+      product !== 'headphone' &&
+      product !== 'socket') {
       return response.status(400).json({
         message: 'Invalid entry. Select one out of this list of products: laptop, monitor, chair, desk, charger and headphone',
       });
     }
-    if (request.body.requestType &&
-          request.body.requestType !== 'repair' &&
-            request.body.requestType !== 'maintenance' &&
-              request.body.requestType !== 'replace') {
+    if (requestType &&
+      requestType !== 'repair' &&
+      requestType !== 'maintenance' &&
+      requestType !== 'replace') {
       return response.status(400).json({
         message: 'Request type should be either repair, maintenance or replace',
       });

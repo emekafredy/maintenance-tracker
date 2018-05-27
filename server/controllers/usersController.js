@@ -17,10 +17,10 @@ class UserController {
 
   static userSignup(request, response, next) {
     const newUser = {
-      firstName: request.body.firstName,
-      lastName: request.body.lastName,
+      firstName: validator.trim(String(request.body.firstName)),
+      lastName: validator.trim(String(request.body.lastName)),
       email: request.body.email,
-      password: request.body.password,
+      password: validator.trim(String(request.body.password)),
     };
     const query = {
       text: 'INSERT INTO users(firstName, lastName, email, password) VALUES($1, $2, $3, $4)',
@@ -36,20 +36,19 @@ class UserController {
     client.query({ text: 'SELECT * FROM users where email = $1', values: [regMail] }).then((foundmail) => {
       if (foundmail.rowCount === 0) {
         return client.query(query).then(user => user)
-          .then((user) => {
-            jwt.sign({ user }, 'secretKey', (err, token) => {
-              response.send({
-                message: `Welcome ${newUser.firstName}`,
-                token,
-              });
+          .then(user => jwt.sign({ user }, 'secretKey', (err, token) => {
+            response.send({
+              message: `Welcome ${newUser.firstName}`,
+              newUser,
+              token,
             });
-          })
+          }))
           .catch(error => next(error));
       }
       return response.status(409).json({
         message: 'An account has already been created with this email address',
       });
-    }).catch(error => next(error));
+    });
     return null;
   }
 
@@ -57,8 +56,12 @@ class UserController {
     const regMail = request.body.email;
     const regPass = request.body.password;
 
+
     client.query({ text: 'SELECT * FROM users where email = $1 and password = $2', values: [regMail, regPass] })
       .then((foundmail) => {
+        if (UserValidator.checkUserLogin(request, response)) {
+          return null;
+        }
         if (foundmail.rowCount === 1 && regPass) {
           jwt.sign({ user: foundmail.rows[0] }, 'secretKey', (err, token) => response.send({
             foundmail: foundmail.rows,
@@ -69,6 +72,7 @@ class UserController {
         response.status(409).json({
           message: 'Your email or password is incorrect',
         });
+        return null;
       });
   }
 }

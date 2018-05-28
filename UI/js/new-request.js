@@ -1,9 +1,3 @@
-const submitRequest = document.getElementById('submitRequest');
-submitRequest.addEventListener('click', () => {
-  createRequestModal();
-});
-
-
 const createRequestModal = () => {
   const modalDiv = document.getElementById('modal-container');
   modalDiv.innerHTML = `
@@ -15,15 +9,20 @@ const createRequestModal = () => {
   `;
   modalDiv.style.display = 'block';
 
-  window.onclick = function (event) {
+  window.addEventListener('click', (event) => {
     if (event.target === modalDiv) {
       modalDiv.style.display = 'none';
     }
-  };
-
+  });
 
   const closeBtn = document.getElementById('close');
-  closeBtn.onclick = function () {
+  closeBtn.addEventListener('click', () => {
     modalDiv.style.display = 'none';
-  };
+  });
 };
+
+
+const submitRequest = document.getElementById('submitRequest');
+submitRequest.addEventListener('click', () => {
+  createRequestModal();
+});

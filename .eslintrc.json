@@ -1,11 +1,5 @@
 {
-  "extends": "airbnb-base",
-  "rules" : {
-      "func-names": ["error", "never"],
-      "no-unused-vars": 0,
-      "import/no-dynamic-require": 0,
-      "no-param-reassign": [2, { "props": false }]
-  },
+  "extends": "airbnb",
   "globals": {
       "window": true,
       "document": true,

@@ -41,7 +41,7 @@ class RequestMiddleware {
     return null;
   }
 
-  static checkUpdate(request, response, next) {
+  static checkUpdate(request, response) {
     const { product, requestType } = request.body;
 
     if (product &&

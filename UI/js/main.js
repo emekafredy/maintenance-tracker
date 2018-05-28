@@ -18,10 +18,12 @@ const getPages = {
     window.location.href = 'admin-panel.html';
   },
 };
+getPages();
 
 const processRequests = () => {
   window.location.href = 'process-requests.html';
 };
+processRequests();
 
 const filterRequest = () => {
   const filterTable = ((list) => {

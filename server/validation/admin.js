@@ -1,6 +1,3 @@
-import jwt from 'jsonwebtoken';
-import validator from 'validator';
-
 class AdminValidation {
   static checkApproval(request, response) {
     const { requestStatus } = request.body;

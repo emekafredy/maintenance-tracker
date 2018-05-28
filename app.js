@@ -1,8 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
-import dotenv from 'dotenv';
-import request from 'supertest';
 
 import router from './server/routes';
 import notFound from './server/routes/notFound';

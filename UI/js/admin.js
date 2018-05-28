@@ -21,6 +21,23 @@ const formatDate = (date) => {
   return `${day} ${monthNames[monthIndex]} ${year}`;
 };
 
+const modalDiv = document.getElementById('modal-container');
+const rejectARequest = () => {
+  modalDiv.innerHTML = `
+      <div class="modal-div">
+        <p id="messageId">Do you really want to reject this request?</p>
+        <button id="proceed" onclick="proceedWithRejection();">Proceed</button>
+        <button id="close">Cancel</button>
+      </div>
+  `;
+  modalDiv.style.display = 'block';
+
+  const closeBtn = document.getElementById('close');
+  closeBtn.addEventListener('click', () => {
+    modalDiv.style.display = 'none';
+  });
+};
+
 
 const process = {
   approveRequest: () => {
@@ -51,24 +68,7 @@ const process = {
     }
   },
 };
-
-
-const modalDiv = document.getElementById('modal-container');
-const rejectARequest = () => {
-  modalDiv.innerHTML = `
-      <div class="modal-div">
-        <p id="messageId">Do you really want to reject this request?</p>
-        <button id="proceed" onclick="proceedWithRejection();">Proceed</button>
-        <button id="close">Cancel</button>
-      </div>
-  `;
-  modalDiv.style.display = 'block';
-
-  const closeBtn = document.getElementById('close');
-  closeBtn.onclick = function () {
-    modalDiv.style.display = 'none';
-  };
-};
+process();
 
 const proceedWithRejection = () => {
   modalDiv.innerHTML = `
@@ -81,7 +81,8 @@ const proceedWithRejection = () => {
   modalDiv.style.display = 'block';
 
   const closeBtn = document.getElementById('closeAfterdelete');
-  closeBtn.onclick = function () {
+  closeBtn.addEventListener('click', () => {
     modalDiv.style.display = 'none';
-  };
+  });
 };
+proceedWithRejection();

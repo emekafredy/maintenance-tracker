@@ -1,7 +1,6 @@
 import userRoutes from './userRoutes';
 import userRequestsRoutes from './userRequestsRoutes';
 import adminRequestsRoutes from './adminRequestsRoutes';
-import notFound from './notFound';
 
 const routes = (app) => {
   app.get('/', (request, response) => response.status(200).json({

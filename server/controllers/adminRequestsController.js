@@ -1,5 +1,4 @@
 import client from '../models/database';
-import requests from '../validation/requests';
 import AdminValidator from '../validation/admin';
 
 class AdminRequestsController {
@@ -11,11 +10,11 @@ class AdminRequestsController {
   }
 
   static approveARequest(request, response, next) {
-    const reqId = parseInt(request.params.requestId, 10);
-
     if (AdminValidator.checkApproval(request, response)) {
       return null;
     }
+
+    const reqId = parseInt(request.params.requestId, 10);
 
     client.query('SELECT * FROM requests WHERE requestId =$1', [reqId])
       .then((data) => {
@@ -42,7 +41,7 @@ class AdminRequestsController {
             approvedRequest.issue,
             approvedRequest.requestStatus, reqId],
         };
-        return client.query(query).then((update) => {
+        return client.query(query).then(() => {
           response.status(200).json({
             message: 'Request has been approved',
             approvedRequest,
@@ -89,7 +88,7 @@ class AdminRequestsController {
             disapprovedRequest.issue,
             disapprovedRequest.requestStatus, reqId],
         };
-        return client.query(query).then((update) => {
+        return client.query(query).then(() => {
           response.status(200).json({
             message: 'Request has been disapproved',
             disapprovedRequest,
@@ -144,7 +143,7 @@ class AdminRequestsController {
             resolvedRequest.issue,
             resolvedRequest.requestStatus, reqId],
         };
-        return client.query(query).then((update) => {
+        return client.query(query).then(() => {
           response.status(200).json({
             message: 'Request has been resolved',
             resolvedRequest,

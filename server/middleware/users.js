@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import client from '../models/database';
 
 class UserMiddleware {
   static checkUser(request, response, next) {

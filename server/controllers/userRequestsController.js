@@ -61,7 +61,7 @@ class UserRequestsController {
         newRequest.requestType,
         newRequest.issue],
     };
-    client.query(query).then(myRequest => response.status(201).json({
+    client.query(query).then(() => response.status(201).json({
       message: 'Request Successfully created',
       newRequest,
     })).catch(err => next(err.message));
@@ -100,7 +100,7 @@ class UserRequestsController {
             updatedRequest.requestType,
             updatedRequest.issue,
             reqId],
-        }).then(myRequest => response.status(200).json({
+        }).then(() => response.status(200).json({
           message: 'Request successfully updated',
           updatedRequest,
         })).catch(err => next(err.message));

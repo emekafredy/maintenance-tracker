@@ -10,10 +10,11 @@ const deleteRequest = () => {
   modalDiv.style.display = 'block';
 
   const closeBtn = document.getElementById('close');
-  closeBtn.onclick = function () {
+  closeBtn.addEventListener('click', () => {
     modalDiv.style.display = 'none';
-  };
+  });
 };
+deleteRequest();
 
 const proceedWithDelete = () => {
   modalDiv.innerHTML = `
@@ -26,7 +27,8 @@ const proceedWithDelete = () => {
   modalDiv.style.display = 'block';
 
   const closeBtn = document.getElementById('closeAfterdelete');
-  closeBtn.onclick = function () {
+  closeBtn.addEventListener('click', () => {
     modalDiv.style.display = 'none';
-  };
+  });
 };
+proceedWithDelete();

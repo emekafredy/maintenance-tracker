@@ -8,7 +8,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "nodemon app.js --exec babel-node  --presets es2015",
     "mig": "psql -U postgres -f  ./server/models/tracker.sql",
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js --fix"
   },
   "repository": {
     "type": "git",

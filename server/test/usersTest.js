@@ -134,7 +134,7 @@ describe('ENDPOINTS TEST', () => {
         .end((error, response) => {
           expect(response).to.have.status(400);
           expect(response.body).to.be.an('object');
-          response.body.message.should.eql('Your first name is required');
+          response.body.firstName.should.eql('First name is required');
           done();
         });
     });
@@ -150,7 +150,7 @@ describe('ENDPOINTS TEST', () => {
         .end((error, response) => {
           expect(response).to.have.status(400);
           expect(response.body).to.be.an('object');
-          response.body.message.should.eql('Your email is invalid');
+          response.body.email.should.eql('Your email is invalid');
           done();
         });
     });

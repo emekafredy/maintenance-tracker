@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 import client from '../../models/database';
-import UserValidator from '../../validation/user';
 
 
 class UserController {
@@ -43,10 +42,6 @@ class UserController {
       text: 'INSERT INTO users(firstName, lastName, email, password) VALUES($1, $2, $3, $4)',
       values: [newUser.firstName, newUser.lastName, newUser.email, newUser.password],
     };
-
-    if (UserValidator.checkUser(request, response)) {
-      return null;
-    }
     return UserController.signUpQuery(request, response, query, newUser);
   }
 
@@ -56,9 +51,6 @@ class UserController {
 
     client.query({ text: 'SELECT * FROM users where email = $1 and password = $2', values: [regMail, regPass] })
       .then((foundmail) => {
-        if (UserValidator.checkUserLogin(request, response)) {
-          return null;
-        }
         if (foundmail.rowCount === 1 && regPass) {
           jwt.sign({ user: foundmail.rows[0] }, 'secretKey', (err, token) => response.json({
             foundmail: foundmail.rows,

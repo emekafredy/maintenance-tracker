@@ -1,40 +1,7 @@
 import validator from 'validator';
 
 class RequestMiddleware {
-  static checkRequest(request, response, next) {
-    const { issue, product, requestType } = request.body;
-    let isValid = true;
-    const errors = {};
-    const products = ['laptop', 'monitor', 'chair', 'desk', 'charger', 'headphone'];
-    const requestTypes = ['repair', 'maintenance', 'replace'];
-
-    if (!product) {
-      isValid = false;
-      errors.product = 'The product is required';
-    }
-    if (product && !products.includes(validator.trim(String(product.toLowerCase())))) {
-      isValid = false;
-      errors.product = 'Invalid entry. Select one out of this list of products: laptop, monitor, chair, desk, charger and headphone';
-    }
-    if (!requestType) {
-      isValid = false;
-      errors.requestType = 'Request type is required';
-    }
-    if (requestType && !requestTypes.includes(validator.trim(String(requestType.toLowerCase())))) {
-      isValid = false;
-      errors.requestType = 'Request type should be either repair, maintenance or replace';
-    }
-    if (!issue) {
-      isValid = false;
-      errors.Issue = 'Please describe the issue with your product';
-    }
-    if (isValid) {
-      return next();
-    }
-    return response.status(400).json(errors);
-  }
-
-  static checkUpdate(request, response, next) {
+  static checkUpdateContent(request, response, next) {
     const { product, requestType } = request.body;
     let isValid = true;
     const errors = {};
@@ -52,7 +19,37 @@ class RequestMiddleware {
     if (isValid) {
       return next();
     }
+    if (isValid) {
+      return next();
+    }
     return response.status(400).json(errors);
+  }
+
+  static checkRequest(request, response, next) {
+    const { issue, product, requestType } = request.body;
+    let isValid = true;
+    const errors = {};
+
+    if (!product) {
+      isValid = false;
+      errors.product = 'The product is required';
+    }
+    if (!requestType) {
+      isValid = false;
+      errors.requestType = 'Request type is required';
+    }
+    if (!issue) {
+      isValid = false;
+      errors.Issue = 'Please describe the issue with your product';
+    }
+    if (isValid) {
+      return next();
+    }
+    return response.status(400).json(errors);
+  }
+
+  static checkUpdate(request, response, next) {
+    RequestMiddleware.checkUpdateContent(request, response, next);
   }
 }
 

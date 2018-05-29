@@ -44,7 +44,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .put('/api/v1/users/requests/2')
+            .put('/api/v1/users/requests/5')
             .set('authorization', `Bearer ${reply.body.token}`)
             .send(updatedRequest)
             .end((err, response) => {
@@ -63,7 +63,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .put('/api/v1/users/requests/2')
+            .put('/api/v1/users/requests/5')
             .set('authorization', `Bearer ${reply.body.token}`)
             .send(partOfData)
             .end((err, response) => {
@@ -76,7 +76,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             });
         });
     });
-    it('should return a message when an input is inccorrect', (done) => {
+    it('should return a message when an input is incorrect', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user2)
@@ -88,7 +88,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .send(incorrectupdatedRequest)
             .end((err, response) => {
               response.should.have.status(400);
-              response.body.message.should.eql('Request type should be either repair, maintenance or replace');
+              response.body.requestType.should.eql('Request type should be either repair, maintenance or replace');
               done();
             });
         });

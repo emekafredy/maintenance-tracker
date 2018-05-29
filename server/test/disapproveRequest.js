@@ -1,5 +1,5 @@
 import chaiHttp from 'chai-http';
-import chai, { expect } from 'chai';
+import chai from 'chai';
 import { describe } from 'mocha';
 
 import app from '../../app';
@@ -11,60 +11,15 @@ const user1 = { email: 'notexistent@gmail.com', password: 'faker' };
 const user2 = { email: 'tomiwa0456@gmail.com', password: '56789' };
 const user3 = { email: 'emekaadmin@gmail.com', password: '01234' };
 
-describe('REQUEST ENDPOINTS TEST', () => {
-  describe('GET /api/v1/users/requests', () => {
-    it('should report 401 on users not logged in', (done) => {
-      chai.request(app)
-        .get('/api/v1/users/requests')
-        .send(user1)
-        .end((error, response) => {
-          response.status.should.eql(401);
-          response.type.should.eql('application/json');
-          response.body.message.should.eql('Please Login or Signup to gain access');
-          done();
-        });
-    });
-    it('should return all requests of a logged in user', (done) => {
-      chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(user2)
-        .then((reply) => {
-          reply.body.should.have.property('token');
-          chai.request(app)
-            .get('/api/v1/users/requests')
-            .set('authorization', `Bearer ${reply.body.token}`)
-            .end((err, response) => {
-              response.should.have.status(200);
-              expect(response.body.data[0].product).to.equal('charger');
-              expect(response.body.data[0].requesttype).to.equal('repair');
-              expect(response.body.data[0].issue).to.equal('Does not charge my laptop anymore');
-              response.body.message.should.eql('Requests successfully retrieved');
-              done();
-            });
-        });
-    });
-    it('should return a message for a successful request without content', (done) => {
-      chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(user3)
-        .then((reply) => {
-          reply.body.should.have.property('token');
-          chai.request(app)
-            .get('/api/v1/users/requests')
-            .set('authorization', `Bearer ${reply.body.token}`)
-            .end((err, response) => {
-              response.should.have.status(200);
-              response.body.message.should.eql('You have no requests record yet');
-              done();
-            });
-        });
-    });
-  });
+const disapprovedRequest = {
+  requestStatus: 'disapproved',
+};
 
-  describe('GET /api/v1/requests', () => {
+describe('REQUEST ENDPOINTS TEST', () => {
+  describe('PUT /api/v1/requests/:requestId/disapprove', () => {
     it('should report 401 on users not logged in', (done) => {
       chai.request(app)
-        .get('/api/v1/requests')
+        .put('/api/v1/requests/2/approve')
         .send(user1)
         .end((error, response) => {
           response.status.should.eql(401);
@@ -73,37 +28,69 @@ describe('REQUEST ENDPOINTS TEST', () => {
           done();
         });
     });
-    it('should return all requests for every user, accessible only to the admin', (done) => {
+    it('should successfully disapprove user requests as an admin', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user3)
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .get('/api/v1/requests')
+            .put('/api/v1/requests/2/disapprove')
             .set('authorization', `Bearer ${reply.body.token}`)
+            .send(disapprovedRequest)
             .end((err, response) => {
               response.should.have.status(200);
-              expect(response.body.data[0].product).to.equal('laptop');
-              expect(response.body.data[0].requesttype).to.equal('repair');
-              expect(response.body.data[0].issue).to.equal('It shuts down on its own');
-              response.body.message.should.eql('Requests retrieved successfully');
+              response.body.message.should.eql('Request has been disapproved');
               done();
             });
         });
     });
-    it('should not grant access to a logged in user who is not an admin', (done) => {
+    it('should report 401 if resquest has already been processed', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(user3)
+        .then((reply) => {
+          reply.body.should.have.property('token');
+          chai.request(app)
+            .put('/api/v1/requests/2/disapprove')
+            .set('authorization', `Bearer ${reply.body.token}`)
+            .send(disapprovedRequest)
+            .end((err, response) => {
+              response.should.have.status(401);
+              response.body.message.should.eql('Request has already been disapproved');
+              done();
+            });
+        });
+    });
+    it('should return a 401 status code if user is not an admin', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user2)
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .get('/api/v1/requests')
+            .put('/api/v1/requests/2/disapprove')
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
               response.should.have.status(401);
               response.body.message.should.eql('User not an Admin');
+              done();
+            });
+        });
+    });
+    it('should return a message if an invalid parameter is used in URL', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(user3)
+        .then((reply) => {
+          reply.body.should.have.property('token');
+          chai.request(app)
+            .put('/api/v1/requests/abd/disapprove')
+            .set('authorization', `Bearer ${reply.body.token}`)
+            .send(disapprovedRequest)
+            .end((err, response) => {
+              response.should.have.status(404);
+              response.body.message.should.eql('Your request ID is invalid. Please enter a number');
               done();
             });
         });

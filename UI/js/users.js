@@ -13,8 +13,9 @@ const deleteRequest = () => {
   closeBtn.addEventListener('click', () => {
     modalDiv.style.display = 'none';
   });
+  deleteRequest();
 };
-deleteRequest();
+
 
 const proceedWithDelete = () => {
   modalDiv.innerHTML = `
@@ -30,5 +31,6 @@ const proceedWithDelete = () => {
   closeBtn.addEventListener('click', () => {
     modalDiv.style.display = 'none';
   });
+  proceedWithDelete();
 };
-proceedWithDelete();
+

@@ -7,6 +7,10 @@ import app from '../../app';
 chai.use(chaiHttp);
 chai.should();
 
+const user1 = { email: 'notexistent@gmail.com', password: 'faker' };
+const user2 = { email: 'tomiwa0456@gmail.com', password: '56789' };
+const user3 = { email: 'emekaadmin@gmail.com', password: '01234' };
+
 describe('ENDPOINTS TEST', () => {
   describe('GET /api/v1', () => {
     it('should return a welcome message on the home page', (done) => {
@@ -34,16 +38,53 @@ describe('ENDPOINTS TEST', () => {
   describe('Test endpoints to get Users', () => {
     it('Should return All Users', (done) => {
       chai.request(app)
-        .get('/api/v1/users')
-        .end((error, response) => {
-          expect(response).to.have.status(200);
-          expect(response.body.status).to.equal('Users successfully retrieved');
-          expect(response.body.data[1].firstname).to.equal('Tomiwa');
-          expect(response.body.data[1].lastname).to.equal('Olaniyi');
-          expect(response.body.data[1].email).to.equal('tomiwa0456@gmail.com');
-          expect(response.body.data[1].isadmin).to.equal(false);
-          expect(response.body).to.be.an('object');
-          done();
+        .post('/api/v1/auth/login')
+        .send(user3)
+        .then((reply) => {
+          reply.body.should.have.property('token');
+          chai.request(app)
+            .get('/api/v1/users')
+            .set('authorization', `Bearer ${reply.body.token}`)
+            .end((err, response) => {
+              expect(response).to.have.status(200);
+              expect(response.body.status).to.equal('Users successfully retrieved');
+              expect(response.body.data[1].firstname).to.equal('Tomiwa');
+              expect(response.body.data[1].lastname).to.equal('Olaniyi');
+              expect(response.body.data[1].email).to.equal('tomiwa0456@gmail.com');
+              expect(response.body.data[1].isadmin).to.equal(false);
+              expect(response.body).to.be.an('object');
+              done();
+            });
+        });
+    });
+    it('should not return users list if user is not an admin', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(user2)
+        .then((reply) => {
+          reply.body.should.have.property('token');
+          chai.request(app)
+            .get('/api/v1/users')
+            .set('authorization', `Bearer ${reply.body.token}`)
+            .end((err, response) => {
+              response.should.have.status(401);
+              response.body.message.should.eql('User not an Admin');
+              done();
+            });
+        });
+    });
+    it('should not also block access to users list for users not logged in', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(user1)
+        .then(() => {
+          chai.request(app)
+            .get('/api/v1/users')
+            .end((err, response) => {
+              response.should.have.status(401);
+              response.body.message.should.eql('Please Login or Signup to gain access');
+              done();
+            });
         });
     });
   });

@@ -22,7 +22,10 @@ class RequestMiddleware {
     if (isValid) {
       return next();
     }
-    return response.status(400).json(errors);
+    return response.status(400).json({
+      success: false,
+      errors,
+    });
   }
 
   static checkRequest(request, response, next) {
@@ -45,7 +48,10 @@ class RequestMiddleware {
     if (isValid) {
       return next();
     }
-    return response.status(400).json(errors);
+    return response.status(400).json({
+      success: false,
+      errors,
+    });
   }
 
   static checkUpdate(request, response, next) {

@@ -5,6 +5,8 @@
       "document": true,
       "location": true,
       "describe": true,
-      "it": true
+      "it": true,
+      "fetch": true,
+      "alert": true
   }
 }

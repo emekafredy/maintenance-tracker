@@ -4,6 +4,7 @@ import AdminRequests from '../../utils/adminRequests';
 class AdminRequestsController {
   static getAllRequests(request, response) {
     client.query('SELECT * FROM requests').then(data => response.status(200).json({
+      success: true,
       message: 'Requests retrieved successfully',
       data: data.rows,
     })).catch(error => response.status(404).json({ message: error.message }));
@@ -13,6 +14,7 @@ class AdminRequestsController {
     const reqId = parseInt(request.params.requestId, 10);
     if (Number.isNaN(reqId)) {
       return response.status(404).json({
+        success: false,
         message: 'Your request ID is invalid. Please enter a number',
       });
     }
@@ -32,6 +34,7 @@ class AdminRequestsController {
 
     if (Number.isNaN(reqId)) {
       return response.status(404).json({
+        success: false,
         message: 'Your request ID is invalid. Please enter a number',
       });
     }

@@ -58,12 +58,12 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .send(invalidRequest)
             .end((err, response) => {
               response.should.have.status(400);
-              response.body.product.should.eql('The product is required');
+              response.body.errors.product.should.eql('The product is required');
               done();
             });
         });
     });
-    it('should return a message when an input is inccorrect', (done) => {
+    it('should return a message when an input is incorrect', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user2)
@@ -75,7 +75,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .send(incorrectRequest)
             .end((err, response) => {
               response.should.have.status(400);
-              response.body.requestType.should.eql('Request type should be either repair, maintenance or replace');
+              response.body.errors.requestType.should.eql('Request type should be either repair, maintenance or replace');
               done();
             });
         });

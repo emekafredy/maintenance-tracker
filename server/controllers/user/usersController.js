@@ -19,13 +19,16 @@ class UserController {
     client.query({ text: 'SELECT * FROM users where email = $1', values: [regMail] }).then((foundmail) => {
       if (foundmail.rowCount === 0) {
         return client.query(query).then(user => user)
-          .then(user => jwt.sign({ user }, 'secretKey', () => response.status(201).json({
+          .then(user => jwt.sign({ user }, 'secretKey', (err, token) => response.status(201).json({
+            success: true,
             message: `Welcome ${newUser.firstName}`,
             newUser,
+            token,
           })))
           .catch(error => response.status(404).json({ message: error.message }));
       }
       return response.status(409).json({
+        success: false,
         message: 'An account has already been created with this email address',
       });
     });
@@ -53,12 +56,14 @@ class UserController {
       .then((foundmail) => {
         if (foundmail.rowCount === 1 && regPass) {
           jwt.sign({ user: foundmail.rows[0] }, 'secretKey', (err, token) => response.json({
+            success: true,
             foundmail: foundmail.rows,
             token,
           }))
             .catch(error => response.status(404).json({ message: error.message }));
         }
         response.status(409).json({
+          success: false,
           message: 'Your email or password is incorrect',
         });
         return null;

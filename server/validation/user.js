@@ -27,7 +27,10 @@ class SignupValidation {
     if (isValid) {
       return next();
     }
-    return response.status(400).json(errors);
+    return response.status(400).json({
+      success: false,
+      errors,
+    });
   }
 
   static validateInput(request, response, next) {
@@ -42,7 +45,10 @@ class SignupValidation {
     if (isValid) {
       return next();
     }
-    return response.status(400).json(errors);
+    return response.status(400).json({
+      success: false,
+      errors,
+    });
   }
 
   static checkUserLogin(request, response, next) {
@@ -61,7 +67,10 @@ class SignupValidation {
     if (isValid) {
       return next();
     }
-    return response.status(400).json(errors);
+    return response.status(400).json({
+      success: false,
+      errors,
+    });
   }
 }
 

@@ -7,6 +7,10 @@ body {
   padding:0;
 }
 
+.main-body {
+  height: 100vh;
+}
+
 .header {
   color:#000;
   font-family:Merriweather;

@@ -38,20 +38,21 @@
         </div>
         <p> 
           <label for="email"> Email </label>
-          <input type="email" required /> 
+          <input type="email" id="email" required /> 
         </p>
         <p> 
           <label for="password" > Password </label>
-          <input type="password" required />
-        </p>
-        <p class="sign-up"> 
-          <input type="submit" value="Login" onclick="getPages.loginUser();"/> 
+          <input type="password" id="password" required />
         </p>
       </form>
+      <p class="sign-up"> 
+        <input type="submit" id="loginUser"/> 
+      </p>
       <div class="centre-div">
         <p>Don't have an account ?</p>
         <a href="sign-up.html"> Sign up </a>
       </div>
+      <button id="clicked">click</button>
     </div>
 
     <footer>
@@ -59,5 +60,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

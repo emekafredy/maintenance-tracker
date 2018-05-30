@@ -14,6 +14,7 @@ const port = process.env.PORT || 4500;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('UI'));
 
 router(app);
 app.use(notFound);

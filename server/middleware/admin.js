@@ -16,7 +16,10 @@ class AdminValidation {
     if (isValid) {
       return next();
     }
-    return response.status(400).json(errors);
+    return response.status(400).json({
+      success: false,
+      errors,
+    });
   }
 
   static checkApproval(request, response, next) {

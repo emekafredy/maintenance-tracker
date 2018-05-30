@@ -9,11 +9,13 @@ class UserRequestsController {
     client.query('SELECT * FROM requests WHERE userId = $1', [userId]).then((data) => {
       if (data.rows.length > 0) {
         return response.status(200).json({
+          success: true,
           message: 'Requests successfully retrieved',
           data: data.rows,
         });
       }
       return response.status(200).json({
+        success: true,
         message: 'You have no requests record yet',
       });
     }).catch(error => response.status(404).json({ message: error.message }));
@@ -23,6 +25,7 @@ class UserRequestsController {
     const reqId = parseInt(request.params.requestId, 10);
     if (Number.isNaN(reqId)) {
       return response.status(400).json({
+        success: false,
         message: 'Your request ID is invalid. Please enter a number',
       });
     }
@@ -31,11 +34,13 @@ class UserRequestsController {
       .then((data) => {
         if (data.rows.length === 0) {
           return response.status(400).json({
+            success: false,
             message: 'You have no request with this ID',
           });
         }
         return response.status(200)
           .json({
+            success: true,
             message: 'Retrieved ONE request',
             data: data.rows,
           });
@@ -62,6 +67,7 @@ class UserRequestsController {
         newRequest.requestDate],
     };
     client.query(query).then(() => response.status(201).json({
+      success: true,
       message: 'Request Successfully created',
       newRequest,
     })).catch(error => response.status(404).json({ message: error.message }));
@@ -84,6 +90,7 @@ class UserRequestsController {
         updatedRequest.issue,
         reqId],
     }).then(() => response.status(200).json({
+      success: true,
       message: 'Request successfully updated',
       updatedRequest,
     })).catch(error => response.status(404).json({ message: error.message }));
@@ -96,10 +103,12 @@ class UserRequestsController {
       .then((data) => {
         if (data.rows.length === 0) {
           return response.status(400).json({
+            success: false,
             message: 'You have no request with this ID',
           });
         } else if (data.rows[0].requeststatus !== 'pending') {
           return response.status(401).json({
+            success: false,
             message: 'You can no longer update this request',
           });
         }
@@ -108,6 +117,7 @@ class UserRequestsController {
 
     if (Number.isNaN(reqId)) {
       return response.status(400).json({
+        success: false,
         message: 'Your request ID is invalid. Please enter a number',
       });
     }

@@ -12,14 +12,20 @@ class UserMiddleware {
         return next();
       });
     }
-    return response.status(401).send({ message: 'Please Login or Signup to gain access' });
+    return response.status(401).send({
+      success: false,
+      message: 'Please Login or Signup to gain access',
+    });
   }
 
   static checkAdmin(request, response, next) {
     if (request.user.isadmin) {
       return next();
     }
-    return response.status(401).send({ message: 'User not an Admin' });
+    return response.status(401).json({
+      success: false,
+      message: 'User not an Admin',
+    });
   }
 }
 

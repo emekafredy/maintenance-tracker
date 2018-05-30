@@ -88,7 +88,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .send(incorrectupdatedRequest)
             .end((err, response) => {
               response.should.have.status(400);
-              response.body.requestType.should.eql('Request type should be either repair, maintenance or replace');
+              response.body.errors.requestType.should.eql('Request type should be either repair, maintenance or replace');
               done();
             });
         });

@@ -28,47 +28,40 @@
       <div class="nav-links">
         <a href="sign-up.html" class="mob-active"><span class="active">Sign Up</span></a>
         <a href="login.html">Login</a>
-        <a href="admin-panel.html"><span class="role">Admin</span></a>
       </div>      
     </div><br>
 
-    <div id="signUp">
-      <form> 
+    <div class="body-div">
+      <div id="signUp">
+        <form id="registerUsers"> 
+          <div class="centre-div">
+            <h2> Sign up </h2>
+            <p>Please fill out every field</p>
+          </div>
+          <p> 
+            <label for="firstname">First name</label>
+            <input type="text" id="firstName" required />
+          </p>
+          <p> 
+            <label for="lastname">Last name</label>
+            <input type="text" id="lastName" required />
+          </p>
+          <p> 
+            <label for="email"> Email </label>
+            <input type="email" id="email" required /> 
+          </p>
+          <p> 
+            <label for="password" > Password </label>
+            <input type="password" id="password" required />
+          </p>
+          <p class="sign-up"> 
+            <input type="submit" value="Register" id="register" onclick="getPages.signUpUser();"/> 
+          </p>
+        </form>
         <div class="centre-div">
-          <h2> Sign up </h2>
-          <p>Please fill out every field</p>
+          <p>Already Registered ?</p>
+          <a href="login.html">Login</a>
         </div>
-        <p> 
-          <label for="firstname">First name</label>
-          <input type="text" required />
-        </p>
-        <p> 
-          <label for="lastname">Last name</label>
-          <input type="text" required />
-        </p>
-        <p> 
-          <label for="email"> Email </label>
-          <input type="email" required /> 
-        </p>
-        <p> 
-          <label for="email"> Phone </label>
-          <input type="number" required /> 
-        </p>
-        <p> 
-          <label for="password" > Password </label>
-          <input type="password" required />
-        </p>
-        <p> 
-          <label for="password" > Confirm password </label>
-          <input type="password" required />
-        </p>
-        <p class="sign-up"> 
-          <input type="submit" value="Register" onclick="getPages.signUpUser();"/> 
-        </p>
-      </form>
-      <div class="centre-div">
-        <p>Already Registered ?</p>
-        <a href="login.html">Login</a>
       </div>
     </div>
 

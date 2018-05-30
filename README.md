@@ -59,6 +59,9 @@ Maintenance tracker is an app that enables employees of an organization request 
 
 - https://emekafredy.github.io/maintenance-tracker/UI
 
+# Front-end app
+- https://emeka-m-tracker.herokuapp.com/
+
 
 # Project Management Tool
 

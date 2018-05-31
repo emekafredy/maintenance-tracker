@@ -19,9 +19,7 @@ class UserController {
     client.query({ text: 'SELECT * FROM users where email = $1', values: [regMail] }).then((foundmail) => {
       if (foundmail.rowCount === 0) {
         return client.query(query)
-          .then(() => {
-            return client.query('SELECT * FROM users WHERE email = $1', [regMail]);
-          })
+          .then(() => client.query('SELECT * FROM users WHERE email = $1', [regMail]))
           .then(data => jwt.sign({ user: data.rows[0] }, 'secretKey', (err, token) => response.status(201).json({
             success: true,
             message: `Welcome ${newUser.firstName}`,

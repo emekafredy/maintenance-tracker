@@ -35,6 +35,15 @@ body {
   transition:0;
 }
 
+.alert-class {
+  background: #ddd;
+  color: #000;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  display: none;
+}
+
 input[type="password"],input[type="email"] {
   background:transparent;
   border:none;

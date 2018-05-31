@@ -1,5 +1,6 @@
 const requestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests';
 
+
 const token = localStorage.getItem('authToken');
 
 const options = {
@@ -33,7 +34,7 @@ fetch(requestsUrl, options)
       cell2.innerHTML = data[index].product;
       cell3.innerHTML = data[index].requesttype;
       cell4.innerHTML = data[index].requeststatus;
-      cell5.innerHTML = `<button class="btn btn-details"> 
+      cell5.innerHTML = `<button class="btn btn-details" onclick="checkDetails(${data[index].requestid});"> 
                           <i class="fa fa-trash"></i> Details 
                         </button>`;
       cell6.innerHTML = `<button class="btn btn-delete"> 

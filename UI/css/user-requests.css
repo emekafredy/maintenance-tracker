@@ -104,7 +104,7 @@ table th {
   padding: 10px;
 }
 
-.btn-delete {
+#btn-close {
   background-color:#dc3545;
   border-bottom: #a11533 3px solid;
   border-color:#6c757d;
@@ -114,12 +114,12 @@ table th {
   transition: 0.5s;
 }
 
-.btn-delete:hover {
+#btn-close:hover {
   background: #b42432;
   transition: 0.5s;
 }
 
-.btn-delete:active {
+#btn-close:active {
   background: #a11533;
   border-radius: 6px;
   margin-top: 3px;
@@ -186,6 +186,19 @@ table th {
 }
 
 #modal-container {
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  height: 100%; 
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  padding-top: 100px;
+  top: 0;
+  width: 100%; 
+  z-index: 100;  
+}
+
+#details-modal {
   background-color: rgba(0,0,0,0.5);
   display: none;
   height: 100%; 

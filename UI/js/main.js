@@ -2,10 +2,9 @@ const getPages = {
   signUpPage: () => {
     window.location.href = 'sign-up.html';
   },
-};
-
-const processRequests = () => {
-  window.location.href = 'process-requests.html';
+  backToRequests: () => {
+    window.location.href = 'user-requests.html';
+  },
 };
 
 const filterRequest = () => {

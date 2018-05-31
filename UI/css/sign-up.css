@@ -20,7 +20,7 @@ body {
   margin:100px auto 0 auto;
   padding:30px;
   width:40%;
-  height: 700px;
+  min-height: 59.1%;
 }
 
 #signUp a {

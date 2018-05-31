@@ -58,20 +58,20 @@
         <form action="">
 
           <div class="form">
-            <label for="product">Product</label>
-            <select>
-              <option value="laptop">Laptop</option>
-              <option value="monitor">Monitor</option>
-              <option value="chair">Chair</option>
-              <option value="table">Desk</option>
-              <option value="charger">Charger</option>
-              <option value="headphone">Headphone</option>
+            <label>Product</label>
+            <select id="product">
+              <option value="laptop">laptop</option>
+              <option value="monitor">monitor</option>
+              <option value="chair">chair</option>
+              <option value="table">desk</option>
+              <option value="charger">charger</option>
+              <option value="headphone">headphone</option>
             </select>
           </div>
 
           <div class="form">
-            <label for="type">Request Type</label>
-            <select>
+            <label>Request Type</label>
+            <select id="request-type">
               <option value="maintenance">maintenance</option>
               <option value="repair">repair</option>
               <option value="replace">replace</option>
@@ -81,13 +81,12 @@
 
           <div class="form">
             <label for="type">Issue</label>
-            <textarea name="issue" required></textarea>
-          </div>
-
-          <div class="centre-div">
-            <input type="submit" value="submit" class="btn-back" id="submitRequest">
+            <textarea name="issue" id="issue-description" required></textarea>
           </div>
         </form>
+        <div class="centre-div">
+          <input type="submit" value="submit" class="btn-back" id="submitRequest">
+        </div>
       </div>
     </div>
       

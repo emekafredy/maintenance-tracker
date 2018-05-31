@@ -7,6 +7,7 @@
       "describe": true,
       "it": true,
       "fetch": true,
-      "alert": true
+      "alert": true,
+      "localStorage": true
   }
 }

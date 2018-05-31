@@ -41,11 +41,12 @@
       <div class="header">
         <div class="container">
           <h1>My Requests</h1>
+          <p id="status-message"></p>
         </div>
       </div>
 
       <div class="table-body">
-        <table>
+        <table id="requests-table">
           <thead>
             <tr>
               <th scope="col"> Request ID</th>
@@ -57,92 +58,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td data-label="Request ID">1</td>
-              <td data-label="Product">Laptop</td>
-              <td data-label="Request Type">Maintenance</td>
-              <td data-label="Status">Pending</td>
-              <td data-label="Details"> 
-                <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
-              </td>
-              <td data-label="Action">
-                <button class="btn btn-delete" onclick="deleteRequest();">
-                  <i class="fa fa-trash"></i> Cancel request 
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Request ID">2</td>
-              <td data-label="Product">Laptop Charger</td>
-              <td data-label="Request Type">Repair</td>
-              <td data-label="Status">Approved</td>
-              <td data-label="Details"> 
-                <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
-              </td>
-              <td data-label="Action">
-                <button class="btn btn-delete" onclick="deleteRequest();">
-                  <i class="fa fa-trash"></i> Cancel request 
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Request ID">3</td>
-              <td data-label="Product">Office Chair</td>
-              <td data-label="Request Type">Repair</td>
-              <td data-label="Status">Rejected</td>
-              <td data-label="Details"> 
-                <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
-              </td>
-              <td data-label="Action">
-                <button class="btn btn-delete" onclick="deleteRequest();">
-                  <i class="fa fa-trash"></i> Cancel request 
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Request ID">4</td>
-              <td data-label="Product">Headphone</td>
-              <td data-label="Request Type">Repair</td>
-              <td data-label="Status">Approved</td>
-              <td data-label="Details"> 
-                <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
-              </td>
-              <td data-label="Action">
-                <button class="btn btn-delete" onclick="deleteRequest();">
-                  <i class="fa fa-trash"></i> Cancel request 
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Request ID">5</td>
-              <td data-label="Product">Office Table</td>
-              <td data-label="Request Type">Repair</td>
-              <td data-label="Status">Approved</td>
-              <td data-label="Details"> 
-                <button class="btn btn-details" onclick="getPages.getDetails();"><i class="fa fa-arrow-circle-o-right"></i> Details </button> 
-              </td>
-              <td data-label="Action">
-                <button class="btn btn-delete" onclick="deleteRequest();">
-                  <i class="fa fa-trash"></i> Cancel request 
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Request ID">6</td>
-              <td data-label="Product">Socket</td>
-              <td data-label="Request Type">Repair</td>
-              <td data-label="Status">Approved</td>
-              <td data-label="Details"> 
-                <button class="btn btn-details" onclick="getPages.getDetails();">
-                  <i class="fa fa-arrow-circle-o-right"></i> Details 
-                </button> 
-              </td>
-              <td data-label="Action">
-                <button class="btn btn-delete" onclick="deleteRequest();">
-                  <i class="fa fa-trash"></i> Cancel request 
-                </button>
-              </td>
-            </tr>
+            
           </tbody>
         </table>
       </div>
@@ -154,6 +70,6 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/users.js"></script>
+    <script src="js/user-requests.js"></script>
   </body>
 </html>

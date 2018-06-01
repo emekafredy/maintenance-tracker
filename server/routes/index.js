@@ -1,11 +1,19 @@
-import requestRoutes from '../routes/requestRoutes';
+import userRoutes from './userRoutes';
+import userRequestsRoutes from './userRequestsRoutes';
+import adminRequestsRoutes from './adminRequestsRoutes';
 
 const routes = (app) => {
   app.get('/', (request, response) => response.status(200).json({
-    message: 'Welcome to Maintenance-Tracker App API, Version 1',
+    message: 'MAINTENANCE TRACKER APP',
   }));
 
-  requestRoutes(app);
+  app.get('/api/v1', (request, response) => response.status(200).json({
+    message: 'Welcome to M-Tracker App API, Version 1',
+  }));
+
+  userRoutes(app);
+  userRequestsRoutes(app);
+  adminRequestsRoutes(app);
 };
 
 export default routes;

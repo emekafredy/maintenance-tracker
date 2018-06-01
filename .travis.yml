@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "8"
+services:
+  - postgresql
+
+before_install:
+  - npm install -g npm@latest
+
+before_script:
+  - psql -c 'create database mtracker;' -U postgres
+
+script:
+  - npm test
+
+after_success:
+-  npm run coverage

@@ -52,7 +52,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .get('/api/v1/users/requests/1')
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
-              response.should.have.status(400);
+              response.should.have.status(404);
               response.body.message.should.eql('You have no request with this ID');
               done();
             });

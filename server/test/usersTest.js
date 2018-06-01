@@ -29,7 +29,7 @@ describe('ENDPOINTS TEST', () => {
         .end((error, response) => {
           response.status.should.eql(404);
           response.type.should.eql('application/json');
-          response.body.message.should.eql('Sorry, this page does not exist');
+          response.body.message.should.eql('Oops! page not found');
           done();
         });
     });

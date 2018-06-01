@@ -48,7 +48,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .send(updatedRequest)
             .end((err, response) => {
-              response.should.have.status(200);
+              response.should.have.status(201);
               expect(response.body.updatedRequest.product).to.equal('charger');
               expect(response.body.updatedRequest.issue).to.equal('Does not charge my system properly');
               response.body.message.should.eql('Request successfully updated');
@@ -67,7 +67,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .send(partOfData)
             .end((err, response) => {
-              response.should.have.status(200);
+              response.should.have.status(201);
               expect(response.body.updatedRequest.product).to.equal('charger');
               expect(response.body.updatedRequest.requestType).to.equal('maintenance');
               expect(response.body.updatedRequest.issue).to.equal('Does not charge my system properly');
@@ -93,7 +93,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             });
         });
     });
-    it('should return a bad request status code for a request Id that does not belong to logged in user', (done) => {
+    it('should return a not found status code for a request Id that does not belong to logged in user', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user2)
@@ -104,7 +104,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .send(updatedRequest)
             .end((err, response) => {
-              response.should.have.status(400);
+              response.should.have.status(404);
               response.body.message.should.eql('You have no request with this ID');
               done();
             });

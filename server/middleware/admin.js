@@ -1,4 +1,12 @@
 class AdminValidation {
+  /**
+   * @description Middle ware for checking requests status before processing
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
   static checkStatus(request, response, next, statusAction, statusType) {
     const { requestStatus } = request.body;
     let isValid = true;

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Kavivanar');
 
 body {
-  background:url(https://cloudinary.com/console/media_library/asset/image/upload/blue);
+  background:url(../files/blue.png);
   background-position:center;
   background-size:cover;
 }

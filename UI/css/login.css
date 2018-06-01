@@ -1,5 +1,5 @@
 body {
-  background:url(https://cloudinary.com/console/media_library/asset/image/upload/blue);
+  background:url('https://cloudinary.com/console/media_library/asset/image/upload/blue');
   background-position:center;
   background-size:cover;
 }

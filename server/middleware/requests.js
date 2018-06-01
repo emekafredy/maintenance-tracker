@@ -1,6 +1,14 @@
 import validator from 'validator';
 
 class RequestMiddleware {
+  /**
+   * @description Middleware to validate content updates
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
   static checkUpdateContent(request, response, next) {
     const { product, requestType } = request.body;
     let isValid = true;
@@ -28,6 +36,14 @@ class RequestMiddleware {
     });
   }
 
+  /**
+   * @description Middleware for new requests validation
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
   static checkRequest(request, response, next) {
     const { issue, product, requestType } = request.body;
     let isValid = true;

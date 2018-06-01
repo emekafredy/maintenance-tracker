@@ -4,16 +4,32 @@ import client from '../../models/database';
 
 
 class UserController {
-  static getAllUsers(request, response, next) {
+  /**
+   * @description Function for admin to get all users
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
+  static getAllUsers(request, response) {
     client.query('SELECT * FROM users')
       .then(data => response.status(200)
         .json({
           status: 'Users successfully retrieved',
           data: data.rows,
         }))
-      .catch(err => next(err));
+      .catch(error => response.status(500).json({ message: error.message }));
   }
 
+  /**
+   * @description Sign up query for new users
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
   static signUpQuery(request, response, query, newUser) {
     const regMail = request.body.email;
     client.query({ text: 'SELECT * FROM users where email = $1', values: [regMail] }).then((foundmail) => {
@@ -26,7 +42,7 @@ class UserController {
             data: data.rows[0],
             token,
           })))
-          .catch(error => response.status(404).json({ message: error.message }));
+          .catch(error => response.status(500).json({ message: error.message }));
       }
       return response.status(409).json({
         success: false,
@@ -35,12 +51,13 @@ class UserController {
     });
   }
 
+
   static userSignup(request, response) {
     const newUser = {
-      firstName: validator.trim(String(request.body.firstName)),
-      lastName: validator.trim(String(request.body.lastName)),
+      firstName: validator.trim(String(request.body.firstName)).replace(/ +(?= )/g, ''),
+      lastName: validator.trim(String(request.body.lastName)).replace(/ +(?= )/g, ''),
       email: request.body.email,
-      password: validator.trim(String(request.body.password)),
+      password: validator.trim(String(request.body.password)).replace(/\s/g, ''),
     };
     const query = {
       text: 'INSERT INTO users(firstName, lastName, email, password) VALUES($1, $2, $3, $4)',
@@ -49,6 +66,14 @@ class UserController {
     return UserController.signUpQuery(request, response, query, newUser);
   }
 
+  /**
+   * @description Login function for registered users
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
   static userLogin(request, response) {
     const regMail = request.body.email;
     const regPass = request.body.password;
@@ -61,7 +86,7 @@ class UserController {
             foundmail: foundmail.rows,
             token,
           }))
-            .catch(error => response.status(404).json({ message: error.message }));
+            .catch(error => response.status(500).json({ message: error.message }));
         }
         response.status(409).json({
           success: false,

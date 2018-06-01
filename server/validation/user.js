@@ -51,6 +51,32 @@ class SignupValidation {
     });
   }
 
+  static checkLength(request, response, next) {
+    const { password, firstName, lastName } = request.body;
+    let isValid = true;
+    const errors = {};
+
+    if (lastName && !(validator.isLength(lastName, { min: 3, max: 10 }))) {
+      isValid = false;
+      errors.lastName = 'The length of your last name should be between 1 and 10';
+    }
+    if (firstName && !(validator.isLength(firstName, { min: 3, max: 10 }))) {
+      isValid = false;
+      errors.firstName = 'The length of your first name should be between 1 and 10';
+    }
+    if (password && !(validator.isLength(password, { min: 6, max: 15 }))) {
+      isValid = false;
+      errors.password = 'your Password length should be between 6 and 15';
+    }
+    if (isValid) {
+      return next();
+    }
+    return response.status(400).json({
+      success: false,
+      errors,
+    });
+  }
+
   static checkUserLogin(request, response, next) {
     const { email, password } = request.body;
     let isValid = true;

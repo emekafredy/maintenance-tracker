@@ -3,6 +3,14 @@ import moment from 'moment';
 import client from '../models/database';
 
 class AdminRequests {
+  /**
+   * @description Methods for request processing as approved, disapproved or resolved
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
   static processRequestQuery(request, response, proccesdAt, processedField) {
     const reqId = parseInt(request.params.requestId, 10);
 

@@ -11,6 +11,10 @@ const routes = (app) => {
     message: 'Welcome to M-Tracker App API, Version 1',
   }));
 
+  app.get('/apidoc', (request, response) => {
+    response.redirect('https://mtracker.docs.apiary.io/#');
+  });
+
   userRoutes(app);
   userRequestsRoutes(app);
   adminRequestsRoutes(app);

@@ -1,6 +1,14 @@
 import jwt from 'jsonwebtoken';
 
 class UserMiddleware {
+  /**
+   * @description Middleware to verify logged in users
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
   static checkUser(request, response, next) {
     if (request.headers.authorization && request.headers.authorization.split(' ')[0] === 'Bearer') {
       const token = request.headers.authorization.split(' ')[1];
@@ -18,6 +26,14 @@ class UserMiddleware {
     });
   }
 
+  /**
+   * @description Middleware to verify user status as Admin
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
   static checkAdmin(request, response, next) {
     if (request.user.isadmin) {
       return next();

@@ -89,7 +89,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .send(disapprovedRequest)
             .end((err, response) => {
-              response.should.have.status(404);
+              response.should.have.status(400);
               response.body.message.should.eql('Your request ID is invalid. Please enter a number');
               done();
             });

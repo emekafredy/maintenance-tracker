@@ -27,7 +27,7 @@ CREATE TABLE requests (
  requestType requestType NOT NULL,
  issue VARCHAR (255) NOT NULL,
  requestStatus requestStatus NOT NULL DEFAULT 'pending',
- imageUrl VARCHAR (255) DEFAULT 'https://www.mountaineers.org/images/placeholder-images/placeholder-400-x-400/image_preview',
+ imageUrl VARCHAR (255) NOT NULL,
  approvedAt VARCHAR DEFAULT 'N/A',
  disapprovedAt VARCHAR DEFAULT 'N/A',
  resolvedAt VARCHAR DEFAULT 'N/A',
@@ -45,11 +45,13 @@ INSERT INTO users (firstName,lastName,email,password)
 
 INSERT INTO requests (userId,product,requestDate,requestType,issue,imageUrl) 
   VALUES (3,'laptop','May 29th 2018, 5:11:58 am','repair','It shuts down on its own',
-          'https://www.asus.com/media/global/products/Slb3ZUQCNmiKi66c/P_setting_F5F5F5_1_90_end_765.png');
-INSERT INTO requests (userId,product,requestDate,requestType,issue) 
-  VALUES (2,'headphone','May 29th 2018, 5:11:58 am','replace','The speaker is bad');
+          'http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528040152/ph.png');
+INSERT INTO requests (userId,product,requestDate,requestType,issue,imageUrl) 
+  VALUES (2,'headphone','May 29th 2018, 5:11:58 am','replace','The speaker is bad',
+          'http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528040152/ph.png');
 INSERT INTO requests (userId,product,requestDate,requestType,issue,imageUrl) 
   VALUES (3,'monitor','May 29th 2018, 5:11:58 am','repair','Broken screen',
-          'https://www.asus.com/media/global/products/Slb3ZUQCNmiKi66c/P_setting_F5F5F5_1_90_end_765.png');
-INSERT INTO requests (userId,product,requestDate,requestType,issue) 
-  VALUES (2,'charger','May 29th 2018, 5:11:58 am','repair','Does not charge my laptop anymore');
+          'http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528040152/ph.png');
+INSERT INTO requests (userId,product,requestDate,requestType,issue,imageUrl) 
+  VALUES (2,'charger','May 29th 2018, 5:11:58 am','repair','Does not charge my laptop anymore',
+          'http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528040152/ph.png');

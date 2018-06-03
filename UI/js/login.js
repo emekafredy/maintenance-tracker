@@ -38,9 +38,15 @@ const loginUser = () => {
     .then((data) => {
       if (data.success === false) {
         checkInput(data);
-      } else {
-        localStorage.setItem('authToken', `Bearer ${data.token}`);
-        window.location.href = 'https://emeka-m-tracker.herokuapp.com/user-requests.html';
+      }
+      if (data.success === true) {
+        if (data.foundmail[0].isadmin) {
+          localStorage.setItem('authToken', `Bearer ${data.token}`);
+          window.location.href = 'https://emeka-m-tracker.herokuapp.com/admin-panel.html';
+        } else {
+          localStorage.setItem('authToken', `Bearer ${data.token}`);
+          window.location.href = 'https://emeka-m-tracker.herokuapp.com/user-requests.html';
+        }
       }
     });
 };

@@ -84,9 +84,9 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
               response.should.have.status(200);
-              expect(response.body.data[0].product).to.equal('laptop');
+              expect(response.body.data[0].product).to.equal('monitor');
               expect(response.body.data[0].requesttype).to.equal('repair');
-              expect(response.body.data[0].issue).to.equal('It shuts down on its own');
+              expect(response.body.data[0].issue).to.equal('Broken screen');
               response.body.message.should.eql('Requests retrieved successfully');
               done();
             });

@@ -4,7 +4,7 @@ Maintenance tracker is an app that enables employees of an organization request 
 
 # badges
 [![Build Status](https://travis-ci.org/emekafredy/maintenance-tracker.svg)](https://travis-ci.org/emekafredy/maintenance-tracker)
-[![Coverage Status](https://coveralls.io/repos/github/emekafredy/maintenance-tracker/badge.svg)](https://coveralls.io/github/emekafredy/maintenance-tracker)
+[![Coverage Status](https://coveralls.io/repos/github/emekafredy/maintenance-tracker/badge.svg?branch=develop)](https://coveralls.io/github/emekafredy/maintenance-tracker?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a79d96ad9d606beaf37b/maintainability)](https://codeclimate.com/github/emekafredy/maintenance-tracker/maintainability)
 
 

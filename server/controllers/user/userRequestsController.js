@@ -91,21 +91,14 @@ class UserRequestsController {
 
     client.query('select * from requests where userId = $1 and requestId = $2', [userId, reqId])
       .then((data) => {
-        if (data.rows.length === 0) {
-          return response.status(404).json({
-            success: false,
-            message: 'You have no request with this ID',
-          });
-        } else if (data.rows[0].requeststatus !== 'pending') {
-          return response.status(412).json({
-            success: false,
-            message: 'You can no longer update this request',
-          });
+        if (UserRequests.condition(request, response, data, 'edit')) {
+          return null;
         }
         return UserRequests.updateRequestQuery(request, response, data);
       }).catch(error => response.status(500).json({ message: error.message }));
     return null;
   }
+
 
   static deleteRequest(request, response) {
     const reqId = parseInt(request.params.requestId, 10);
@@ -115,16 +108,8 @@ class UserRequestsController {
 
     return client.query('SELECT * from requests where userId = $1 AND requestId = $2', [userId, reqId])
       .then((data) => {
-        if (data.rows.length === 0) {
-          return response.status(404).json({
-            success: false,
-            message: 'You have no request with this ID',
-          });
-        } else if (data.rows[0].requeststatus !== 'pending') {
-          return response.status(400).json({
-            success: false,
-            message: 'You can no longer delete this request',
-          });
+        if (UserRequests.condition(request, response, data, 'delete')) {
+          return null;
         }
         return UserRequests.deleteQuery(request, response);
       })

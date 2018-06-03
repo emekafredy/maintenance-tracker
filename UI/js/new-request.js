@@ -3,6 +3,7 @@ const postRequestUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/reque
 const product = document.getElementById('product');
 const requestType = document.getElementById('request-type');
 const issueDescription = document.getElementById('issue-description');
+const productImage = document.getElementById('product-image');
 
 const submitRequest = document.getElementById('submitRequest');
 
@@ -37,6 +38,7 @@ const createRequest = () => {
     product: product.value,
     requestType: requestType.value,
     issue: issueDescription.value,
+    imageUrl: productImage.value,
   };
 
   const options = {

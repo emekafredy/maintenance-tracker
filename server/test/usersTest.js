@@ -177,7 +177,7 @@ describe('ENDPOINTS TEST', () => {
           password: 'paord',
         })
         .end((error, response) => {
-          expect(response).to.have.status(409);
+          expect(response).to.have.status(400);
           expect(response.body).to.be.an('object');
           response.body.message.should.eql('Your email or password is incorrect');
           done();

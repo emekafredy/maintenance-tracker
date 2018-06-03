@@ -23,6 +23,11 @@ const registerUser = () => {
     },
   };
 
+  const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
   const checkInput = (data) => {
     const firstNameAlert = document.getElementById('firstname-alert');
     const lastNameAlert = document.getElementById('lastname-alert');
@@ -38,6 +43,10 @@ const registerUser = () => {
       lastNameAlert.innerHTML = data.errors.lastName;
     }
     if (!signupBody.email) {
+      emailAlert.style.display = 'block';
+      emailAlert.innerHTML = data.errors.email;
+    }
+    if (signupBody.email && !validateEmail(signupBody.email)) {
       emailAlert.style.display = 'block';
       emailAlert.innerHTML = data.errors.email;
     }

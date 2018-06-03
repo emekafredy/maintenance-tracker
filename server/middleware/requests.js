@@ -1,5 +1,7 @@
 import validator from 'validator';
 
+import client from '../models/database';
+
 class RequestMiddleware {
   /**
    * @description Middleware to validate content updates
@@ -72,6 +74,35 @@ class RequestMiddleware {
 
   static checkUpdate(request, response, next) {
     RequestMiddleware.checkUpdateContent(request, response, next);
+  }
+
+  /**
+   * @description Middleware Query to check for unprocessed duplicate requests
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
+  static checkDuplicateQuery(request, response, next) {
+    const { userid: userId } = request.user;
+
+    const product = validator.trim(String(request.body.product.toLowerCase()));
+    const requestType = validator.trim(String(request.body.requestType.toLowerCase()));
+
+    client.query(
+      'select * from requests where userId = $1 AND product = $2 AND requestType = $3 AND requestStatus = $4',
+      [userId, product, requestType, 'pending'],
+    )
+      .then((data) => {
+        if (data.rowCount > 0) {
+          return response.status(409).json({
+            success: false,
+            message: 'You cannot make duplicate requests until the previous has been processed',
+          });
+        }
+        return next();
+      }).catch(error => response.status(500).json({ message: error.message }));
   }
 }
 

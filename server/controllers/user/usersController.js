@@ -88,7 +88,7 @@ class UserController {
           }))
             .catch(error => response.status(500).json({ message: error.message }));
         }
-        response.status(409).json({
+        response.status(400).json({
           success: false,
           message: 'Your email or password is incorrect',
         });

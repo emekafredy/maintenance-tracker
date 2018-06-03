@@ -17,7 +17,7 @@ const updatedRequest = {
 };
 const partOfData = {
   requestType: 'maintenance',
-  issue: 'Does not charge my system properly',
+  issue: 'Does not charge my system anymore',
 };
 const incorrectupdatedRequest = {
   product: 'desk',
@@ -70,7 +70,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
               response.should.have.status(201);
               expect(response.body.updatedRequest.product).to.equal('charger');
               expect(response.body.updatedRequest.requestType).to.equal('maintenance');
-              expect(response.body.updatedRequest.issue).to.equal('Does not charge my system properly');
+              expect(response.body.updatedRequest.issue).to.equal('Does not charge my system anymore');
               response.body.message.should.eql('Request successfully updated');
               done();
             });

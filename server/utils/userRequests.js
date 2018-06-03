@@ -110,6 +110,21 @@ class UserRequests {
           message: 'Request successfully cancelled',
         })).catch(error => response.status(500).json({ message: error.message }));
   }
+
+  static condition(request, response, data, process) {
+    if (data.rows.length === 0) {
+      return response.status(404).json({
+        success: false,
+        message: 'You have no request with this ID',
+      });
+    } else if (data.rows[0].requeststatus !== 'pending') {
+      return response.status(400).json({
+        success: false,
+        message: `You can no longer ${process} this request`,
+      });
+    }
+    return null;
+  }
 }
 
 export default UserRequests;

@@ -9,7 +9,6 @@ chai.should();
 
 const user1 = { email: 'notexistent@gmail.com', password: 'faker' };
 const user2 = { email: 'mercy@gmail.com', password: '56789' };
-const user3 = { email: 'tomiwa0456@gmail.com', password: '56789' };
 
 describe('REQUEST ENDPOINTS TEST', () => {
   describe('PUT /api/v1/users/requests', () => {

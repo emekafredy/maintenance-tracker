@@ -38,6 +38,7 @@
     <div class="header">
       <div class="container">
         <h1>Users' Requests</h1>
+        <p id="status-message"></p>
       </div>
     </div>
 
@@ -47,7 +48,7 @@
     </div>
 
     <div class="table-body">
-      <table class="request-table">
+      <table class="request-table" id="users-requests">
         <thead>
           <tr>
             <th scope="col"> Request ID</th>
@@ -59,114 +60,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td data-label="Request ID">1</td>
-            <td data-label="User ID">usr1</td>
-            <td data-label="Product">Laptop</td>
-            <td data-label="Request Type">Repair</td>
-            <td data-label="Status">Pending</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Request ID">2</td>
-            <td data-label="User ID">usr2</td>
-            <td data-label="Product">Monitor</td>
-            <td data-label="Request Type">Maintenance</td>
-            <td data-label="Status">Pending</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Request ID">3</td>
-            <td data-label="User ID">usr2</td>
-            <td data-label="Product">Headphone</td>
-            <td data-label="Request Type">Repair</td>
-            <td data-label="Status">Approved</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Request ID">4</td>
-            <td data-label="User ID">usr1</td>
-            <td data-label="Product">Laptop Charger</td>
-            <td data-label="Request Type">Repair</td>
-            <td data-label="Status">Pending</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Request ID">5</td>
-            <td data-label="User ID">usr3</td>
-            <td data-label="Product">Office Chair</td>
-            <td data-label="Request Type">Repair</td>
-            <td data-label="Status">Rejected</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Request ID">6</td>
-            <td data-label="User ID">usr4</td>
-            <td data-label="Product">Office Desk</td>
-            <td data-label="Request Type">Repair</td>
-            <td data-label="Status">Approved</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Request ID">7</td>
-            <td data-label="User ID">usr3</td>
-            <td data-label="Product">Laptop</td>
-            <td data-label="Request Type">Repair</td>
-            <td data-label="Status">Approved</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Request ID">8</td>
-            <td data-label="User ID">usr4</td>
-            <td data-label="Product">Laptop</td>
-            <td data-label="Request Type">Maintenance</td>
-            <td data-label="Status">Pending</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Request ID">9</td>
-            <td data-label="User ID">usr4</td>
-            <td data-label="Product">Headphone</td>
-            <td data-label="Request Type">Maintenance</td>
-            <td data-label="Status">Resolved</td>
-            <td data-label="Details"> 
-              <button class="btn btn-details" onclick="processRequests();">
-                <i class="fa fa-arrow-circle-o-right"></i> Details 
-              </button> 
-            </td>
-          </tr>
+          <tr></tr>
         </tbody>
       </table>
     </div>
@@ -177,5 +71,6 @@
     </footer>
   
     <script src="js/main.js"></script>
+    <script src="js/admin-panel.js"></script>
   </body>
 </html>

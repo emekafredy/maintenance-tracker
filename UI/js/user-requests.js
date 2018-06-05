@@ -1,4 +1,4 @@
-const requestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests';
+const requestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests/';
 
 
 const token = localStorage.getItem('authToken');

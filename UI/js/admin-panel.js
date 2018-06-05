@@ -10,6 +10,14 @@ const options = {
   },
 };
 
+/**
+   * @description fetch method to consume API used to get all users' requests for logged in admin.
+   *
+   * @param {string} requestsUrl - API endpoint
+   * @param {Object} options - Mthod and headers
+   *
+   * @returns {object} response JSON Object
+   */
 fetch(allRequestsUrl, options)
   .then(response => response.json())
   .then((json) => {

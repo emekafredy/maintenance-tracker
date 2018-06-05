@@ -1,5 +1,6 @@
 import client from '../../models/database';
 import AdminRequests from '../../utils/adminRequests';
+import UserRequests from '../../utils/userRequests';
 
 class AdminRequestsController {
   /**
@@ -16,6 +17,35 @@ class AdminRequestsController {
       message: 'Requests retrieved successfully',
       data: data.rows,
     })).catch(error => response.status(500).json({ message: error.message }));
+  }
+
+  /**
+   * @description Get a request made in the app
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
+  static getRequest(request, response) {
+    const reqId = parseInt(request.params.requestId, 10);
+    UserRequests.checkNaN(request, response);
+    return client.query('select * from requests where requestId = $1', [reqId])
+      .then((data) => {
+        if (data.rows.length === 0) {
+          return response.status(404).json({
+            success: false,
+            message: 'There is no request with this ID',
+          });
+        }
+        return response.status(200)
+          .json({
+            success: true,
+            message: 'Retrieved ONE request',
+            data: data.rows,
+          });
+      })
+      .catch(error => response.status(500).json({ message: error.message }));
   }
 
   /**

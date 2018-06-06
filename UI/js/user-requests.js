@@ -1,5 +1,5 @@
 const requestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests/';
-
+let detailsData = {};
 
 const token = localStorage.getItem('authToken');
 
@@ -60,15 +60,16 @@ fetch(requestsUrl, options)
 
 
 /**
-   * @description modal function to display user's request details by ID
-   *
-   * @param {string} requestsUrl - API endpoint
-   * @param {Object} options - Mthod and headers
-   *
-   * @returns {object} response JSON Object
-   */
+ * @description modal function to display user's request details by ID
+ *
+ * @param {string} requestsUrl - API endpoint
+ * @param {Object} options - Mthod and headers
+ *
+ * @returns {object} response JSON Object
+ */
+const modalDiv = document.getElementById('details-modal');
 const requestDetailsModal = (data, message) => {
-  const modalDiv = document.getElementById('details-modal');
+  detailsData = data;
 
   const card = document.createElement('div');
   card.className = 'card';
@@ -110,7 +111,7 @@ const requestDetailsModal = (data, message) => {
                   <i class="fa fa-close"></i> Close
                 </button>
               </div><br><br>
-          `;
+  `;
 
   card.appendChild(header);
   card.appendChild(wrapper);
@@ -150,3 +151,164 @@ const checkDetails = (id) => {
       requestDetailsModal(data[0], message);
     });
 };
+
+const updateMessageModal = (data) => {
+  const updateMessageDiv = document.getElementById('modal-container');
+  updateMessageDiv.innerHTML = `
+      <div class="modal-div">
+        <div> <i class="fa fa-check-circle"></i> </div>
+        <p id="messageId">${data.message}</p>
+        <button class="btn" id="close">close</button>
+      </div>
+  `;
+  updateMessageDiv.style.display = 'block';
+
+  window.addEventListener('click', (event) => {
+    if (event.target === updateMessageDiv) {
+      updateMessageDiv.style.display = 'none';
+    }
+  });
+
+
+  const closeBtn = document.getElementById('close');
+  closeBtn.addEventListener('click', () => {
+    updateMessageDiv.style.display = 'none';
+  });
+};
+
+/**
+   * @description modal function to update request by ID
+   *
+   * @param {string} requestsUrl - API endpoint
+   * @param {Object} options - Mthod and headers
+   *
+   * @returns {object} response JSON Object
+   */
+const updateModal = () => {
+  const updateModalDiv = document.getElementById('update-modal');
+
+  const updateDiv = document.createElement('div');
+  const titleDiv = document.createElement('div');
+  const productDiv = document.createElement('div');
+  const typeDiv = document.createElement('div');
+  const issueDiv = document.createElement('div');
+  const imgDiv = document.createElement('div');
+  const submitDiv = document.createElement('div');
+  const submitUpdateBtn = document.createElement('button');
+
+  updateDiv.className = 'card';
+
+  titleDiv.textContent = 'Update Request';
+  titleDiv.className = 'title';
+
+  const form = document.createElement('form');
+
+  productDiv.className = 'form';
+
+  typeDiv.className = 'form';
+
+  issueDiv.className = 'form';
+
+  imgDiv.className = 'form';
+
+  submitDiv.className = 'centre-div';
+
+  submitUpdateBtn.textContent = 'Update';
+  submitUpdateBtn.className = 'btn-back';
+
+  productDiv.innerHTML = `
+              <label>Product</label>
+              <select id="product">
+                <option ${detailsData.product === 'charger' ? 'selected' : ''} value="charger">charger</option>
+                <option ${detailsData.product === 'headphone' ? 'selected' : ''} value="headphone">headphone</option>
+                <option ${detailsData.product === 'laptop' ? 'selected' : ''} value="laptop">laptop</option>
+                <option ${detailsData.product === 'monitor' ? 'selected' : ''} value="monitor">monitor</option>
+                <option ${detailsData.product === 'chair' ? 'selected' : ''} value="chair">chair</option>
+                <option ${detailsData.product === 'desk' ? 'selected' : ''} value="desk">desk</option>
+              </select>
+  `;
+
+  typeDiv.innerHTML = `
+              <label>Request Type</label>
+              <select id="request-type">
+                <option ${detailsData.requesttype === 'maintenance' ? 'selected' : ''} value="maintenance">maintenance</option>
+                <option ${detailsData.requesttype === 'repair' ? 'selected' : ''} value="repair">repair</option>
+                <option ${detailsData.requesttype === 'replace' ? 'selected' : ''} value="replace">replace</option>
+              </select>
+  `;
+
+  issueDiv.innerHTML = `
+              <label for="type">Issue</label>
+              <textarea name="issue" id="issue-description" required>${detailsData.issue}</textarea>
+  `;
+
+  imgDiv.innerHTML = `
+              <label for="image">Upload product image</label>
+              <input type="file" name="pic" accept="image/*" id="product-image">
+  `;
+
+  form.appendChild(productDiv);
+  form.appendChild(typeDiv);
+  form.appendChild(issueDiv);
+  form.appendChild(imgDiv);
+  submitDiv.appendChild(submitUpdateBtn);
+  updateDiv.appendChild(titleDiv);
+  updateDiv.appendChild(form);
+  updateDiv.appendChild(submitDiv);
+  updateModalDiv.appendChild(updateDiv);
+
+  updateModalDiv.style.display = 'block';
+
+  window.addEventListener('click', (event) => {
+    if (event.target === updateModalDiv) {
+      updateModalDiv.style.display = 'none';
+      updateModalDiv.innerHTML = '';
+    }
+  });
+
+  /**
+   * @description fetch method to consume API used to edit logged in user's request.
+   *
+   * @param {string} requestsUrl - API endpoint
+   * @param {Object} options - Mthod and headers
+   *
+   * @returns {object} response JSON Object
+   */
+  const product = document.getElementById('product');
+  const requestType = document.getElementById('request-type');
+  const issueDescription = document.getElementById('issue-description');
+  const productImage = document.getElementById('product-image');
+
+  submitUpdateBtn.addEventListener('click', () => {
+    const requestBody = {
+      product: product.value,
+      requestType: requestType.value,
+      issue: issueDescription.value,
+      imageUrl: productImage.value,
+    };
+
+    const editOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+      body: JSON.stringify(requestBody),
+    };
+
+    fetch(requestsUrl + detailsData.requestid, editOptions)
+      .then(response => response.json())
+      .then((data) => {
+        if (data.success === false) {
+          alert(data.message);
+        } else {
+          updateModalDiv.style.display = 'none';
+          updateModalDiv.innerHTML = '';
+          modalDiv.style.display = 'none';
+          modalDiv.innerHTML = '';
+          updateMessageModal(data);
+        }
+      });
+  });
+};
+

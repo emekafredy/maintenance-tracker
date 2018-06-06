@@ -25,6 +25,26 @@
   min-height: 53% !important;
 }
 
+.btn-details {
+  margin-right: 5px;
+}
+
+.resolve-btn {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+}
+
+.resolve-btn:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+  color: #fff;
+}
+
+#resolveHeader {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .table-body {
     min-height: 65% !important;

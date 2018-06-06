@@ -16,11 +16,12 @@ img {
 
 .card {
   background:#fff;
-  border-radius:10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   line-height:1.5em;
-  margin:0 auto;
+  margin: auto;
   padding:3em;
-  width:70%;
+  width:50%;
 }
 
 .wrapper {
@@ -52,6 +53,31 @@ label {
   background-color:#c82333;
   border-color:#bd2130;
   color:#fff;
+}
+
+.request-tab {
+  width: 60%;
+  background: #1d2951;
+  margin: auto;
+}
+
+.tab-btn {
+  background: #1d2951;
+  border: none;
+  border-right: 2px solid #fff;
+  cursor: pointer;
+  font-weight: bold;
+  outline: none;
+  color: #fff;
+  height: 50px;
+  padding: 0 100px;
+  transition: 0.5s;
+}
+
+.tab-btn:hover {
+  background: #ccc;
+  color: #000 !important;
+  transition: 0.5s;
 }
 
 

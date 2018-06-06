@@ -132,8 +132,10 @@ input[type="submit"] {
 
 /* Modal Message */
 .modal-div {
-  background: #ccc;
+  background: #fff;
+  border: 2px solid #1d2951;
   border-radius: 8px;
+  color: #000;
   margin: 100px auto;
   padding: 20px;
   text-align: center;

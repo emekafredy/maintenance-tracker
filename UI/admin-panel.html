@@ -7,6 +7,7 @@
   <link rel="shortcut icon" type="image/png" href="http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528128949/My_Post.jpg"/>
   <!-- CSS -->
   <link rel="stylesheet" href="css/admin-panel.css">
+  <link rel="stylesheet" href="css/request-details.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/user-requests.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
@@ -36,6 +37,7 @@
       </div>      
     </div><br>
 
+    <div id="details-modal"></div>
     <div class="header">
       <div class="container">
         <h1>Users' Requests</h1>
@@ -60,7 +62,7 @@
             <th scope="col"> Details </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="table-body">
           <tr></tr>
         </tbody>
       </table>

@@ -63,7 +63,7 @@ fetch(requestsUrl, options)
  * @description modal function to display user's request details by ID
  *
  * @param {string} requestsUrl - API endpoint
- * @param {Object} options - Mthod and headers
+ * @param {Object} options - Method and headers
  *
  * @returns {object} response JSON Object
  */

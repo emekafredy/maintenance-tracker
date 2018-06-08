@@ -70,6 +70,22 @@ body {
   word-wrap:break-word;
 }
 
+.edit-card {
+  -ms-flex-direction:column;
+  background-clip:border-box;
+  background-color:#f4f7f8;
+  border:1px solid rgba(0,0,0,0.125);
+  border-radius:.25rem;
+  display:flex;
+  flex-direction:column;
+  margin:auto;
+  margin-top:-40px;
+  padding:3em;
+  position:relative;
+  width:55%;
+  word-wrap:break-word;
+}
+
 .title {
   background-color:#1d2951;
   border-bottom:1px solid rgba(0,0,0,0.125);

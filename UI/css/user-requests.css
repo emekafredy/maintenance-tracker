@@ -176,7 +176,7 @@ table th {
   font-size:2em !important;
 }
 
-#details-modal, #update-modal, #modal-container {
+#details-modal, #update-modal, #modal-container, #message-modal {
   background-color: rgba(0,0,0,0.5);
   display: none;
   height: 100%; 

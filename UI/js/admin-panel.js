@@ -10,6 +10,40 @@ const options = {
   },
 };
 
+
+const processModal = (result) => {
+  const processDiv = document.getElementById('message-modal');
+  processDiv.innerHTML = `
+      <div class="modal-div">
+        <div> <i class="fa fa-check-circle"></i> </div>
+        <p id="messageId">${result.message}</p>
+        <button id="close">close</button>
+      </div>
+  `;
+  processDiv.style.display = 'block';
+
+  window.addEventListener('click', (event) => {
+    if (event.target === processDiv) {
+      processDiv.style.display = 'none';
+    }
+  });
+
+
+  const closeBtn = document.getElementById('close');
+  closeBtn.addEventListener('click', () => {
+    processDiv.style.display = 'none';
+  });
+};
+
+const clearTable = () => {
+  const tableBody = document.getElementById('table-body')
+    tableBody.innerHTML = '';
+}
+const clearDetailsModal = () => {
+  document.getElementById('details-modal').innerHTML = '';
+  document.getElementById('details-modal').style.display = 'none';
+}
+
 /**
  * @description fetch method to consume API used to get users' request details for logged in admin.
  *
@@ -21,11 +55,11 @@ const options = {
 const modalDiv = document.getElementById('details-modal');
 const requestDetailsModal = (data, message) => {
   const card = document.createElement('div');
-  card.className = 'card';
+  card.className = 'details-card';
 
   const header = document.createElement('div');
-  header.className = 'header';
-  header.innerHTML = `<h1>${message}</h1>`;
+  header.className = 'details-title';
+  header.innerHTML = `<h3>${message}</h3>`;
 
   const wrapper = document.createElement('div');
   wrapper.className = 'wrapper';
@@ -56,17 +90,17 @@ const requestDetailsModal = (data, message) => {
   resolveBtn.className = 'btn resolve-btn';
   resolveBtn.innerHTML = '<i class="fa fa-check"></i> Check as resolved';
   column2.innerHTML = `
-              <p> <label>Request ID</label> : <span>${data.requestid}</span></p>
-              <p> <label>User ID</label> : <span>${data.userid}</span></p>
-              <p> <label>Product</label> : <span>${data.product}</span></p>
-              <p> <label>Request Date</label> : <span>${data.requestdate}</span></p>
-              <p> </p><label>Request type</label> : <span>${data.requesttype}</span></p>
-              <p> <label>Isssue</label>: <br>
+              <p class="para"> <label>Request ID</label> : <span>${data.requestid}</span></p>
+              <p class="para"> <label>User ID</label> : <span>${data.userid}</span></p>
+              <p class="para"> <label>Product</label> : <span>${data.product}</span></p>
+              <p class="para"> <label>Request Date</label> : <span>${data.requestdate}</span></p>
+              <p class="para"> <label>Request type</label> : <span>${data.requesttype}</span></p>
+              <p class="para"> <label>Isssue</label>: <br>
               <span> ${data.issue}</span></p>
-              <p> </p><label>Request status</label> : <span>${data.requeststatus}</span></p>
-              <p> </p><label>Approved At</label> : <span>${data.approvedat}</span></p>
-              <p> </p><label>Disapproved At</label> : <span>${data.disapprovedat}</span></p>
-              <p> </p><label>Resolved At</label> : <span>${data.resolvedat}</span></p>
+              <p class="para"> <label>Request status</label> : <span>${data.requeststatus}</span></p>
+              <p class="para"> <label>Approved At</label> : <span>${data.approvedat}</span></p>
+              <p class="para"> <label>Disapproved At</label> : <span>${data.disapprovedat}</span></p>
+              <p class="para"> <label>Resolved At</label> : <span>${data.resolvedat}</span></p>
   `;
 
   btnDiv.appendChild(approveBtn);
@@ -98,6 +132,37 @@ const requestDetailsModal = (data, message) => {
       modalDiv.style.display = 'none';
       modalDiv.innerHTML = '';
     }
+  });
+
+  /**
+   * @description fetch method to consume API used to approve users' pending requests for logged in admin.
+   *
+   * @param {string} 'allRequestsUrl + data.requestid + /approve' - API endpoint
+   * @param {Object} editOptions - Method and headers
+   *
+   * @returns {object} response JSON Object
+   */
+  approveBtn.addEventListener('click', () => {
+    const editOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    fetch(`${allRequestsUrl}${data.requestid}/approve`, editOptions)
+      .then(response => response.json())
+      .then((approveResult) => {
+        if (approveResult.success === false) {
+          alert(approveResult.message);
+        } else {
+          clearDetailsModal();
+          processModal(approveResult);
+          clearTable();
+          fetchAllRequests();
+        }
+      });
   });
 };
 

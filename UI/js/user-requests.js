@@ -72,10 +72,10 @@ const requestDetailsModal = (data, message) => {
   detailsData = data;
 
   const card = document.createElement('div');
-  card.className = 'card';
+  card.className = 'details-card';
 
   const header = document.createElement('div');
-  header.className = 'header';
+  header.className = 'details-title';
   header.innerHTML = `<h1>${message}</h1>`;
 
   const wrapper = document.createElement('div');
@@ -93,16 +93,16 @@ const requestDetailsModal = (data, message) => {
   column1.appendChild(imgDiv);
 
   column2.innerHTML = `
-              <p> <label>Request ID</label> : <span>${data.requestid}</span></p>
-              <p> <label>Product</label> : <span>${data.product}</span></p>
-              <p> <label>Request Date</label> : <span>${data.requestdate}</span></p>
-              <p> </p><label>Request type</label> : <span>${data.requesttype}</span></p>
-              <p> <label>Isssue</label>: <br>
+              <p class="para"> <label>Request ID</label> : <span>${data.requestid}</span></p>
+              <p class="para"> <label>Product</label> : <span>${data.product}</span></p>
+              <p class="para"> <label>Request Date</label> : <span>${data.requestdate}</span></p>
+              <p class="para"> <label>Request type</label> : <span>${data.requesttype}</span></p>
+              <p class="para"> <label>Isssue</label>: <br>
               <span> ${data.issue}</span></p>
-              <p> </p><label>Request status</label> : <span>${data.requeststatus}</span></p>
-              <p> </p><label>Approved Date</label> : <span>${data.approvedat}</span></p>
-              <p> </p><label>Disapproved Date</label> : <span>${data.disapprovedat}</span></p>
-              <p> </p><label>Resolved Date</label> : <span>${data.resolvedat}</span></p>
+              <p class="para"> <label>Request status</label> : <span>${data.requeststatus}</span></p>
+              <p class="para"> <label>Approved Date</label> : <span>${data.approvedat}</span></p>
+              <p class="para"> <label>Disapproved Date</label> : <span>${data.disapprovedat}</span></p>
+              <p class="para"> <label>Resolved Date</label> : <span>${data.resolvedat}</span></p>
               <div class="btn-div">
                 <button class="btn btn-details" onclick="updateModal();">
                   <i class="fa fa-pencil-square-o"></i> Edit Request
@@ -110,7 +110,7 @@ const requestDetailsModal = (data, message) => {
                 <button class="btn" id="btn-close">
                   <i class="fa fa-close"></i> Close
                 </button>
-              </div><br><br>
+              </div>
   `;
 
   card.appendChild(header);
@@ -196,7 +196,7 @@ const updateModal = () => {
   const submitDiv = document.createElement('div');
   const submitUpdateBtn = document.createElement('button');
 
-  updateDiv.className = 'card';
+  updateDiv.className = 'edit-card';
 
   titleDiv.textContent = 'Update Request';
   titleDiv.className = 'title';

@@ -164,6 +164,37 @@ const requestDetailsModal = (data, message) => {
         }
       });
   });
+
+   /**
+   * @description fetch method to consume API used to disapprove users' pending requests for logged in admin.
+   *
+   * @param {string} 'allRequestsUrl + data.requestid + /disapprove' - API endpoint
+   * @param {Object} editOptions - Method and headers
+   *
+   * @returns {object} response JSON Object
+   */
+  disapproveBtn.addEventListener('click', () => {
+    const editOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    fetch(`${allRequestsUrl}${data.requestid}/disapprove`, editOptions)
+      .then(response => response.json())
+      .then((disapproveResult) => {
+        if (disapproveResult.success === false) {
+          alert(disapproveResult.message);
+        } else {
+          clearDetailsModal();
+          processModal(disapproveResult);
+          clearTable();
+          fetchAllRequests();
+        }
+      });
+  });
 };
 
 /**

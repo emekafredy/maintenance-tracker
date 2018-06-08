@@ -195,6 +195,37 @@ const requestDetailsModal = (data, message) => {
         }
       });
   });
+
+  /**
+   * @description fetch method to consume API used to resolve users' approved requests for logged in admin.
+   *
+   * @param {string} 'allRequestsUrl + data.requestid + /resolve' - API endpoint
+   * @param {Object} editOptions - Method and headers
+   *
+   * @returns {object} response JSON Object
+   */
+  resolveBtn.addEventListener('click', () => {
+    const editOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+
+    fetch(`${allRequestsUrl}${data.requestid}/resolve`, editOptions)
+      .then(response => response.json())
+      .then((resolveResult) => {
+        if (resolveResult.success === false) {
+          alert(resolveResult.message);
+        } else {
+          clearDetailsModal();
+          processModal(resolveResult);
+          clearTable();
+          fetchAllRequests();
+        }
+      });
+  });
 };
 
 /**

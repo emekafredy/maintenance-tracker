@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/png" href="http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528128949/My_Post.jpg"/>
   <!-- CSS -->
+  <link rel="stylesheet" href="css/alert.css">
   <link rel="stylesheet" href="css/new-request.css">
   <link rel="stylesheet" href="css/styles.css"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
@@ -35,8 +36,13 @@
       </div>      
     </div><br>
 
+    <div class="alert-div success" id="success-alert">
+      SUCCESS! <span id="close-success"><i class="fa fa-close"></i></span>
+    </div>
 
-    <div id="modal-container"></div>
+    <div class="alert-div danger" id="danger-alert">
+      ERROR! <span id="close-danger"><i class="fa fa-close"></i></span>
+    </div>
 
     
     <div class="header">

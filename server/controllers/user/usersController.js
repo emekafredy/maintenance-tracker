@@ -38,7 +38,6 @@ class UserController {
           .then(() => client.query('SELECT * FROM users WHERE email = $1', [regMail]))
           .then(data => jwt.sign({ user: data.rows[0] }, 'secretKey', (err, token) => response.status(201).json({
             success: true,
-            message: `Welcome ${newUser.firstName}`,
             data: data.rows[0],
             token,
           })))

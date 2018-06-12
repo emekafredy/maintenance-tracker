@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/png" href="http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528128949/My_Post.jpg"/>
   <!-- CSS -->
+  <link rel="stylesheet" href="css/alert.css">
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/styles.css">
   <title>Login</title>
@@ -32,6 +33,8 @@
       </div>      
     </div><br>
 
+    <div class="alert-div danger" id="danger-alert"></div>
+
     <div id="login">
       <form> 
         <div class="centre-div">
@@ -41,12 +44,10 @@
           <label for="email"> Email </label>
           <input type="email" id="email" required /> 
         </p>
-        <p id="email-alert" class="alert-class"></p>
         <p> 
           <label for="password" > Password </label>
           <input type="password" id="password" required />
         </p>
-        <p id="password-alert" class="alert-class"></p>
       </form>
       <p class="sign-up"> 
         <input type="submit" id="loginUser"/> 

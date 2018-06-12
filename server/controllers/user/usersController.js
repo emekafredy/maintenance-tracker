@@ -30,7 +30,7 @@ class UserController {
    *
    * @returns {object} response JSON Object
    */
-  static signUpQuery(request, response, query, newUser) {
+  static signUpQuery(request, response, query) {
     const regMail = request.body.email;
     client.query({ text: 'SELECT * FROM users where email = $1', values: [regMail] }).then((foundmail) => {
       if (foundmail.rowCount === 0) {
@@ -105,12 +105,10 @@ class UserController {
    */
   static getUserProfile(request, response) {
     const { userid: userId } = request.user;
-    client.query('SELECT * FROM users WHERE userId = $1', [userId]).then((data) => {
-      return response.status(200).json({
-        message: 'User details retrieved',
-        data: data.rows,
-      });
-    }).catch(error => response.status(500).json({ message: error.message }));
+    client.query('SELECT * FROM users WHERE userId = $1', [userId]).then(data => response.status(200).json({
+      message: 'User details retrieved',
+      data: data.rows,
+    })).catch(error => response.status(500).json({ message: error.message }));
   }
 }
 

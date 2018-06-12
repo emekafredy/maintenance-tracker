@@ -90,7 +90,7 @@ describe('ENDPOINTS TEST', () => {
   });
 
   describe('Test endpoints to sign up Users', () => {
-    it('Should return a Should return a success message if user registered succesfully', (done) => {
+    it('Should return a success message if user registered succesfully', (done) => {
       chai.request(app)
         .post('/api/v1/auth/signup')
         .send({
@@ -102,7 +102,7 @@ describe('ENDPOINTS TEST', () => {
         .end((error, response) => {
           expect(response).to.have.status(201);
           expect(response.body).to.be.an('object');
-          response.body.message.should.eql('Welcome Sandra');
+          response.body.data.firstname.should.eql('Sandra');
           done();
         });
     });

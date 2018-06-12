@@ -1,5 +1,12 @@
 const signupUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/auth/signup';
 
+const dangerDiv = document.getElementById('danger-alert');
+const dangerTimeout = () => {
+  setTimeout(() => {
+    dangerDiv.style.display = 'none';
+  }, 3000);
+};
+
 const firstNameInput = document.getElementById('firstName');
 const lastNameInput = document.getElementById('lastName');
 const emailInput = document.getElementById('email');
@@ -29,30 +36,45 @@ const registerUser = () => {
   };
 
   const checkInput = (data) => {
-    const firstNameAlert = document.getElementById('firstname-alert');
-    const lastNameAlert = document.getElementById('lastname-alert');
-    const emailAlert = document.getElementById('email-alert');
-    const passwordAlert = document.getElementById('password-alert');
-
     if (!signupBody.firstName) {
-      firstNameAlert.style.display = 'block';
-      firstNameAlert.innerHTML = data.errors.firstName;
+      const firstnameSpan = document.createElement('p');
+      firstnameSpan.innerHTML = `${data.errors.firstName}`;
+      dangerDiv.appendChild(firstnameSpan);
+      dangerDiv.style.display = 'block';
     }
     if (!signupBody.lastName) {
-      lastNameAlert.style.display = 'block';
-      lastNameAlert.innerHTML = data.errors.lastName;
+      const lastnameSpan = document.createElement('p');
+      lastnameSpan.innerHTML = `${data.errors.lastName}`;
+      dangerDiv.appendChild(lastnameSpan);
+      dangerDiv.style.display = 'block';
     }
     if (!signupBody.email) {
-      emailAlert.style.display = 'block';
-      emailAlert.innerHTML = data.errors.email;
+      const emailSpan = document.createElement('p');
+      emailSpan.innerHTML = `${data.errors.email}`;
+      dangerDiv.appendChild(emailSpan);
+      dangerDiv.style.display = 'block';
     }
     if (signupBody.email && !validateEmail(signupBody.email)) {
-      emailAlert.style.display = 'block';
-      emailAlert.innerHTML = data.errors.email;
+      const invalidEmailSpan = document.createElement('p');
+      invalidEmailSpan.innerHTML = `${data.errors.email}`;
+      dangerDiv.appendChild(invalidEmailSpan);
+      dangerDiv.style.display = 'block';
     }
     if (!signupBody.password) {
-      passwordAlert.style.display = 'block';
-      passwordAlert.innerHTML = data.errors.password;
+      const passwordSpan = document.createElement('p');
+      passwordSpan.innerHTML = `${data.errors.password}`;
+      dangerDiv.appendChild(passwordSpan);
+      dangerDiv.style.display = 'block';
+    }
+    if (signupBody.firstName &&
+        signupBody.lastName &&
+        signupBody.email &&
+        signupBody.password &&
+        validateEmail(signupBody.email) && data.success === false) {
+      const emailPara = document.createElement('p');
+      emailPara.innerHTML = `${data.message}`;
+      dangerDiv.appendChild(emailPara);
+      dangerDiv.style.display = 'block';
     }
   };
 
@@ -60,7 +82,9 @@ const registerUser = () => {
     .then(response => response.json())
     .then((data) => {
       if (data.success === false) {
+        dangerDiv.innerHTML = '';
         checkInput(data);
+        dangerTimeout();
       } else {
         localStorage.setItem('authToken', `Bearer ${data.token}`);
         window.location.href = 'https://emeka-m-tracker.herokuapp.com/user-requests.html';

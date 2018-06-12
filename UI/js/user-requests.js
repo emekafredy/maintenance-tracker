@@ -1,6 +1,20 @@
 const requestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests/';
 let detailsData = {};
 
+const successDiv = document.getElementById('success-alert');
+const dangerDiv = document.getElementById('danger-alert');
+
+const dangerTimeout = () => {
+  setTimeout(() => {
+    dangerDiv.style.display = 'none';
+  }, 3000);
+};
+const successTimeout = () => {
+  setTimeout(() => {
+    successDiv.style.display = 'none';
+  }, 3000);
+};
+
 const token = localStorage.getItem('authToken');
 
 const options = {
@@ -10,54 +24,6 @@ const options = {
     Authorization: token,
   },
 };
-
-/**
-   * @description fetch method to consume API used to get logged in user's requests.
-   *
-   * @param {string} requestsUrl - API endpoint
-   * @param {Object} options - Mthod and headers
-   *
-   * @returns {object} response JSON Object
-   */
-fetch(requestsUrl, options)
-  .then(response => response.json())
-  .then((json) => {
-    const { message, data } = json;
-
-    const requestMessage = document.getElementById('status-message');
-    requestMessage.innerHTML = message;
-
-
-    const table = document.getElementById('requests-table');
-    for (let index = 0; index < data.length; index += 1) {
-      const row = table.insertRow(index + 1);
-
-      const cell1 = row.insertCell(0);
-      cell1.setAttribute('data-label', 'Request ID');
-      const cell2 = row.insertCell(1);
-      cell2.setAttribute('data-label', 'Product');
-      const cell3 = row.insertCell(2);
-      cell3.setAttribute('data-label', 'Request Type');
-      const cell4 = row.insertCell(3);
-      cell4.setAttribute('data-label', 'Status');
-      const cell5 = row.insertCell(4);
-      cell5.setAttribute('data-label', 'Details');
-      const cell6 = row.insertCell(5);
-      cell6.setAttribute('data-label', 'Cancel');
-
-      cell1.innerHTML = data[index].requestid;
-      cell2.innerHTML = data[index].product;
-      cell3.innerHTML = data[index].requesttype;
-      cell4.innerHTML = data[index].requeststatus;
-      cell5.innerHTML = `<button class="btn btn-details" onclick="checkDetails(${data[index].requestid});"> 
-                          <i class="fa fa-arrow-circle-o-right"></i> Details 
-                        </button>`;
-      cell6.innerHTML = `<button class="btn btn-delete"> 
-                          <i class="fa fa-trash"></i> Cancel 
-                        </button>`;
-    }
-  });
-
 
 /**
  * @description modal function to display user's request details by ID
@@ -135,46 +101,118 @@ const requestDetailsModal = (data, message) => {
   });
 };
 
+
 /**
-   * @description fetch method to consume API used to get logged in user's request details.
+   * @description fetch method to consume API used to get logged in user's requests.
    *
    * @param {string} requestsUrl - API endpoint
    * @param {Object} options - Mthod and headers
    *
    * @returns {object} response JSON Object
    */
-const checkDetails = (id) => {
-  fetch(requestsUrl + id, options)
+const allRequests = () => {
+  fetch(requestsUrl, options)
     .then(response => response.json())
     .then((json) => {
       const { message, data } = json;
-      requestDetailsModal(data[0], message);
+
+      const requestMessage = document.getElementById('status-message');
+      requestMessage.innerHTML = message;
+
+      const approveBtn = document.createElement('button');
+      approveBtn.className = 'btn btn-details';
+      approveBtn.innerHTML = '<i class="fa fa-thumbs-up"></i> Approve';
+
+      const table = document.getElementById('requests-table');
+      for (let index = 0; index < data.length; index += 1) {
+        const row = table.insertRow(index + 1);
+
+        const detailsBtn = document.createElement('button');
+        detailsBtn.className = 'btn btn-details';
+        detailsBtn.innerHTML = '<i class="fa fa-arrow-circle-o-right"></i> Details';
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn btn-delete';
+        deleteBtn.innerHTML = '<i class="fa fa-trash"></i> Delete';
+
+        const cell1 = row.insertCell(0);
+        cell1.setAttribute('data-label', 'Request ID');
+        const cell2 = row.insertCell(1);
+        cell2.setAttribute('data-label', 'Product');
+        const cell3 = row.insertCell(2);
+        cell3.setAttribute('data-label', 'Request Type');
+        const cell4 = row.insertCell(3);
+        cell4.setAttribute('data-label', 'Status');
+        const cell5 = row.insertCell(4);
+        cell5.setAttribute('data-label', 'Details');
+        const cell6 = row.insertCell(5);
+        cell6.setAttribute('data-label', 'Cancel');
+
+        cell1.innerHTML = data[index].requestid;
+        cell2.innerHTML = data[index].product;
+        cell3.innerHTML = data[index].requesttype;
+        cell4.innerHTML = data[index].requeststatus;
+        cell5.appendChild(detailsBtn);
+        cell6.appendChild(deleteBtn);
+
+        /**
+         * @description fetch method to consume API used to get logged in user's request details.
+         *
+         * @param {string} requestsUrl - API endpoint
+         * @param {Object} options - Mthod and headers
+         *
+         * @returns {object} response JSON Object
+         */
+        detailsBtn.addEventListener('click', () => {
+          fetch(requestsUrl + data[index].requestid, options)
+            .then(response => response.json())
+            .then((jsondata) => {
+              requestDetailsModal(jsondata.data[0], jsondata.message);
+            });
+        });
+
+        /**
+         * @description fetch method to consume API used to delete logged in user's pending request.
+         *
+         * @param {string} requestsUrl - API endpoint
+         * @param {Object} options - Mthod and headers
+         *
+         * @returns {object} response JSON Object
+         */
+        deleteBtn.addEventListener('click', () => {
+          const confirmDelete = window.confirm('Are you sure you want to delete this request?');
+
+          if (confirmDelete) {
+            const deleteOptions = {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+              },
+            };
+
+            fetch(requestsUrl + data[index].requestid, deleteOptions)
+              .then(response => response.json())
+              .then((deleteStatus) => {
+                if (deleteStatus.success === false) {
+                  dangerDiv.innerHTML = `${deleteStatus.message}`;
+                  dangerDiv.style.display = 'block';
+                  dangerTimeout();
+                } else {
+                  successDiv.innerHTML = `${deleteStatus.message}`;
+                  successDiv.style.display = 'block';
+                  document.getElementById('table-body').innerHTML = '';
+                  allRequests();
+                  successTimeout();
+                }
+              });
+          }
+        });
+      }
     });
 };
+allRequests();
 
-const updateMessageModal = (data) => {
-  const updateMessageDiv = document.getElementById('modal-container');
-  updateMessageDiv.innerHTML = `
-      <div class="modal-div">
-        <div> <i class="fa fa-check-circle"></i> </div>
-        <p id="messageId">${data.message}</p>
-        <button class="btn" id="close">close</button>
-      </div>
-  `;
-  updateMessageDiv.style.display = 'block';
-
-  window.addEventListener('click', (event) => {
-    if (event.target === updateMessageDiv) {
-      updateMessageDiv.style.display = 'none';
-    }
-  });
-
-
-  const closeBtn = document.getElementById('close');
-  closeBtn.addEventListener('click', () => {
-    updateMessageDiv.style.display = 'none';
-  });
-};
 
 /**
    * @description modal function to update request by ID
@@ -279,6 +317,13 @@ const updateModal = () => {
   const issueDescription = document.getElementById('issue-description');
   const productImage = document.getElementById('product-image');
 
+  const clearModal = () => {
+    updateModalDiv.style.display = 'none';
+    updateModalDiv.innerHTML = '';
+    modalDiv.style.display = 'none';
+    modalDiv.innerHTML = '';
+  };
+
   submitUpdateBtn.addEventListener('click', () => {
     const requestBody = {
       product: product.value,
@@ -300,13 +345,15 @@ const updateModal = () => {
       .then(response => response.json())
       .then((data) => {
         if (data.success === false) {
-          alert(data.message);
+          clearModal();
+          dangerDiv.innerHTML = `${data.message}`;
+          dangerDiv.style.display = 'block';
+          dangerTimeout();
         } else {
-          updateModalDiv.style.display = 'none';
-          updateModalDiv.innerHTML = '';
-          modalDiv.style.display = 'none';
-          modalDiv.innerHTML = '';
-          updateMessageModal(data);
+          clearModal();
+          successDiv.innerHTML = `${data.message}`;
+          successDiv.style.display = 'block';
+          successTimeout();
         }
       });
   });

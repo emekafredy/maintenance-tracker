@@ -1,5 +1,19 @@
 const allRequestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/requests/';
 
+const dangerDiv = document.getElementById('danger-alert');
+const successDiv = document.getElementById('success-alert');
+const dangerTimeout = () => {
+  setTimeout(() => {
+    dangerDiv.style.display = 'none';
+  }, 3000);
+};
+const successTimeout = () => {
+  setTimeout(() => {
+    successDiv.style.display = 'none';
+  }, 3000);
+};
+
+
 const token = localStorage.getItem('authToken');
 
 const options = {
@@ -11,38 +25,83 @@ const options = {
 };
 
 
-const processModal = (result) => {
-  const processDiv = document.getElementById('message-modal');
-  processDiv.innerHTML = `
-      <div class="modal-div">
-        <div> <i class="fa fa-check-circle"></i> </div>
-        <p id="messageId">${result.message}</p>
-        <button id="close">close</button>
-      </div>
-  `;
-  processDiv.style.display = 'block';
-
-  window.addEventListener('click', (event) => {
-    if (event.target === processDiv) {
-      processDiv.style.display = 'none';
-    }
-  });
-
-
-  const closeBtn = document.getElementById('close');
-  closeBtn.addEventListener('click', () => {
-    processDiv.style.display = 'none';
-  });
+const processMessage = (result) => {
+  successDiv.innerHTML = `${result.message}`;
+  successDiv.style.display = 'block';
+  successTimeout();
+};
+const errorMessage = (result) => {
+  dangerDiv.innerHTML = `${result.message}`;
+  dangerDiv.style.display = 'block';
+  dangerTimeout();
 };
 
 const clearTable = () => {
-  const tableBody = document.getElementById('table-body')
-    tableBody.innerHTML = '';
-}
+  const tableBody = document.getElementById('table-body');
+  tableBody.innerHTML = '';
+};
 const clearDetailsModal = () => {
   document.getElementById('details-modal').innerHTML = '';
   document.getElementById('details-modal').style.display = 'none';
-}
+};
+
+/**
+   * @description fetch method to consume API used to get all users' requests for logged in admin.
+   *
+   * @param {string} requestsUrl - API endpoint
+   * @param {Object} options - Mthod and headers
+   *
+   * @returns {object} response JSON Object
+   */
+const fetchAllRequests = () => {
+  fetch(allRequestsUrl, options)
+    .then(response => response.json())
+    .then((json) => {
+      const { message, data } = json;
+
+      const requestMessage = document.getElementById('status-message');
+      requestMessage.innerHTML = message;
+
+      const table = document.getElementById('users-requests');
+      for (let index = 0; index < data.length; index += 1) {
+        const row = table.insertRow(index + 1);
+
+        const detailsBtn = document.createElement('button');
+        detailsBtn.className = 'btn btn-details';
+        detailsBtn.innerHTML = '<i class="fa fa-arrow-circle-o-right"></i> Details';
+
+        const cell1 = row.insertCell(0);
+        cell1.setAttribute('data-label', 'Request ID');
+        const cell2 = row.insertCell(1);
+        cell2.setAttribute('data-label', 'User ID');
+        const cell3 = row.insertCell(2);
+        cell3.setAttribute('data-label', 'Product');
+        const cell4 = row.insertCell(3);
+        cell4.setAttribute('data-label', 'Request Type');
+        const cell5 = row.insertCell(4);
+        cell5.setAttribute('data-label', 'Status');
+        const cell6 = row.insertCell(5);
+        cell6.setAttribute('data-label', 'Details');
+
+        cell1.innerHTML = data[index].requestid;
+        cell2.innerHTML = data[index].userid;
+        cell3.innerHTML = data[index].product;
+        cell4.innerHTML = data[index].requesttype;
+        cell5.innerHTML = data[index].requeststatus;
+        cell6.appendChild(detailsBtn);
+
+        detailsBtn.addEventListener('click', () => {
+          fetch(allRequestsUrl + data[index].requestid, options)
+            .then(response => response.json())
+            .then((myData) => {
+              requestDetailsModal(myData.data[0], myData.message);
+            });
+        });
+      }
+    });
+};
+fetchAllRequests();
+
 
 /**
  * @description fetch method to consume API used to get users' request details for logged in admin.
@@ -135,7 +194,8 @@ const requestDetailsModal = (data, message) => {
   });
 
   /**
-   * @description fetch method to consume API used to approve users' pending requests for logged in admin.
+   * @description fetch method to consume API used to approve users'
+   * pending requests for logged in admin.
    *
    * @param {string} 'allRequestsUrl + data.requestid + /approve' - API endpoint
    * @param {Object} editOptions - Method and headers
@@ -155,18 +215,19 @@ const requestDetailsModal = (data, message) => {
       .then(response => response.json())
       .then((approveResult) => {
         if (approveResult.success === false) {
-          alert(approveResult.message);
+          errorMessage(approveResult);
         } else {
           clearDetailsModal();
-          processModal(approveResult);
+          processMessage(approveResult);
           clearTable();
           fetchAllRequests();
         }
       });
   });
 
-   /**
-   * @description fetch method to consume API used to disapprove users' pending requests for logged in admin.
+  /**
+   * @description fetch method to consume API used to disapprove users'
+   * pending requests for logged in admin.
    *
    * @param {string} 'allRequestsUrl + data.requestid + /disapprove' - API endpoint
    * @param {Object} editOptions - Method and headers
@@ -186,10 +247,10 @@ const requestDetailsModal = (data, message) => {
       .then(response => response.json())
       .then((disapproveResult) => {
         if (disapproveResult.success === false) {
-          alert(disapproveResult.message);
+          errorMessage(disapproveResult);
         } else {
           clearDetailsModal();
-          processModal(disapproveResult);
+          processMessage(disapproveResult);
           clearTable();
           fetchAllRequests();
         }
@@ -197,7 +258,8 @@ const requestDetailsModal = (data, message) => {
   });
 
   /**
-   * @description fetch method to consume API used to resolve users' approved requests for logged in admin.
+   * @description fetch method to consume API used to resolve users'
+   * approved requests for logged in admin.
    *
    * @param {string} 'allRequestsUrl + data.requestid + /resolve' - API endpoint
    * @param {Object} editOptions - Method and headers
@@ -217,10 +279,10 @@ const requestDetailsModal = (data, message) => {
       .then(response => response.json())
       .then((resolveResult) => {
         if (resolveResult.success === false) {
-          alert(resolveResult.message);
+          errorMessage(resolveResult);
         } else {
           clearDetailsModal();
-          processModal(resolveResult);
+          processMessage(resolveResult);
           clearTable();
           fetchAllRequests();
         }
@@ -228,59 +290,3 @@ const requestDetailsModal = (data, message) => {
   });
 };
 
-/**
-   * @description fetch method to consume API used to get all users' requests for logged in admin.
-   *
-   * @param {string} requestsUrl - API endpoint
-   * @param {Object} options - Mthod and headers
-   *
-   * @returns {object} response JSON Object
-   */
-const fetchAllRequests = () => {
-  fetch(allRequestsUrl, options)
-    .then(response => response.json())
-    .then((json) => {
-      const { message, data } = json;
-
-      const requestMessage = document.getElementById('status-message');
-      requestMessage.innerHTML = message;
-
-      const table = document.getElementById('users-requests');
-      for (let index = 0; index < data.length; index += 1) {
-        const row = table.insertRow(index + 1);
-
-        const detailsBtn = document.createElement('button');
-        detailsBtn.className = 'btn btn-details';
-        detailsBtn.innerHTML = '<i class="fa fa-arrow-circle-o-right"></i> Details';
-
-        const cell1 = row.insertCell(0);
-        cell1.setAttribute('data-label', 'Request ID');
-        const cell2 = row.insertCell(1);
-        cell2.setAttribute('data-label', 'User ID');
-        const cell3 = row.insertCell(2);
-        cell3.setAttribute('data-label', 'Product');
-        const cell4 = row.insertCell(3);
-        cell4.setAttribute('data-label', 'Request Type');
-        const cell5 = row.insertCell(4);
-        cell5.setAttribute('data-label', 'Status');
-        const cell6 = row.insertCell(5);
-        cell6.setAttribute('data-label', 'Details');
-
-        cell1.innerHTML = data[index].requestid;
-        cell2.innerHTML = data[index].userid;
-        cell3.innerHTML = data[index].product;
-        cell4.innerHTML = data[index].requesttype;
-        cell5.innerHTML = data[index].requeststatus;
-        cell6.appendChild(detailsBtn);
-
-        detailsBtn.addEventListener('click', () => {
-          fetch(allRequestsUrl + data[index].requestid, options)
-            .then(response => response.json())
-            .then((myData) => {
-              requestDetailsModal(myData.data[0], myData.message);
-            });
-        });
-      }
-    });
-};
-fetchAllRequests();

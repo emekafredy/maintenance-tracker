@@ -1,0 +1,41 @@
+.alert-div {
+  width: 60%;
+  margin: 50px 20% -30px 20%;
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff;
+  position: fixed;
+  z-index: 100;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-div > span {
+  float: right;
+  opacity: 0.7;
+}
+
+.alert-div > span:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  display: none;
+}
+
+.danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .alert-div {
+    width: 100%;
+  }
+}

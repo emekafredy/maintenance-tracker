@@ -5,6 +5,13 @@ const passwordInput = document.getElementById('password');
 
 const loginBtn = document.getElementById('loginUser');
 
+const dangerDiv = document.getElementById('danger-alert');
+const dangerTimeout = () => {
+  setTimeout(() => {
+    dangerDiv.style.display = 'none';
+  }, 3000);
+};
+
 const loginUser = () => {
   const loginBody = {
     email: emailInput.value,
@@ -20,16 +27,17 @@ const loginUser = () => {
   };
 
   const checkInput = (data) => {
-    const emailAlert = document.getElementById('email-alert');
-    const passwordAlert = document.getElementById('password-alert');
-
-    if (!loginBody.email) {
-      emailAlert.style.display = 'block';
-      emailAlert.innerHTML = data.errors.email;
+    if (loginBody.password && !loginBody.email) {
+      dangerDiv.innerHTML = `${data.errors.email}`;
+      dangerDiv.style.display = 'block';
     }
-    if (!loginBody.password) {
-      passwordAlert.style.display = 'block';
-      passwordAlert.innerHTML = data.errors.password;
+    if (loginBody.email && !loginBody.password) {
+      dangerDiv.innerHTML = `${data.errors.password}`;
+      dangerDiv.style.display = 'block';
+    }
+    if (!loginBody.email && !loginBody.password) {
+      dangerDiv.innerHTML = `${data.errors.email} </br> ${data.errors.password}`;
+      dangerDiv.style.display = 'block';
     }
   };
 
@@ -37,7 +45,11 @@ const loginUser = () => {
     .then(response => response.json())
     .then((data) => {
       if (data.success === false) {
+        dangerDiv.innerHTML = `${data.message}`;
+        dangerDiv.style.display = 'block';
+        dangerTimeout();
         checkInput(data);
+        dangerTimeout();
       }
       if (data.success === true) {
         if (data.foundmail[0].isadmin) {

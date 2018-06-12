@@ -1,5 +1,19 @@
 const postRequestUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests';
 
+const successDiv = document.getElementById('success-alert');
+const dangerDiv = document.getElementById('danger-alert');
+
+const dangerTimeout = () => {
+  setTimeout(() => {
+    dangerDiv.style.display = 'none';
+  }, 3000);
+};
+const successTimeout = () => {
+  setTimeout(() => {
+    successDiv.style.display = 'none';
+  }, 3000);
+};
+
 const product = document.getElementById('product');
 const requestType = document.getElementById('request-type');
 const issueDescription = document.getElementById('issue-description');
@@ -8,30 +22,6 @@ const productImage = document.getElementById('product-image');
 const submitRequest = document.getElementById('submitRequest');
 
 const token = localStorage.getItem('authToken');
-
-const createRequestModal = () => {
-  const modalDiv = document.getElementById('modal-container');
-  modalDiv.innerHTML = `
-      <div class="modal-div">
-        <div> <i class="fa fa-check-circle"></i> </div>
-        <p id="messageId">Request Successfully Created</p>
-        <button id="close">close</button>
-      </div>
-  `;
-  modalDiv.style.display = 'block';
-
-  window.addEventListener('click', (event) => {
-    if (event.target === modalDiv) {
-      modalDiv.style.display = 'none';
-    }
-  });
-
-
-  const closeBtn = document.getElementById('close');
-  closeBtn.addEventListener('click', () => {
-    modalDiv.style.display = 'none';
-  });
-};
 
 const createRequest = () => {
   const requestBody = {
@@ -51,8 +41,9 @@ const createRequest = () => {
   };
 
   const checkInput = (data) => {
-    if (!requestBody.issueDescription) {
-      alert(data.errors.Issue);
+    if (data.success === false) {
+      dangerDiv.innerHTML = `${data.errors.Issue}`;
+      dangerDiv.style.display = 'block';
     }
   };
 
@@ -60,9 +51,16 @@ const createRequest = () => {
     .then(response => response.json())
     .then((data) => {
       if (data.success === false) {
+        dangerDiv.innerHTML = `${data.message}`;
+        dangerDiv.style.display = 'block';
+        dangerTimeout();
         checkInput(data);
+        dangerTimeout();
       } else {
-        createRequestModal();
+        document.getElementById('issue-description').value = '';
+        successDiv.innerHTML = `${data.message}`;
+        successDiv.style.display = 'block';
+        successTimeout();
       }
     });
 };

@@ -1,4 +1,5 @@
-const postRequestUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests';
+const postRequestUrl = 'http://localhost:4500/api/v1/users/requests';
+const userUrl = 'http://localhost:4500/api/v1/user';
 
 const successDiv = document.getElementById('success-alert');
 const dangerDiv = document.getElementById('danger-alert');
@@ -14,14 +15,36 @@ const successTimeout = () => {
   }, 3000);
 };
 
+const token = localStorage.getItem('authToken');
+
+
+const getOptions = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: token,
+  },
+};
+
+fetch(userUrl, getOptions)
+  .then(response => response.json())
+  .then((user) => {
+    const userLink = document.getElementById('user-id');
+    userLink.innerHTML = ` <span class="role" ><i class="fa fa-user-circle-o"></i> ${user.data[0].firstname}</span>`;
+    userLink.addEventListener('click', () => {
+      if (user.data[0].isadmin) {
+        window.location.href = 'admin-profile.html';
+      }
+      window.location.href = 'user-profile.html';
+    });
+  });
+
 const product = document.getElementById('product');
 const requestType = document.getElementById('request-type');
 const issueDescription = document.getElementById('issue-description');
 const productImage = document.getElementById('product-image');
 
 const submitRequest = document.getElementById('submitRequest');
-
-const token = localStorage.getItem('authToken');
 
 const createRequest = () => {
   const requestBody = {

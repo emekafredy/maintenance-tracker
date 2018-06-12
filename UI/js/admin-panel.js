@@ -1,4 +1,4 @@
-const allRequestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/requests/';
+const allRequestsUrl = 'http://localhost:4500/api/v1/requests/';
 
 const dangerDiv = document.getElementById('danger-alert');
 const successDiv = document.getElementById('success-alert');

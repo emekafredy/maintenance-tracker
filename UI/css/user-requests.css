@@ -24,6 +24,10 @@ body {
   margin-top:10px;
 }
 
+#user-id {
+  cursor: pointer;
+}
+
 .table-body {
   margin:0 auto 150px;
   margin-bottom: 90px;

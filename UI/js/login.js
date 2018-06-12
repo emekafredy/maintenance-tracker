@@ -1,4 +1,4 @@
-const loginUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/auth/login';
+const loginUrl = 'http://localhost:4500/api/v1/auth/login';
 
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
@@ -54,10 +54,10 @@ const loginUser = () => {
       if (data.success === true) {
         if (data.foundmail[0].isadmin) {
           localStorage.setItem('authToken', `Bearer ${data.token}`);
-          window.location.href = 'https://emeka-m-tracker.herokuapp.com/admin-panel.html';
+          window.location.href = 'http://localhost:4500/admin-panel.html';
         } else {
           localStorage.setItem('authToken', `Bearer ${data.token}`);
-          window.location.href = 'https://emeka-m-tracker.herokuapp.com/user-requests.html';
+          window.location.href = 'http://localhost:4500/user-requests.html';
         }
       }
     });

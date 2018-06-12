@@ -1,4 +1,5 @@
-const requestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests/';
+const requestsUrl = 'http://localhost:4500/api/v1/users/requests/';
+const userUrl = 'http://localhost:4500/api/v1/user';
 let detailsData = {};
 
 const successDiv = document.getElementById('success-alert');
@@ -24,6 +25,19 @@ const options = {
     Authorization: token,
   },
 };
+
+fetch(userUrl, options)
+  .then(response => response.json())
+  .then((user) => {
+    const userLink = document.getElementById('user-id');
+    userLink.innerHTML = ` <span class="role" ><i class="fa fa-user-circle-o"></i> ${user.data[0].firstname}</span>`;
+    userLink.addEventListener('click', () => {
+      if (user.data[0].isadmin) {
+        window.location.href = 'admin-profile.html';
+      }
+      window.location.href = 'user-profile.html';
+    });
+  });
 
 /**
  * @description modal function to display user's request details by ID

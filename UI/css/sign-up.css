@@ -6,10 +6,6 @@ body {
   background-size:cover;
 }
 
-.body-div {
-  height: 100vh;
-}
-
 #signUp {
   background:transparent;
   border:3px solid #1d2951;
@@ -20,7 +16,6 @@ body {
   margin:100px auto 0 auto;
   padding:30px;
   width:40%;
-  min-height: 59.1%;
 }
 
 #signUp a {

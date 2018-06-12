@@ -2,6 +2,10 @@ body {
   background: #f2f2f2;
 }
 
+#user-id {
+  cursor: pointer;
+}
+
 .back {
   margin-left: 225px;
   width:70%;

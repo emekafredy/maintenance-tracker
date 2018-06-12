@@ -94,6 +94,24 @@ class UserController {
         return null;
       });
   }
+
+  /**
+   * @description Get the profile of a logged in user
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
+  static getUserProfile(request, response) {
+    const { userid: userId } = request.user;
+    client.query('SELECT * FROM users WHERE userId = $1', [userId]).then((data) => {
+      return response.status(200).json({
+        message: 'User details retrieved',
+        data: data.rows,
+      });
+    }).catch(error => response.status(500).json({ message: error.message }));
+  }
 }
 
 export default UserController;

@@ -24,6 +24,10 @@ body {
   margin-top:10px;
 }
 
+#user-id {
+  cursor: pointer;
+}
+
 .table-body {
   margin:0 auto 150px;
   margin-bottom: 90px;
@@ -177,7 +181,7 @@ table th {
 }
 
 #details-modal, #update-modal, #modal-container, #message-modal {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.3);
   display: none;
   height: 100%; 
   left: 0;

@@ -84,9 +84,9 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
               response.should.have.status(200);
-              expect(response.body.data[0].product).to.equal('monitor');
-              expect(response.body.data[0].requesttype).to.equal('repair');
-              expect(response.body.data[0].issue).to.equal('Broken screen');
+              expect(response.body.data[0].product).to.equal('headphone');
+              expect(response.body.data[0].requesttype).to.equal('replace');
+              expect(response.body.data[0].issue).to.equal('The speaker is bad');
               response.body.message.should.eql('Requests retrieved successfully');
               done();
             });

@@ -28,8 +28,10 @@ Maintenance tracker is an app that enables employees of an organization request 
 # Installation
 
 - filepath> git clone https://github.com/emekafredy/maintenance-tracker.git
-- npm install
-- npm start
+- create database with postgres named 'mtracker'
+- run **_npm install_**
+- run **_npm run mig_**
+- run **_npm start_**
 
 
 # API
@@ -48,6 +50,8 @@ Maintenance tracker is an app that enables employees of an organization request 
  | PUT | Approve a request | /requests/requestId/approve | Admin |
  | PUT | Disapprove a request | /requests/requestId/disapprove | Admin |
  | PUT |  Resolve a request | /requests/requestId/resolve | Admin |
+ | DELETE |  Cancel a pending request | users/requests/requestId | User |
+ | GET |  Get User details | /user | User |
 
 
 # API documentation

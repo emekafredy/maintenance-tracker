@@ -30,7 +30,11 @@ body {
 .btn-back {
   background-color:#007bff;
   border-color:#007bff;
+  border-radius: 8px;
+  cursor: pointer;
   color:#fff;
+  padding: 10px;
+  width: 200px;
 }
 
 .btn-back:hover {
@@ -86,7 +90,7 @@ body {
   margin-top:-40px;
   padding:3em;
   position:relative;
-  width:55%;
+  width:50%;
   word-wrap:break-word;
 }
 

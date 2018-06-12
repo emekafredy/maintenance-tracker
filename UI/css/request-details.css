@@ -1,5 +1,5 @@
 img {
-  max-width:80%;
+  max-width:60%;
 }
 
 .details-title {
@@ -40,7 +40,17 @@ img {
 }
 
 .para {
-  font-size: 0.7em;
+  font-size: 0.8em;
+}
+
+#approved-para, #disapproved-para, #resolved-para {
+  display: none;
+}
+
+#edit-btn {
+  display: none;
+  float: left;
+  margin-right: 10px;
 }
 
 .column {

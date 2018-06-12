@@ -1,4 +1,4 @@
-const signupUrl = 'http://localhost:4500/api/v1/auth/signup';
+const signupUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/auth/signup';
 
 const dangerDiv = document.getElementById('danger-alert');
 const dangerTimeout = () => {
@@ -87,7 +87,7 @@ const registerUser = () => {
         dangerTimeout();
       } else {
         localStorage.setItem('authToken', `Bearer ${data.token}`);
-        window.location.href = 'http://localhost:4500/user-requests.html';
+        window.location.href = 'https://emeka-m-tracker.herokuapp.com/user-requests.html';
       }
     });
 };

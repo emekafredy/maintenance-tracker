@@ -1,5 +1,5 @@
-const requestsUrl = 'http://localhost:4500/api/v1/users/requests/';
-const userUrl = 'http://localhost:4500/api/v1/user';
+const requestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests/';
+const userUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/user';
 let detailsData = {};
 
 const successDiv = document.getElementById('success-alert');
@@ -32,12 +32,25 @@ fetch(userUrl, options)
     const userLink = document.getElementById('user-id');
     userLink.innerHTML = ` <span class="role" ><i class="fa fa-user-circle-o"></i> ${user.data[0].firstname}</span>`;
     userLink.addEventListener('click', () => {
-      if (user.data[0].isadmin) {
-        window.location.href = 'admin-profile.html';
-      }
       window.location.href = 'user-profile.html';
     });
   });
+
+const displayProcessDate = (data) => {
+  const approvedPara = document.getElementById('approved-para');
+  const disapprovedPara = document.getElementById('disapproved-para');
+  const resolvedPara = document.getElementById('resolved-para');
+  if (data.requeststatus === 'approved') {
+    approvedPara.style.display = 'block';
+  }
+  if (data.requeststatus === 'disapproved') {
+    disapprovedPara.style.display = 'block';
+  }
+  if (data.requeststatus === 'resolved') {
+    approvedPara.style.display = 'block';
+    resolvedPara.style.display = 'block';
+  }
+};
 
 /**
  * @description modal function to display user's request details by ID
@@ -80,11 +93,11 @@ const requestDetailsModal = (data, message) => {
               <p class="para"> <label>Isssue</label>: <br>
               <span> ${data.issue}</span></p>
               <p class="para"> <label>Request status</label> : <span>${data.requeststatus}</span></p>
-              <p class="para"> <label>Approved Date</label> : <span>${data.approvedat}</span></p>
-              <p class="para"> <label>Disapproved Date</label> : <span>${data.disapprovedat}</span></p>
-              <p class="para"> <label>Resolved Date</label> : <span>${data.resolvedat}</span></p>
-              <div class="btn-div">
-                <button class="btn btn-details" onclick="updateModal();">
+              <p class="para" id="approved-para"> <label>Approved Date</label> : <span>${data.approvedat}</span></p>
+              <p class="para" id="disapproved-para"> <label>Disapproved Date</label> : <span>${data.disapprovedat}</span></p>
+              <p class="para" id="resolved-para"> <label>Resolved Date</label> : <span>${data.resolvedat}</span></p>
+              <div class="btn-div" style="float:right;">
+                <button class="btn btn-details" id="edit-btn" onclick="updateModal();">
                   <i class="fa fa-pencil-square-o"></i> Edit Request
                 </button>
                 <button class="btn" id="btn-close">
@@ -98,6 +111,12 @@ const requestDetailsModal = (data, message) => {
   wrapper.appendChild(column1);
   wrapper.appendChild(column2);
   modalDiv.appendChild(card);
+
+  const editBtn = document.getElementById('edit-btn');
+  if (data.requeststatus === 'pending') {
+    editBtn.style.display = 'block';
+  }
+  displayProcessDate(data);
 
   modalDiv.style.display = 'block';
 
@@ -150,24 +169,21 @@ const allRequests = () => {
         deleteBtn.innerHTML = '<i class="fa fa-trash"></i> Delete';
 
         const cell1 = row.insertCell(0);
-        cell1.setAttribute('data-label', 'Request ID');
+        cell1.setAttribute('data-label', 'Product');
         const cell2 = row.insertCell(1);
-        cell2.setAttribute('data-label', 'Product');
+        cell2.setAttribute('data-label', 'Request Type');
         const cell3 = row.insertCell(2);
-        cell3.setAttribute('data-label', 'Request Type');
+        cell3.setAttribute('data-label', 'Status');
         const cell4 = row.insertCell(3);
-        cell4.setAttribute('data-label', 'Status');
+        cell4.setAttribute('data-label', 'Details');
         const cell5 = row.insertCell(4);
-        cell5.setAttribute('data-label', 'Details');
-        const cell6 = row.insertCell(5);
-        cell6.setAttribute('data-label', 'Cancel');
+        cell5.setAttribute('data-label', 'Cancel');
 
-        cell1.innerHTML = data[index].requestid;
-        cell2.innerHTML = data[index].product;
-        cell3.innerHTML = data[index].requesttype;
-        cell4.innerHTML = data[index].requeststatus;
-        cell5.appendChild(detailsBtn);
-        cell6.appendChild(deleteBtn);
+        cell1.innerHTML = data[index].product;
+        cell2.innerHTML = data[index].requesttype;
+        cell3.innerHTML = data[index].requeststatus;
+        cell4.appendChild(detailsBtn);
+        cell5.appendChild(deleteBtn);
 
         /**
          * @description fetch method to consume API used to get logged in user's request details.
@@ -215,9 +231,9 @@ const allRequests = () => {
                 } else {
                   successDiv.innerHTML = `${deleteStatus.message}`;
                   successDiv.style.display = 'block';
-                  document.getElementById('table-body').innerHTML = '';
-                  allRequests();
                   successTimeout();
+                  document.getElementById('table-body').innerHTML = '';
+                  window.location.href = 'user-requests.html';
                 }
               });
           }

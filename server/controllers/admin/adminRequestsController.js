@@ -12,11 +12,12 @@ class AdminRequestsController {
    * @returns {object} response JSON Object
    */
   static getAllRequests(request, response) {
-    client.query('SELECT * FROM requests').then(data => response.status(200).json({
-      success: true,
-      message: 'Requests retrieved successfully',
-      data: data.rows,
-    })).catch(error => response.status(500).json({ message: error.message }));
+    client.query('SELECT users.userId, users.firstName, users.lastName, requests.requestId, requests.product, requests.requestType, requests.issue, requests.requestStatus FROM requests INNER JOIN users on requests.userId = users.userId')
+      .then(data => response.status(200).json({
+        success: true,
+        message: 'Requests retrieved successfully',
+        data: data.rows,
+      })).catch(error => response.status(500).json({ message: error.message }));
   }
 
   /**
@@ -30,7 +31,7 @@ class AdminRequestsController {
   static getRequest(request, response) {
     const reqId = parseInt(request.params.requestId, 10);
     UserRequests.checkNaN(request, response);
-    return client.query('select * from requests where requestId = $1', [reqId])
+    return client.query('SELECT * FROM requests INNER JOIN users on requests.userId = users.userId where requestId = $1', [reqId])
       .then((data) => {
         if (data.rows.length === 0) {
           return response.status(404).json({

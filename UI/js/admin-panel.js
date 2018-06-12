@@ -1,4 +1,5 @@
-const allRequestsUrl = 'http://localhost:4500/api/v1/requests/';
+const allRequestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/requests/';
+const userUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/user';
 
 const dangerDiv = document.getElementById('danger-alert');
 const successDiv = document.getElementById('success-alert');
@@ -23,6 +24,16 @@ const options = {
     Authorization: token,
   },
 };
+
+fetch(userUrl, options)
+  .then(response => response.json())
+  .then((user) => {
+    const userLink = document.getElementById('user-id');
+    userLink.innerHTML = ` <span class="role" ><i class="fa fa-user-circle-o"></i> ${user.data[0].firstname} admin</span>`;
+    userLink.addEventListener('click', () => {
+      window.location.href = 'admin-profile.html';
+    });
+  });
 
 
 const processMessage = (result) => {
@@ -57,10 +68,7 @@ const fetchAllRequests = () => {
   fetch(allRequestsUrl, options)
     .then(response => response.json())
     .then((json) => {
-      const { message, data } = json;
-
-      const requestMessage = document.getElementById('status-message');
-      requestMessage.innerHTML = message;
+      const { data } = json;
 
       const table = document.getElementById('users-requests');
       for (let index = 0; index < data.length; index += 1) {
@@ -71,9 +79,9 @@ const fetchAllRequests = () => {
         detailsBtn.innerHTML = '<i class="fa fa-arrow-circle-o-right"></i> Details';
 
         const cell1 = row.insertCell(0);
-        cell1.setAttribute('data-label', 'Request ID');
+        cell1.setAttribute('data-label', 'User ID');
         const cell2 = row.insertCell(1);
-        cell2.setAttribute('data-label', 'User ID');
+        cell2.setAttribute('data-label', 'Name');
         const cell3 = row.insertCell(2);
         cell3.setAttribute('data-label', 'Product');
         const cell4 = row.insertCell(3);
@@ -83,8 +91,8 @@ const fetchAllRequests = () => {
         const cell6 = row.insertCell(5);
         cell6.setAttribute('data-label', 'Details');
 
-        cell1.innerHTML = data[index].requestid;
-        cell2.innerHTML = data[index].userid;
+        cell1.innerHTML = data[index].userid;
+        cell2.innerHTML = `${data[index].firstname} ${data[index].lastname}`;
         cell3.innerHTML = data[index].product;
         cell4.innerHTML = data[index].requesttype;
         cell5.innerHTML = data[index].requeststatus;
@@ -102,6 +110,21 @@ const fetchAllRequests = () => {
 };
 fetchAllRequests();
 
+const displayProcessDate = (data) => {
+  const approvedPara = document.getElementById('approved-para');
+  const disapprovedPara = document.getElementById('disapproved-para');
+  const resolvedPara = document.getElementById('resolved-para');
+  if (data.requeststatus === 'approved') {
+    approvedPara.style.display = 'block';
+  }
+  if (data.requeststatus === 'disapproved') {
+    disapprovedPara.style.display = 'block';
+  }
+  if (data.requeststatus === 'resolved') {
+    approvedPara.style.display = 'block';
+    resolvedPara.style.display = 'block';
+  }
+};
 
 /**
  * @description fetch method to consume API used to get users' request details for logged in admin.
@@ -151,15 +174,17 @@ const requestDetailsModal = (data, message) => {
   column2.innerHTML = `
               <p class="para"> <label>Request ID</label> : <span>${data.requestid}</span></p>
               <p class="para"> <label>User ID</label> : <span>${data.userid}</span></p>
+              <p class="para"> <label>Name</label> : <span>${data.firstname} ${data.lastname}</span></p>
+              <p class="para"> <label>Email</label> : <span>${data.email}</span></p>
               <p class="para"> <label>Product</label> : <span>${data.product}</span></p>
               <p class="para"> <label>Request Date</label> : <span>${data.requestdate}</span></p>
               <p class="para"> <label>Request type</label> : <span>${data.requesttype}</span></p>
               <p class="para"> <label>Isssue</label>: <br>
               <span> ${data.issue}</span></p>
               <p class="para"> <label>Request status</label> : <span>${data.requeststatus}</span></p>
-              <p class="para"> <label>Approved At</label> : <span>${data.approvedat}</span></p>
-              <p class="para"> <label>Disapproved At</label> : <span>${data.disapprovedat}</span></p>
-              <p class="para"> <label>Resolved At</label> : <span>${data.resolvedat}</span></p>
+              <p class="para" id="approved-para"> <label>Approved At</label> : <span>${data.approvedat}</span></p>
+              <p class="para" id="disapproved-para"> <label>Disapproved At</label> : <span>${data.disapprovedat}</span></p>
+              <p class="para" id="resolved-para"> <label>Resolved At</label> : <span>${data.resolvedat}</span></p>
   `;
 
   btnDiv.appendChild(approveBtn);
@@ -184,6 +209,9 @@ const requestDetailsModal = (data, message) => {
     disapproveBtn.style.display = 'none';
     resolveBtn.style.display = 'none';
   }
+
+  displayProcessDate(data);
+
   modalDiv.style.display = 'block';
 
   window.addEventListener('click', (event) => {
@@ -220,7 +248,7 @@ const requestDetailsModal = (data, message) => {
           clearDetailsModal();
           processMessage(approveResult);
           clearTable();
-          fetchAllRequests();
+          window.location.href = 'admin-panel.html';
         }
       });
   });
@@ -252,7 +280,7 @@ const requestDetailsModal = (data, message) => {
           clearDetailsModal();
           processMessage(disapproveResult);
           clearTable();
-          fetchAllRequests();
+          window.location.href = 'admin-panel.html';
         }
       });
   });
@@ -284,7 +312,7 @@ const requestDetailsModal = (data, message) => {
           clearDetailsModal();
           processMessage(resolveResult);
           clearTable();
-          fetchAllRequests();
+          window.location.href = 'admin-panel.html';
         }
       });
   });

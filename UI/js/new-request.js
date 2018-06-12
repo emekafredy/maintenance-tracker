@@ -1,5 +1,5 @@
-const postRequestUrl = 'http://localhost:4500/api/v1/users/requests';
-const userUrl = 'http://localhost:4500/api/v1/user';
+const postRequestUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests';
+const userUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/user';
 
 const successDiv = document.getElementById('success-alert');
 const dangerDiv = document.getElementById('danger-alert');

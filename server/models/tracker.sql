@@ -7,7 +7,7 @@ CREATE TABLE users (
  lastName VARCHAR (50) NOT NULL,
  signupDate date NOT NULL DEFAULT CURRENT_DATE,
  email VARCHAR (50) NOT NULL UNIQUE,
- password VARCHAR (20) NOT NULL,
+ password VARCHAR (255) NOT NULL,
  isAdmin boolean NOT NULL default false
 );
 

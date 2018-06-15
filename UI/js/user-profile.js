@@ -1,4 +1,4 @@
-const userUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/user';
+const userUrl = 'http://localhost:4500/api/v1/user';
 
 const token = localStorage.getItem('authToken');
 const options = {

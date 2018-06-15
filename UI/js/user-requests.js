@@ -1,5 +1,5 @@
-const requestsUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/users/requests/';
-const userUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/user';
+const requestsUrl = 'http://localhost:4500/api/v1/users/requests/';
+const userUrl = 'http://localhost:4500/api/v1/user';
 let detailsData = {};
 
 const successDiv = document.getElementById('success-alert');
@@ -209,10 +209,18 @@ const allRequests = () => {
          *
          * @returns {object} response JSON Object
          */
+        const deleteModal = document.getElementById('delete-modal');
         deleteBtn.addEventListener('click', () => {
-          const confirmDelete = window.confirm('Are you sure you want to delete this request?');
+          deleteModal.style.display = 'block';
 
-          if (confirmDelete) {
+          const deleteRequestBtn = document.getElementById('delete-request');
+          const cancelDeleteBtn = document.getElementById('close-modal');
+
+          cancelDeleteBtn.addEventListener('click', () => {
+            deleteModal.style.display = 'none';
+          });
+
+          deleteRequestBtn.addEventListener('click', () => {
             const deleteOptions = {
               method: 'DELETE',
               headers: {
@@ -220,7 +228,6 @@ const allRequests = () => {
                 Authorization: token,
               },
             };
-
             fetch(requestsUrl + data[index].requestid, deleteOptions)
               .then(response => response.json())
               .then((deleteStatus) => {
@@ -229,6 +236,7 @@ const allRequests = () => {
                   dangerDiv.style.display = 'block';
                   dangerTimeout();
                 } else {
+                  deleteModal.style.display = 'none';
                   successDiv.innerHTML = `${deleteStatus.message}`;
                   successDiv.style.display = 'block';
                   successTimeout();
@@ -236,7 +244,7 @@ const allRequests = () => {
                   window.location.href = 'user-requests.html';
                 }
               });
-          }
+          });
         });
       }
     });
@@ -384,6 +392,7 @@ const updateModal = () => {
           successDiv.innerHTML = `${data.message}`;
           successDiv.style.display = 'block';
           successTimeout();
+          window.location.href = 'user-requests.html';
         }
       });
   });

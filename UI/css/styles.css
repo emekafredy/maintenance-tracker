@@ -11,6 +11,10 @@ html, body {
   height: 100%;
 }
 
+#logout-account {
+  cursor: pointer;
+}
+
 .body-wrapper {
   min-height:100%;
   position:relative;

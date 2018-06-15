@@ -180,7 +180,7 @@ table th {
   font-size:2em !important;
 }
 
-#details-modal, #update-modal, #modal-container, #message-modal {
+#details-modal, #update-modal, #delete-modal {
   background-color: rgba(0,0,0,0.3);
   display: none;
   height: 100%; 
@@ -230,4 +230,63 @@ table th {
   margin-top: 20px;
   outline: none;
   padding: 10px 20px;
+}
+
+/* DELETE MODAL STYLING */
+.confirm-box {
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  height: 200px;
+  width: 30%;
+  margin: auto;
+  margin-top: 50px;
+  background: #ccc;
+  padding: 10px;
+}
+
+.question-div {
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  background: #fff !important;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.confirm-div {
+  float: right;
+  padding: 5px;
+  margin-top: 50px;
+}
+
+.btn-no {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  margin-right: 10px;
+}
+
+.btn-no:hover {
+  color: #fff;
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.btn-yes {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  margin-right: 10px;
+}
+
+.btn-yes:hover {
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+@media screen and (max-width: 600px) {
+  .confirm-box {
+    width: 80%;
+  }
 }

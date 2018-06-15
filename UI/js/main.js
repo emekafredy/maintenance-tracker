@@ -47,3 +47,10 @@ const filterRequest = () => {
 };
 
 filterRequest();
+
+const logoutBtn = document.getElementById('logout-account');
+
+logoutBtn.addEventListener('click', () => {
+  localStorage.clear('authToken');
+  window.location.href = 'index.html';
+});

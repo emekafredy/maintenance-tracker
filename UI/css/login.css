@@ -4,6 +4,10 @@ body {
   background-size:cover;
 }
 
+form > p {
+  margin-bottom: 50px;
+}
+
 #login {
   background:transparent;
   border:3px solid #1d2951;
@@ -33,6 +37,12 @@ body {
   background:rgb(156,145,145);
   cursor:pointer;
   transition:0;
+}
+
+::placeholder {
+  color: #fff;
+  opacity: 0.80;
+  font-size: 1.2em;
 }
 
 input[type="password"],input[type="email"] {

@@ -9,6 +9,9 @@ env:
   DB_DATABASE=mtracker
   DB_USERNAME=postgres
   DB_PASSWORD=
+  ADMIN_PASSWORD=testadmin
+  USER_PASSWORD=testuser
+  JWT_KEY=testkey
   
 
 before_install:

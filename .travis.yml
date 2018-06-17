@@ -3,15 +3,12 @@ node_js:
   - "8"
 services:
   - postgresql
-
-postgres:
-  user: process.env.USER
-  host: process.env.HOST
-  database: process.env.DB_DATABASE
-  password: process.env.DB_PASSWORD
-  port: process.env.DB_PORT
-  userPass: process.env.USER_PASSWORD
-  adminPass: process.env.ADMIN_PASSWORD
+env:
+  DB_HOST=localhost
+  DB_PORT=5432
+  DB_DATABASE=mtracker
+  DB_USERNAME=postgres
+  DB_PASSWORD=
   
 
 before_install:

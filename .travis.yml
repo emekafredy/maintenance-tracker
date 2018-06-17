@@ -3,6 +3,9 @@ node_js:
   - "8"
 services:
   - postgresql
+env:
+  userPass: process.env.USER_PASSWORD;
+  adminPass: process.env.ADMIN_PASSWORD
 
 before_install:
   - npm install -g npm@latest

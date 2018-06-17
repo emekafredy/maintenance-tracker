@@ -28,11 +28,15 @@ const options = {
 fetch(userUrl, options)
   .then(response => response.json())
   .then((user) => {
-    const userLink = document.getElementById('user-id');
-    userLink.innerHTML = ` <span class="role" ><i class="fa fa-user-circle-o"></i> ${user.data[0].firstname} admin</span>`;
-    userLink.addEventListener('click', () => {
-      window.location.href = 'admin-profile.html';
-    });
+    if (user.data[0].isadmin) {
+      const userLink = document.getElementById('user-id');
+      userLink.innerHTML = ` <span class="role" ><i class="fa fa-user-circle-o"></i> ${user.data[0].firstname} admin</span>`;
+      userLink.addEventListener('click', () => {
+        window.location.href = 'admin-profile.html';
+      });
+    } else {
+      window.location.href = 'user-requests.html';
+    }
   });
 
 

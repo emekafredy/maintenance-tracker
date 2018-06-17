@@ -8,7 +8,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "babel-node app.js --exec --presets es2015",
     "start:dev": "nodemon app.js --exec babel-node --presets es2015",
-    "mig": "babel-node ./Server/worker/index.js",
+    "mig": "babel-node ./Server/models/migrate.js",
     "lint": "eslint **/*.js --fix"
   },
   "repository": {

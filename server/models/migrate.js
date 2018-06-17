@@ -1,5 +1,5 @@
 import winston from 'winston';
-import pool from '../models/database';
+import pool from './database';
 import query from './model';
 
 pool.query(query)

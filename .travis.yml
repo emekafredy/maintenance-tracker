@@ -5,11 +5,6 @@ services:
   - postgresql
 
 env:
-  DB_HOST=localhost
-  DB_PORT=5432
-  DB_DATABASE=mtracker
-  DB_USERNAME=postgres
-  DB_PASSWORD=
   ADMIN_PASSWORD=testadmin
   USER_PASSWORD=testuser
   JWT_KEY=testkey
@@ -18,7 +13,7 @@ before_install:
   - npm install -g npm@latest
 
 before_script:
-  - psql -c 'create database mtracker;' -U postgres
+  - psql -c 'create database travis;' -U postgres
 
 script:
   - npm test

@@ -3,16 +3,16 @@ node_js:
   - "8"
 services:
   - postgresql
+
 env:
   DB_HOST=localhost
   DB_PORT=5432
   DB_DATABASE=mtracker
   DB_USERNAME=postgres
-  DB_PASSWORD=
+  DB_PASSWORD=sam
   ADMIN_PASSWORD=testadmin
   USER_PASSWORD=testuser
   JWT_KEY=testkey
-  
 
 before_install:
   - npm install -g npm@latest

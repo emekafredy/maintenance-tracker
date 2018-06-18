@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "npm run mig && nyc --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./server/test/index.js",
+    "test:travis": "pwd npm run mig && nyc --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./server/test/index.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "babel-node app.js --exec --presets es2015",
     "start:dev": "nodemon app.js --exec babel-node --presets es2015",

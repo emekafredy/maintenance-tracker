@@ -8,7 +8,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "babel-node app.js --exec --presets es2015",
     "start:dev": "nodemon app.js --exec babel-node --presets es2015",
-    "mig": "babel-node ./Server/models/migrate.js",
+    "mig": "babel-node ./server/models/migrate.js",
     "create:table": "psql -U postgres -f  ./server/models/tracker.sql",
     "lint": "eslint **/*.js --fix"
   },

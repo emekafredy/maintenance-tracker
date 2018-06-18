@@ -33,12 +33,7 @@ class AdminRequestsController {
     UserRequests.checkNaN(request, response);
     return client.query('SELECT * FROM requests INNER JOIN users on requests.userId = users.userId where requestId = $1', [reqId])
       .then((data) => {
-        if (data.rows.length === 0) {
-          return response.status(404).json({
-            success: false,
-            message: 'There is no request with this ID',
-          });
-        }
+        UserRequests.noContent(request, response, data, 'There is no request with this ID');
         return response.status(200)
           .json({
             success: true,
@@ -58,13 +53,7 @@ class AdminRequestsController {
    * @returns {object} response JSON Object
    */
   static processARequest(request, response, proccesdAt, processedField) {
-    const reqId = parseInt(request.params.requestId, 10);
-    if (Number.isNaN(reqId)) {
-      return response.status(400).json({
-        success: false,
-        message: 'Your request ID is invalid. Please enter a number',
-      });
-    }
+    UserRequests.checkNaN(request, response);
     return AdminRequests.selectionQuery(request, response, proccesdAt, processedField);
   }
 
@@ -101,14 +90,7 @@ class AdminRequestsController {
    * @returns {object} response JSON Object
    */
   static resolveARequest(request, response) {
-    const reqId = parseInt(request.params.requestId, 10);
-
-    if (Number.isNaN(reqId)) {
-      return response.status(400).json({
-        success: false,
-        message: 'Your request ID is invalid. Please enter a number',
-      });
-    }
+    UserRequests.checkNaN(request, response);
     return AdminRequests.resolveSelectionQuery(request, response, 'resolvedAt', 'resolved');
   }
 }

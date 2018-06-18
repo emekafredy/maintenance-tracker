@@ -1,4 +1,4 @@
-const signupUrl = 'http://localhost:4500/api/v1/auth/signup';
+const signupUrl = '/api/v1/auth/signup';
 
 const dangerDiv = document.getElementById('danger-alert');
 const dangerTimeout = () => {
@@ -95,14 +95,13 @@ const registerUser = () => {
   fetch(signupUrl, options)
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
       if (data.success === false) {
         dangerDiv.innerHTML = '';
         checkInput(data);
         dangerTimeout();
       } else {
         localStorage.setItem('authToken', `Bearer ${data.token}`);
-        window.location.href = 'http://localhost:4500/user-requests.html';
+        window.location.href = '/user-requests.html';
       }
     });
 };

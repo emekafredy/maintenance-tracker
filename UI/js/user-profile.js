@@ -1,4 +1,4 @@
-const userUrl = 'http://localhost:4500/api/v1/user';
+const userUrl = '/api/v1/user';
 
 const token = localStorage.getItem('authToken');
 const options = {

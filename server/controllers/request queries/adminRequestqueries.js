@@ -1,6 +1,7 @@
 import moment from 'moment';
 
 import client from '../../models/database';
+import UserRequests from './userRequestqueries';
 
 class AdminRequests {
   /**
@@ -57,9 +58,7 @@ class AdminRequests {
     const reqId = parseInt(request.params.requestId, 10);
     client.query('SELECT * FROM requests WHERE requestId =$1', [reqId])
       .then((data) => {
-        if (data.rows.length === 0) {
-          return response.status(500).json({ message: 'There is no request with this ID' });
-        }
+        UserRequests.noContent(request, response, data, 'There is no request with this ID');
         if (data.rows[0].requeststatus === 'disapproved') {
           return response.status(400).json({ message: 'You can no longer update this request' });
         }

@@ -56,13 +56,13 @@ class SignupValidation {
     let isValid = true;
     const errors = {};
 
-    if (lastName && !(validator.isLength(lastName, { min: 1, max: 15 }))) {
+    if (lastName && !(validator.isLength(lastName, { min: 1, max: 20 }))) {
       isValid = false;
-      errors.lastName = 'The length of your last name should be between 1 and 10';
+      errors.lastName = 'The length of your last name should not be more than 20';
     }
-    if (firstName && !(validator.isLength(firstName, { min: 1, max: 15 }))) {
+    if (firstName && !(validator.isLength(firstName, { min: 1, max: 20 }))) {
       isValid = false;
-      errors.firstName = 'The length of your first name should be between 1 and 10';
+      errors.firstName = 'The length of your first name should not be more than 20';
     }
     if (password && !(validator.isLength(password, { min: 6, max: 15 }))) {
       isValid = false;

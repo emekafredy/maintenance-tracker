@@ -1,2 +1,2 @@
 web: npm start
-migrate: npm run mig
+migrate: npm run prod:mig

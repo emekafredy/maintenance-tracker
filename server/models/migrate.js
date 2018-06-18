@@ -1,6 +1,6 @@
 import winston from 'winston';
 import pool from './database';
-import query from './model';
+import query from './seed';
 
 pool.query(query)
   .then(() => process.exit())

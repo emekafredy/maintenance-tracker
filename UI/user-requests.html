@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="js/redirect.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -32,7 +33,7 @@
       <input type="checkbox" id="nav-check">
       <div class="nav-links">
         <a href="new-request.html"><i class="fa fa-plus"></i> Create new request</a>
-        <a href="index.html">Logout</a>
+        <a id="logout-account">Logout</a>
         <a id="user-id"></a>
       </div>      
     </div><br>
@@ -41,9 +42,20 @@
       <div class="alert-div success" id="success-alert"></div>
       <div class="alert-div danger" id="danger-alert"></div>
 
-
       <div id="details-modal"></div>
       <div id="update-modal"></div>
+
+      <div id="delete-modal">
+        <div class="confirm-box" id="conf-box">
+          <div class="question-div">
+            <p>Are you sure you want to delete this request?</p>
+          </div>
+          <div class="confirm-div">
+            <button class="btn btn-yes" id="delete-request"> Proceed </button>
+            <button class="btn btn-no" id="close-modal"> Cancel </button>
+          </div>
+        </div>
+      </div>
 
       <div class="header">
         <div class="container">

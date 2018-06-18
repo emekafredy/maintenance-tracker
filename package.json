@@ -4,10 +4,13 @@
   "description": "A company app that helps employees forward maintenance/repair requests to the maintenance department",
   "main": "app.js",
   "scripts": {
-    "test": "npm run mig && nyc --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./server/test",
+    "test": "npm run mig && nyc --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./server/test/index.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "start": "nodemon app.js --exec babel-node --presets es2015",
-    "mig": "psql -U postgres -f  ./server/models/tracker.sql",
+    "start": "babel-node app.js --exec --presets es2015",
+    "start:dev": "nodemon app.js --exec babel-node --presets es2015",
+    "mig": "npm run create:table && npm run seed",
+    "seed": "babel-node ./server/models/migrate.js",
+    "create:table": "psql -U postgres -f  ./server/models/tracker.sql",
     "lint": "eslint **/*.js --fix"
   },
   "repository": {
@@ -33,6 +36,7 @@
   "dependencies": {
     "alert-node": "^1.2.1",
     "babel-plugin-istanbul": "^4.1.6",
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",

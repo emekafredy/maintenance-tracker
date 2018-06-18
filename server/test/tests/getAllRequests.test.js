@@ -1,17 +1,21 @@
 import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
 import { describe } from 'mocha';
+import dotenv from 'dotenv';
 
-import app from '../../app';
+import app from '../../../app';
 
+dotenv.config();
 chai.use(chaiHttp);
 chai.should();
 
+const userPass = process.env.USER_PASSWORD;
+const adminPass = process.env.ADMIN_PASSWORD;
 const user1 = { email: 'notexistent@gmail.com', password: 'faker' };
-const user2 = { email: 'tomiwa0456@gmail.com', password: '56789' };
-const user3 = { email: 'emekaadmin@gmail.com', password: '01234' };
+const user2 = { email: 'tomiwa0456@gmail.com', password: userPass };
+const user3 = { email: 'emekaadmin@gmail.com', password: adminPass };
 
-describe('REQUEST ENDPOINTS TEST', () => {
+describe('ALL REQUESTS ENDPOINTS TEST', () => {
   describe('GET /api/v1/users/requests', () => {
     it('should report 401 on users not logged in', (done) => {
       chai.request(app)
@@ -35,9 +39,9 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
               response.should.have.status(200);
-              expect(response.body.data[0].product).to.equal('charger');
+              expect(response.body.data[0].product).to.equal('laptop');
               expect(response.body.data[0].requesttype).to.equal('repair');
-              expect(response.body.data[0].issue).to.equal('Does not charge my laptop anymore');
+              expect(response.body.data[0].issue).to.equal('It shuts down on its own');
               response.body.message.should.eql('Requests successfully retrieved');
               done();
             });
@@ -84,9 +88,9 @@ describe('REQUEST ENDPOINTS TEST', () => {
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
               response.should.have.status(200);
-              expect(response.body.data[0].product).to.equal('headphone');
-              expect(response.body.data[0].requesttype).to.equal('replace');
-              expect(response.body.data[0].issue).to.equal('The speaker is bad');
+              expect(response.body.data[0].product).to.equal('charger');
+              expect(response.body.data[0].requesttype).to.equal('repair');
+              expect(response.body.data[0].issue).to.equal('Does not charge my laptop anymore');
               response.body.message.should.eql('Requests retrieved successfully');
               done();
             });

@@ -1,4 +1,9 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const key = process.env.JWT_KEY;
 
 class UserMiddleware {
   /**
@@ -12,9 +17,9 @@ class UserMiddleware {
   static checkUser(request, response, next) {
     if (request.headers.authorization && request.headers.authorization.split(' ')[0] === 'Bearer') {
       const token = request.headers.authorization.split(' ')[1];
-      return jwt.verify(token, 'secretKey', (err, decoded) => {
+      return jwt.verify(token, key, (err, decoded) => {
         if (err) {
-          return response.status(401).send({ message: 'Please register or login to gain access' });
+          return response.status(401).send({ message: 'Your Token is invalid' });
         }
         request.user = decoded.user;
         return next();

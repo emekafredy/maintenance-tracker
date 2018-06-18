@@ -1,4 +1,4 @@
-const signupUrl = 'https://emeka-m-tracker.herokuapp.com/api/v1/auth/signup';
+const signupUrl = 'http://localhost:4500/api/v1/auth/signup';
 
 const dangerDiv = document.getElementById('danger-alert');
 const dangerTimeout = () => {
@@ -66,10 +66,24 @@ const registerUser = () => {
       dangerDiv.appendChild(passwordSpan);
       dangerDiv.style.display = 'block';
     }
+    if (signupBody.password && signupBody.password.length < 6) {
+      const passwordSpan = document.createElement('p');
+      passwordSpan.innerHTML = `${data.errors.password}`;
+      dangerDiv.appendChild(passwordSpan);
+      dangerDiv.style.display = 'block';
+    }
+    if (signupBody.password && signupBody.password.length > 15) {
+      const passwordSpan = document.createElement('p');
+      passwordSpan.innerHTML = `${data.errors.password}`;
+      dangerDiv.appendChild(passwordSpan);
+      dangerDiv.style.display = 'block';
+    }
     if (signupBody.firstName &&
         signupBody.lastName &&
         signupBody.email &&
         signupBody.password &&
+        signupBody.password.length >= 6 &&
+        signupBody.password.length <= 15 &&
         validateEmail(signupBody.email) && data.success === false) {
       const emailPara = document.createElement('p');
       emailPara.innerHTML = `${data.message}`;
@@ -81,13 +95,14 @@ const registerUser = () => {
   fetch(signupUrl, options)
     .then(response => response.json())
     .then((data) => {
+      console.log(data);
       if (data.success === false) {
         dangerDiv.innerHTML = '';
         checkInput(data);
         dangerTimeout();
       } else {
         localStorage.setItem('authToken', `Bearer ${data.token}`);
-        window.location.href = 'https://emeka-m-tracker.herokuapp.com/user-requests.html';
+        window.location.href = 'http://localhost:4500/user-requests.html';
       }
     });
 };

@@ -13,5 +13,6 @@ const DATABASE_URL = {
 };
 
 const pool = new pg.Pool(DATABASE_URL);
+pool.connect();
 
 export default pool;

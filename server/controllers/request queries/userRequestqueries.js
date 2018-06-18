@@ -1,6 +1,6 @@
 import validator from 'validator';
 
-import client from '../models/database';
+import client from '../../models/database';
 
 class UserRequests {
   /**
@@ -32,8 +32,8 @@ class UserRequests {
    */
   static selectARequest(request, response) {
     const reqId = parseInt(request.params.requestId, 10);
-    UserRequests.checkNaN(request, response);
     const { userid: userId } = request.user;
+    UserRequests.checkNaN(request, response);
     return client.query('select * from requests where userId = $1 and requestId = $2', [userId, reqId])
       .then((data) => {
         if (data.rows.length === 0) {
@@ -107,7 +107,7 @@ class UserRequests {
       .then(() => response.status(200)
         .json({
           success: true,
-          message: 'Request successfully cancelled',
+          message: 'Request successfully deleted',
         })).catch(error => response.status(500).json({ message: error.message }));
   }
 

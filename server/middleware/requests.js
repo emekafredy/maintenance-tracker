@@ -89,10 +89,11 @@ class RequestMiddleware {
 
     const product = validator.trim(String(request.body.product.toLowerCase()));
     const requestType = validator.trim(String(request.body.requestType.toLowerCase()));
+    const issue = validator.trim(String(request.body.issue.toLowerCase()));
 
     client.query(
-      'select * from requests where userId = $1 AND product = $2 AND requestType = $3 AND requestStatus = $4',
-      [userId, product, requestType, 'pending'],
+      'select * from requests where userId = $1 AND product = $2 AND requestType = $3 AND issue = $4 AND requestStatus = $5',
+      [userId, product, requestType, issue, 'pending'],
     )
       .then((data) => {
         if (data.rowCount > 0) {

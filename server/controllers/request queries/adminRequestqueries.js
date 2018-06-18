@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import client from '../models/database';
+import client from '../../models/database';
 
 class AdminRequests {
   /**

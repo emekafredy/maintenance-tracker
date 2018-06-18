@@ -1,34 +1,25 @@
 import chaiHttp from 'chai-http';
 import chai, { expect } from 'chai';
 import { describe } from 'mocha';
+import dotenv from 'dotenv';
 
-import app from '../../app';
+import app from '../../../app';
 
+dotenv.config();
 chai.use(chaiHttp);
 chai.should();
 
+const userPass = process.env.USER_PASSWORD;
+const adminPass = process.env.ADMIN_PASSWORD;
 const user1 = { email: 'notexistent@gmail.com', password: 'faker' };
-const user2 = { email: 'tomiwa0456@gmail.com', password: '56789' };
+const user2 = { email: 'tomiwa0456@gmail.com', password: userPass };
+const user3 = { email: 'emekaadmin@gmail.com', password: adminPass };
 
-const updatedRequest = {
-  product: 'charger',
-  requestType: 'maintenance',
-  issue: 'Does not charge my system properly',
-};
-const partOfData = {
-  requestType: 'maintenance',
-  issue: 'Does not charge my system anymore',
-};
-const incorrectupdatedRequest = {
-  product: 'desk',
-  requestType: 'new desk',
-};
-
-describe('REQUEST ENDPOINTS TEST', () => {
-  describe('PUT /api/v1/users/requests', () => {
+describe('SINGLE REQUEST ENDPOINTS TEST', () => {
+  describe('GET /api/v1/users/requests/:requestId', () => {
     it('should report 401 on users not logged in', (done) => {
       chai.request(app)
-        .put('/api/v1/users/requests/2')
+        .get('/api/v1/users/requests/1')
         .send(user1)
         .end((error, response) => {
           response.status.should.eql(401);
@@ -37,75 +28,72 @@ describe('REQUEST ENDPOINTS TEST', () => {
           done();
         });
     });
-    it('should successfully update existing request for a logged in user', (done) => {
+    it('should return a request of a logged in user', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user2)
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .put('/api/v1/users/requests/5')
+            .get('/api/v1/users/requests/1')
             .set('authorization', `Bearer ${reply.body.token}`)
-            .send(updatedRequest)
             .end((err, response) => {
-              response.should.have.status(201);
-              expect(response.body.updatedRequest.product).to.equal('charger');
-              expect(response.body.updatedRequest.issue).to.equal('Does not charge my system properly');
-              response.body.message.should.eql('Request successfully updated');
+              response.should.have.status(200);
+              expect(response.body.data[0].product).to.equal('laptop');
+              expect(response.body.data[0].requesttype).to.equal('repair');
+              expect(response.body.data[0].issue).to.equal('It shuts down on its own');
+              response.body.message.should.eql('Retrieved ONE request');
               done();
             });
         });
     });
-    it('should be able to successfully update only selected part(s) of the request for a logged in user', (done) => {
+    it('should return a bad request status code for a request Id that does not belong to logged in user', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user2)
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .put('/api/v1/users/requests/5')
+            .get('/api/v1/users/requests/6')
             .set('authorization', `Bearer ${reply.body.token}`)
-            .send(partOfData)
-            .end((err, response) => {
-              response.should.have.status(201);
-              expect(response.body.updatedRequest.product).to.equal('charger');
-              expect(response.body.updatedRequest.requestType).to.equal('maintenance');
-              expect(response.body.updatedRequest.issue).to.equal('Does not charge my system anymore');
-              response.body.message.should.eql('Request successfully updated');
-              done();
-            });
-        });
-    });
-    it('should return a message when an input is incorrect', (done) => {
-      chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(user2)
-        .then((reply) => {
-          reply.body.should.have.property('token');
-          chai.request(app)
-            .put('/api/v1/users/requests/2')
-            .set('authorization', `Bearer ${reply.body.token}`)
-            .send(incorrectupdatedRequest)
-            .end((err, response) => {
-              response.should.have.status(400);
-              response.body.errors.requestType.should.eql('Request type should be either repair, maintenance or replace');
-              done();
-            });
-        });
-    });
-    it('should return a not found status code for a request Id that does not belong to logged in user', (done) => {
-      chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(user2)
-        .then((reply) => {
-          reply.body.should.have.property('token');
-          chai.request(app)
-            .put('/api/v1/users/requests/1')
-            .set('authorization', `Bearer ${reply.body.token}`)
-            .send(updatedRequest)
             .end((err, response) => {
               response.should.have.status(404);
               response.body.message.should.eql('You have no request with this ID');
+              done();
+            });
+        });
+    });
+    it('should return a user\'s request for logged in admin', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(user3)
+        .then((reply) => {
+          reply.body.should.have.property('token');
+          chai.request(app)
+            .get('/api/v1/requests/4')
+            .set('authorization', `Bearer ${reply.body.token}`)
+            .end((err, response) => {
+              response.should.have.status(200);
+              expect(response.body.data[0].product).to.equal('charger');
+              expect(response.body.data[0].requesttype).to.equal('repair');
+              expect(response.body.data[0].issue).to.equal('Does not charge my laptop anymore');
+              response.body.message.should.eql('Retrieved ONE request');
+              done();
+            });
+        });
+    });
+    it('should return a bad request status code for a request Id that does not exist in the app', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(user3)
+        .then((reply) => {
+          reply.body.should.have.property('token');
+          chai.request(app)
+            .get('/api/v1/requests/15')
+            .set('authorization', `Bearer ${reply.body.token}`)
+            .end((err, response) => {
+              response.should.have.status(404);
+              response.body.message.should.eql('There is no request with this ID');
               done();
             });
         });

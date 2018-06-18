@@ -1,22 +1,26 @@
 import chaiHttp from 'chai-http';
 import chai from 'chai';
 import { describe } from 'mocha';
+import dotenv from 'dotenv';
 
-import app from '../../app';
+import app from '../../../app';
 
+dotenv.config();
 chai.use(chaiHttp);
 chai.should();
 
+const userPass = process.env.USER_PASSWORD;
+const adminPass = process.env.ADMIN_PASSWORD;
 const user1 = { email: 'notexistent@gmail.com', password: 'faker' };
-const user2 = { email: 'tomiwa0456@gmail.com', password: '56789' };
-const user3 = { email: 'emekaadmin@gmail.com', password: '01234' };
+const user2 = { email: 'tomiwa0456@gmail.com', password: userPass };
+const user3 = { email: 'emekaadmin@gmail.com', password: adminPass };
 
-const disapprovedRequest = {
-  requestStatus: 'disapproved',
+const approvedRequest = {
+  requestStatus: 'approved',
 };
 
-describe('REQUEST ENDPOINTS TEST', () => {
-  describe('PUT /api/v1/requests/:requestId/disapprove', () => {
+describe('APPROVE REQUEST ENDPOINTS TEST', () => {
+  describe('PUT /api/v1/requests/:requestId/approve', () => {
     it('should report 401 on users not logged in', (done) => {
       chai.request(app)
         .put('/api/v1/requests/2/approve')
@@ -28,36 +32,36 @@ describe('REQUEST ENDPOINTS TEST', () => {
           done();
         });
     });
-    it('should successfully disapprove user requests as an admin', (done) => {
+    it('should successfully approve user requests as an admin', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user3)
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .put('/api/v1/requests/2/disapprove')
+            .put('/api/v1/requests/4/approve')
             .set('authorization', `Bearer ${reply.body.token}`)
-            .send(disapprovedRequest)
+            .send(approvedRequest)
             .end((err, response) => {
               response.should.have.status(200);
-              response.body.message.should.eql('Request has been disapproved');
+              response.body.message.should.eql('Request has been approved');
               done();
             });
         });
     });
-    it('should report 401 if resquest has already been processed', (done) => {
+    it('should report 400 if resquest has already been processed', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send(user3)
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .put('/api/v1/requests/2/disapprove')
+            .put('/api/v1/requests/4/approve')
             .set('authorization', `Bearer ${reply.body.token}`)
-            .send(disapprovedRequest)
+            .send(approvedRequest)
             .end((err, response) => {
               response.should.have.status(400);
-              response.body.message.should.eql('Request has already been disapproved');
+              response.body.message.should.eql('Request has already been approved');
               done();
             });
         });
@@ -69,7 +73,7 @@ describe('REQUEST ENDPOINTS TEST', () => {
         .then((reply) => {
           reply.body.should.have.property('token');
           chai.request(app)
-            .put('/api/v1/requests/2/disapprove')
+            .put('/api/v1/requests/4/approve')
             .set('authorization', `Bearer ${reply.body.token}`)
             .end((err, response) => {
               response.should.have.status(401);
@@ -78,22 +82,22 @@ describe('REQUEST ENDPOINTS TEST', () => {
             });
         });
     });
-    it('should return a message if an invalid parameter is used in URL', (done) => {
-      chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(user3)
-        .then((reply) => {
-          reply.body.should.have.property('token');
-          chai.request(app)
-            .put('/api/v1/requests/abd/disapprove')
-            .set('authorization', `Bearer ${reply.body.token}`)
-            .send(disapprovedRequest)
-            .end((err, response) => {
-              response.should.have.status(400);
-              response.body.message.should.eql('Your request ID is invalid. Please enter a number');
-              done();
-            });
-        });
-    });
+  });
+  it('should return a message if an invalid parameter is used in URL', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user3)
+      .then((reply) => {
+        reply.body.should.have.property('token');
+        chai.request(app)
+          .put('/api/v1/requests/abd/disapprove')
+          .set('authorization', `Bearer ${reply.body.token}`)
+          .send(approvedRequest)
+          .end((err, response) => {
+            response.should.have.status(400);
+            response.body.message.should.eql('Your request ID is invalid. Please enter a number');
+            done();
+          });
+      });
   });
 });

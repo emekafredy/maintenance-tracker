@@ -18,6 +18,10 @@ body {
   width:40%;
 }
 
+form > p {
+  margin-bottom: 50px;
+}
+
 #signUp a {
   background:rgb(199,189,189);
   color:#1d2951;
@@ -55,6 +59,12 @@ input[type="text"],input[type="password"],input[type="email"],input[type="number
   height:20px;
   outline:none;
   width:100%;
+}
+
+::placeholder {
+  color: #fff;
+  opacity: 0.80;
+  font-size: 1.2em;
 }
 
 input[type="submit"] {

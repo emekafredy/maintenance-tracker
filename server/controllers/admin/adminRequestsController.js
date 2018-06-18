@@ -1,6 +1,6 @@
 import client from '../../models/database';
-import AdminRequests from '../../utils/adminRequests';
-import UserRequests from '../../utils/userRequests';
+import AdminRequests from '../request queries/adminRequestqueries';
+import UserRequests from '../request queries/userRequestqueries';
 
 class AdminRequestsController {
   /**
@@ -104,7 +104,7 @@ class AdminRequestsController {
     const reqId = parseInt(request.params.requestId, 10);
 
     if (Number.isNaN(reqId)) {
-      return response.status(404).json({
+      return response.status(400).json({
         success: false,
         message: 'Your request ID is invalid. Please enter a number',
       });

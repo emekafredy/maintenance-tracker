@@ -1,0 +1,9 @@
+import './tests/usersTest.test';
+import './tests/getAllRequests.test';
+import './tests/getARequest.test';
+import './tests/createRequest.test';
+import './tests/modifyRequest.test';
+import './tests/deleteRequest.test';
+import './tests/approveRequest.test';
+import './tests/disapproveRequest.test';
+import './tests/resolveRequests.test';

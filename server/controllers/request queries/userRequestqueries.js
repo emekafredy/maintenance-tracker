@@ -23,6 +23,24 @@ class UserRequests {
   }
 
   /**
+   * @description Method to check for unavailable request Ids
+   *
+   * @param {Object} request - HTTP Request
+   * @param {Object} response - HTTP Response
+   *
+   * @returns {object} response JSON Object
+   */
+  static noContent(request, response, data, errorMessage) {
+    if (data.rows.length === 0) {
+      return response.status(404).json({
+        success: false,
+        message: errorMessage,
+      });
+    }
+    return null;
+  }
+
+  /**
    * @description Query to select a request
    *
    * @param {Object} request - HTTP Request
@@ -36,12 +54,7 @@ class UserRequests {
     UserRequests.checkNaN(request, response);
     return client.query('select * from requests where userId = $1 and requestId = $2', [userId, reqId])
       .then((data) => {
-        if (data.rows.length === 0) {
-          return response.status(404).json({
-            success: false,
-            message: 'You have no request with this ID',
-          });
-        }
+        UserRequests.noContent(request, response, data, 'You have no request with this ID');
         return response.status(200)
           .json({
             success: true,
@@ -112,12 +125,8 @@ class UserRequests {
   }
 
   static condition(request, response, data, process) {
-    if (data.rows.length === 0) {
-      return response.status(404).json({
-        success: false,
-        message: 'You have no request with this ID',
-      });
-    } else if (data.rows[0].requeststatus !== 'pending') {
+    UserRequests.noContent(request, response, data, 'You have no request with this ID');
+    if (data.rows[0].requeststatus !== 'pending') {
       return response.status(400).json({
         success: false,
         message: `You can no longer ${process} this request`,

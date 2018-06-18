@@ -1,5 +1,5 @@
-const requestsUrl = 'http://localhost:4500/api/v1/users/requests/';
-const userUrl = 'http://localhost:4500/api/v1/user';
+const requestsUrl = '/api/v1/users/requests/';
+const userUrl = '/api/v1/user';
 let detailsData = {};
 
 const successDiv = document.getElementById('success-alert');

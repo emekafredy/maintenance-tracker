@@ -1,4 +1,4 @@
-const loginUrl = 'http://localhost:4500/api/v1/auth/login';
+const loginUrl = '/api/v1/auth/login';
 
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
@@ -54,10 +54,10 @@ const loginUser = () => {
       if (data.success === true) {
         if (data.user.isadmin) {
           localStorage.setItem('authToken', `Bearer ${data.token}`);
-          window.location.href = 'http://localhost:4500/admin-panel.html';
+          window.location.href = '/admin-panel.html';
         } else {
           localStorage.setItem('authToken', `Bearer ${data.token}`);
-          window.location.href = 'http://localhost:4500/user-requests.html';
+          window.location.href = '/user-requests.html';
         }
       }
     });

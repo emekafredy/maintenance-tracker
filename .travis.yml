@@ -19,9 +19,11 @@ before_install:
 
 before_script:
   - psql -c 'create database mtracker;' -U postgres
+  - npm run create:table
+  - npm run mig
 
 script:
-  - npm run test:travis
+  - npm run test
 
 after_success:
 -  npm run coverage

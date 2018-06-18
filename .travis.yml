@@ -5,11 +5,7 @@ services:
   - postgresql
 
 env:
-  DB_HOST=localhost
-  DB_PORT=5432
-  DB_DATABASE=mtracker
-  DB_USERNAME=postgres
-  DB_PASSWORD=sam
+  DATABASE_URL=postgres://ownohaap:pxQ3Rq_sqG9OclEYka9t0hWKupwnc-nt@pellefant.db.elephantsql.com:5432/ownohaap
   ADMIN_PASSWORD=testadmin
   USER_PASSWORD=testuser
   JWT_KEY=testkey

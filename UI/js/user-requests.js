@@ -236,6 +236,7 @@ const allRequests = () => {
               .then(response => response.json())
               .then((deleteStatus) => {
                 if (deleteStatus.success === false) {
+                  deleteModal.style.display = 'none';
                   dangerDiv.innerHTML = `${deleteStatus.message}`;
                   dangerDiv.style.display = 'block';
                   dangerTimeout();

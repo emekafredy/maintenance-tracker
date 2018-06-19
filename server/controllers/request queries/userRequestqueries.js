@@ -82,7 +82,7 @@ class UserRequests {
         : data.rows[0].product,
       requestType: request.body.requestType ? request.body.requestType.toLowerCase()
         : data.rows[0].requesttype,
-      issue: request.body.issue || data.rows[0].issue,
+      issue: request.body.issue ? validator.trim(String(request.body.issue)) : data.rows[0].issue,
       imageUrl: request.body.imageUrl ? validator.trim(String(request.body.imageUrl))
         : data.rows[0].imageurl,
     };
@@ -98,11 +98,12 @@ class UserRequests {
           });
         }
         return client.query({
-          text: 'UPDATE requests SET product=$1, requestType=$2, issue=$3 WHERE requestId=$4',
+          text: 'UPDATE requests SET product=$1, requestType=$2, issue=$3, imageUrl=$4 WHERE requestId=$5',
           values: [
             updatedRequest.product,
             updatedRequest.requestType,
             updatedRequest.issue,
+            updatedRequest.imageUrl,
             reqId],
         }).then(() => response.status(201).json({
           success: true,

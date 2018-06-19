@@ -56,7 +56,7 @@ Maintenance tracker is an app that enables employees of an organization request 
 
 # API documentation
 
-- Apiary - https://mtracker.docs.apiary.io/#
+- Apiary - http://emeka-m-tracker.herokuapp.com/apidoc
 
 
 # UI Template

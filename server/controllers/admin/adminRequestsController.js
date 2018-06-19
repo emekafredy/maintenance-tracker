@@ -52,46 +52,21 @@ class AdminRequestsController {
    *
    * @returns {object} response JSON Object
    */
-  static processARequest(request, response, proccesdAt, processedField) {
+  static processARequest(request, response) {
     UserRequests.checkNaN(request, response);
-    return AdminRequests.selectionQuery(request, response, proccesdAt, processedField);
-  }
-
-  /**
-   * @description Function call for request approval
-   *
-   * @param {Object} request - HTTP Request
-   * @param {Object} response - HTTP Response
-   *
-   * @returns {object} response JSON Object
-   */
-  static approveARequest(request, response) {
-    AdminRequestsController.processARequest(request, response, 'approvedAt', 'approved');
-  }
-
-  /**
-   * @description Function call for request disapproval
-   *
-   * @param {Object} request - HTTP Request
-   * @param {Object} response - HTTP Response
-   *
-   * @returns {object} response JSON Object
-   */
-  static disapproveARequest(request, response) {
-    AdminRequestsController.processARequest(request, response, 'disapprovedAt', 'disapproved');
-  }
-
-  /**
-   * @description Function call for request resolution
-   *
-   * @param {Object} request - HTTP Request
-   * @param {Object} response - HTTP Response
-   *
-   * @returns {object} response JSON Object
-   */
-  static resolveARequest(request, response) {
-    UserRequests.checkNaN(request, response);
-    return AdminRequests.resolveSelectionQuery(request, response, 'resolvedAt', 'resolved');
+    if (request.params.status === 'approve') {
+      return AdminRequests.selectionQuery(request, response, 'approvedAt', 'approved');
+    }
+    if (request.params.status === 'disapprove') {
+      return AdminRequests.selectionQuery(request, response, 'disapprovedAt', 'disapproved');
+    }
+    if (request.params.status === 'resolve') {
+      return AdminRequests.resolveSelectionQuery(request, response, 'resolvedAt', 'resolved');
+    }
+    return response.status(400).json({
+      success: false,
+      message: 'Your request is not valid',
+    });
   }
 }
 

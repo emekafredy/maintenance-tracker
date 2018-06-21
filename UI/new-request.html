@@ -92,7 +92,7 @@
 
           <div class="form">
             <label for="image">Upload product image</label>
-            <input type="file" id="product-image" accept="image/gif, image/jpeg, image/png">
+            <input type="file" multiple="false" accept="image/*" id="product-image" onchange="uploadImage();">
           </div>
 
         </form>

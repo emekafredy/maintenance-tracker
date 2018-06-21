@@ -14,8 +14,9 @@ body {
   color:rgb(199,189,189);
   font-family:Merriweather;
   margin:100px auto 0 auto;
+  min-height: 59.1%;
   padding:30px;
-  width:40%;
+  width:35%;
 }
 
 form > p {
@@ -55,8 +56,9 @@ input[type="text"],input[type="password"],input[type="email"],input[type="number
   border:none;
   border-bottom:2px solid #ddd;
   color:#fff;
-  font-size:1em;
+  font-size:0.8em;
   height:20px;
+  margin-bottom: 20px;
   outline:none;
   width:100%;
 }
@@ -73,7 +75,7 @@ input[type="submit"] {
   color:#1d2951;
   font-size:1em;
   font-weight:bold;
-  margin:40px 30% 20px;
+  margin:0 30% 8px;
   outline:none;
   padding:10px 0;
   text-align:center;

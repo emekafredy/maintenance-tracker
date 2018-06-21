@@ -19,7 +19,7 @@ class AdminRequests {
       text: `UPDATE requests SET requestStatus=$1, ${proccesdAt}=$2 WHERE requestId=$3`,
       values: [
         `${action}`,
-        moment().format('MMMM Do YYYY, h:mm:ss a'),
+        moment.utc().format('MMMM Do YYYY, h:mm:ss a'),
         reqId,
       ],
     };

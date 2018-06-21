@@ -1,6 +1,6 @@
 import client from '../../models/database';
-import AdminRequests from '../request queries/adminRequestqueries';
-import UserRequests from '../request queries/userRequestqueries';
+import AdminRequests from '../request_queries/adminRequestqueries';
+import UserRequests from '../request_queries/userRequestqueries';
 
 class AdminRequestsController {
   /**

@@ -46,6 +46,15 @@ const productImage = document.getElementById('product-image');
 
 const submitRequest = document.getElementById('submitRequest');
 
+const cloudName = 'mtracker_products';
+const uploadImage = () => {
+  const imgsurl = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+  const xhr = new window.XMLHttpRequest();
+  xhr.open('POST', imgsurl, true);
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+};
+
+
 const createRequest = () => {
   const requestBody = {
     product: product.value,
@@ -69,6 +78,7 @@ const createRequest = () => {
       dangerDiv.style.display = 'block';
     }
   };
+  uploadImage();
 
   fetch(postRequestUrl, options)
     .then(response => response.json())

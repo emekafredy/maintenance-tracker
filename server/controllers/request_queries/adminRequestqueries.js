@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import client from '../../models/database';
 import UserRequests from './userRequestqueries';
@@ -19,7 +19,7 @@ class AdminRequests {
       text: `UPDATE requests SET requestStatus=$1, ${proccesdAt}=$2 WHERE requestId=$3`,
       values: [
         `${action}`,
-        moment.utc().format('MMMM Do YYYY, h:mm:ss a'),
+        moment.utc().tz('Africa/Lagos').format('MMMM Do YYYY, h:mm:ss a'),
         reqId,
       ],
     };

@@ -240,6 +240,8 @@ const allRequests = () => {
                   dangerDiv.innerHTML = `${deleteStatus.message}`;
                   dangerDiv.style.display = 'block';
                   dangerTimeout();
+                  document.getElementById('table-body').innerHTML = '';
+                  window.location.href = 'user-requests.html';
                 } else {
                   deleteModal.style.display = 'none';
                   successDiv.innerHTML = `${deleteStatus.message}`;

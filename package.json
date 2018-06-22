@@ -54,6 +54,7 @@
     "mocha-lcov-reporter": "^1.3.0",
     "mock-mocha": "^1.0.0",
     "moment": "^2.22.1",
+    "moment-timezone": "^0.5.20",
     "node-fetch": "^2.1.2",
     "nodemon": "^1.17.4",
     "nyc": "^11.8.0",

@@ -56,7 +56,7 @@ class UserRequestsController {
       product: validator.trim(String(request.body.product.toLowerCase())),
       requestType: validator.trim(String(request.body.requestType.toLowerCase())),
       issue: validator.trim(String(request.body.issue.toLowerCase())),
-      requestDate: moment.utc().tz('Africa/Cairo').format('MMMM Do YYYY, h:mm:ss a'),
+      requestDate: moment.utc().tz('Africa/Lagos').format('MMMM Do YYYY, h:mm:ss a'),
       imageUrl: request.body.imageUrl ? validator.trim(String(request.body.imageUrl)) : 'http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528040152/ph.png',
     };
     const query = {

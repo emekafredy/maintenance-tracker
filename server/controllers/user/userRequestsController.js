@@ -57,7 +57,7 @@ class UserRequestsController {
       requestType: validator.trim(String(request.body.requestType.toLowerCase())),
       issue: validator.trim(String(request.body.issue.toLowerCase())),
       requestDate: moment.utc().tz('Africa/Lagos').format('MMMM Do YYYY, h:mm:ss a'),
-      imageUrl: request.body.imageUrl ? validator.trim(String(request.body.imageUrl)) : 'http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528040152/ph.png',
+      imageUrl: 'http://res.cloudinary.com/dgbmeqmyf/image/upload/v1528128949/My_Post.jpg',
     };
     const query = {
       text: 'INSERT INTO requests(userId, product, requestType, issue, requestDate, imageUrl) VALUES($1, $2, $3, $4, $5, $6)',

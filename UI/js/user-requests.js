@@ -275,7 +275,6 @@ const updateModal = () => {
   const productDiv = document.createElement('div');
   const typeDiv = document.createElement('div');
   const issueDiv = document.createElement('div');
-  const imgDiv = document.createElement('div');
   const submitDiv = document.createElement('div');
   const submitUpdateBtn = document.createElement('button');
 
@@ -291,8 +290,6 @@ const updateModal = () => {
   typeDiv.className = 'form';
 
   issueDiv.className = 'form';
-
-  imgDiv.className = 'form';
 
   submitDiv.className = 'centre-div';
 
@@ -325,15 +322,9 @@ const updateModal = () => {
               <textarea name="issue" id="issue-description" required>${detailsData.issue}</textarea>
   `;
 
-  imgDiv.innerHTML = `
-              <label for="image">Upload product image</label>
-              <input type="file" name="pic" accept="image/*" id="product-image">
-  `;
-
   form.appendChild(productDiv);
   form.appendChild(typeDiv);
   form.appendChild(issueDiv);
-  form.appendChild(imgDiv);
   submitDiv.appendChild(submitUpdateBtn);
   updateDiv.appendChild(titleDiv);
   updateDiv.appendChild(form);
@@ -360,7 +351,6 @@ const updateModal = () => {
   const product = document.getElementById('product');
   const requestType = document.getElementById('request-type');
   const issueDescription = document.getElementById('issue-description');
-  const productImage = document.getElementById('product-image');
 
   const clearModal = () => {
     updateModalDiv.style.display = 'none';
@@ -374,7 +364,6 @@ const updateModal = () => {
       product: product.value,
       requestType: requestType.value,
       issue: issueDescription.value,
-      imageUrl: productImage.value,
     };
 
     const editOptions = {

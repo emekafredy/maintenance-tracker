@@ -83,12 +83,10 @@ class UserRequests {
       requestType: request.body.requestType ? request.body.requestType.toLowerCase()
         : data.rows[0].requesttype,
       issue: request.body.issue ? validator.trim(String(request.body.issue)) : data.rows[0].issue,
-      imageUrl: request.body.imageUrl ? validator.trim(String(request.body.imageUrl))
-        : data.rows[0].imageurl,
     };
     client.query(
-      'select * from requests where userId = $1 AND product = $2 AND requestType = $3 AND requestStatus = $4 AND issue = $5 AND imageUrl = $6',
-      [userId, updatedRequest.product, updatedRequest.requestType, 'pending', updatedRequest.issue, updatedRequest.imageUrl],
+      'select * from requests where userId = $1 AND product = $2 AND requestType = $3 AND requestStatus = $4 AND issue = $5',
+      [userId, updatedRequest.product, updatedRequest.requestType, 'pending', updatedRequest.issue],
     )
       .then((prod) => {
         if (prod.rowCount > 0) {
@@ -98,12 +96,11 @@ class UserRequests {
           });
         }
         return client.query({
-          text: 'UPDATE requests SET product=$1, requestType=$2, issue=$3, imageUrl=$4 WHERE requestId=$5',
+          text: 'UPDATE requests SET product=$1, requestType=$2, issue=$3 WHERE requestId=$4',
           values: [
             updatedRequest.product,
             updatedRequest.requestType,
             updatedRequest.issue,
-            updatedRequest.imageUrl,
             reqId],
         }).then(() => response.status(201).json({
           success: true,

@@ -151,7 +151,7 @@ describe('USERS ENDPOINTS TEST', () => {
         .end((error, response) => {
           expect(response).to.have.status(409);
           expect(response.body).to.be.an('object');
-          response.body.message.should.eql('An account has already been created with this email address');
+          response.body.errors.email.should.eql('An account has already been created with this email address');
           done();
         });
     });
@@ -265,7 +265,7 @@ describe('USERS ENDPOINTS TEST', () => {
         .end((error, response) => {
           expect(response).to.have.status(400);
           expect(response.body).to.be.an('object');
-          response.body.message.should.eql('Your email or password is incorrect');
+          response.body.errors.password.should.eql('Your email or password is incorrect');
           done();
         });
     });
@@ -276,7 +276,7 @@ describe('USERS ENDPOINTS TEST', () => {
         .end((error, response) => {
           expect(response).to.have.status(400);
           expect(response.body).to.be.an('object');
-          response.body.message.should.eql('Your email or password is incorrect');
+          response.body.errors.email.should.eql('Your email or password is incorrect');
           done();
         });
     });

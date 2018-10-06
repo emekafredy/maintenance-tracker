@@ -64,7 +64,9 @@ class UserController {
       }
       return response.status(409).json({
         success: false,
-        message: 'An account has already been created with this email address',
+        errors: {
+          email: 'An account has already been created with this email address',
+        },
       });
     }).catch(error => response.status(500).json({ message: error.message }));
   }
@@ -99,13 +101,17 @@ class UserController {
             }
             return response.status(400).json({
               success: false,
-              message: 'Your email or password is incorrect',
+              errors: {
+                password: 'Your email or password is incorrect',
+              },
             });
           });
         }
         return response.status(400).json({
           success: false,
-          message: 'Your email or password is incorrect',
+          errors: {
+            email: 'Your email or password is incorrect',
+          },
         });
       });
   }

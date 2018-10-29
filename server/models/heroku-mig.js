@@ -46,11 +46,11 @@ const createRequestsTable = `
 `;
 const seedAdmin = `
   INSERT INTO users (firstName,lastName,email,password,isAdmin) 
-    VALUES ('Emeka', 'Chinedu','emekaadmin@gmail.com','${adminPassword}', true);
+    VALUES ('Emeka', 'Chinedu','emekaadmin@mail.com','${adminPassword}', true);
 `;
 const seedUser = `
   INSERT INTO users (firstName,lastName,email,password) 
-    VALUES ('Tomiwa','Olaniyi','tomiwa0456@gmail.com','${userPassword}');
+    VALUES ('Tomiwa','Olaniyi','tomiwa0456@mail.com','${userPassword}');
 `;
 
 const seedRequests = `

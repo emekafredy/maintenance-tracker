@@ -51,7 +51,7 @@ class UserController {
           'INSERT INTO users(firstName, lastName, email, password) VALUES($1, $2, $3, $4)',
           [newUser.firstName, newUser.lastName, newUser.email, hash],
         )
-          .then(() => client.query('SELECT userId, password, isAdmin FROM users WHERE email = $1', [regMail]))
+          .then(() => client.query('SELECT userId, password, isAdmin, firstname FROM users WHERE email = $1', [regMail]))
           .then((data) => {
             const { password, ...user } = data.rows[0];
             return jwt.sign({ user }, key, (error, token) => response.status(201).json({
@@ -83,7 +83,7 @@ class UserController {
     const regMail = request.body.email;
     const regPass = request.body.password;
 
-    client.query({ text: 'SELECT userId, password, isAdmin FROM users where email = $1', values: [regMail] })
+    client.query({ text: 'SELECT userId, password, isAdmin, firstname FROM users where email = $1', values: [regMail] })
       .then((foundmail) => {
         if (foundmail.rowCount === 1) {
           const hash = foundmail.rows[0].password;
